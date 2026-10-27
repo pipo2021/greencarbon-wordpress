@@ -9,8 +9,8 @@
     f.src = url; f.title = titulo; f.loading = 'lazy';
     caja.appendChild(f);
   }
-  embeber('mapa-territorio', ENLACES.mapas, 'Mapa del territorio');
-  embeber('mapa-monitoreo', ENLACES.incendios, 'Monitoreo de incendios');
+  embeber('mapa-territorio', ENLACES.mapas, GC.t.iframe_mapa);
+  embeber('mapa-monitoreo', ENLACES.incendios, GC.t.iframe_incendios);
 
   const raiz = document.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -20,10 +20,10 @@
   menuBtn.addEventListener('click', () => {
     const abierto = cab.classList.toggle('menu');
     menuBtn.setAttribute('aria-expanded', String(abierto));
-    menuBtn.textContent = abierto ? 'CERRAR' : 'MENÚ';
+    menuBtn.textContent = abierto ? GC.t.cerrar : GC.t.menu;
   });
   document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => {
-    cab.classList.remove('menu'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.textContent = 'MENÚ';
+    cab.classList.remove('menu'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.textContent = GC.t.menu;
   }));
 
   // Títulos que entran palabra por palabra: cada palabra va en una máscara (.w) que la deja subir.
@@ -106,14 +106,14 @@
     ev.preventDefault();
     const datos = Object.fromEntries(new FormData(form));
     const decir = (t, cls) => { estado.textContent = t; estado.className = 'form-estado ' + (cls || ''); };
-    if (!datos.nombre.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.correo.trim()) || !datos.mensaje.trim()) return decir('Completá nombre, un correo válido y el mensaje.', 'error');
-    if (!datos.consentimiento) return decir('Necesitamos tu consentimiento para responderte.', 'error');
-    const boton = form.querySelector('button'); boton.disabled = true; decir('Enviando…');
+    if (!datos.nombre.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.correo.trim()) || !datos.mensaje.trim()) return decir(GC.t.form_faltan, 'error');
+    if (!datos.consentimiento) return decir(GC.t.form_consentimiento, 'error');
+    const boton = form.querySelector('button'); boton.disabled = true; decir(GC.t.form_enviando);
     try {
       const r = await fetch(form.action, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ ...datos, origen: 'web Green Carbon Bolivia' }) });
       if (!r.ok) throw new Error(r.status);
-      form.reset(); decir('Hemos recibido tu mensaje.', 'ok');
-    } catch (e) { decir('No se pudo enviar. Probá de nuevo en unos minutos.', 'error'); }
+      form.reset(); decir(GC.t.form_ok, 'ok');
+    } catch (e) { decir(GC.t.form_error, 'error'); }
     boton.disabled = false;
   });
 
@@ -124,7 +124,8 @@
   // currentTime de un video deja la imagen en negro). Si el MP4 falla, la computadora usa los paquetes 1440x810.
   let N = 1294;
   const FPS_ANCLAS = 24;
-  const VERSION = '?v=6';  // cambia con cada recorrido nuevo: los archivos se llaman igual y el navegador los cachea
+  let ESC = 1;  // cuadros del paquete por cuadro de ancla: el manifest trae sus fps (48 en celular)
+  const VERSION = '?v=7';  // cambia con cada recorrido nuevo: los archivos se llaman igual y el navegador los cachea
   const dir = matchMedia('(max-aspect-ratio: 1/1)').matches ? 'v' : 'h';
   let usarVideo = dir === 'h';
   let peli = document.createElement('video');
@@ -132,7 +133,7 @@
   const ctx = canvas.getContext('2d');
   const blobs = [];
   let cargados = 0, paraMostrar = N;
-  const PAQUETES_PARA_MOSTRAR = 2;
+  let PAQUETES_PARA_MOSTRAR = 2;  // ~1 de cada 8 cuadros de 24/s: con más fps alcanza con el primer paquete
 
   raiz.classList.add('cargando');
   scrollTo(0, 0);
@@ -141,7 +142,7 @@
   function progreso() {
     const pct = Math.min(100, Math.floor(cargados / paraMostrar * 100));
     barra.style.width = pct + '%';
-    txt.textContent = `Cargando el territorio · ${pct}%`;
+    txt.textContent = `${GC.t.cargando} · ${pct}%`;
     if (cargados >= paraMostrar) esperarInicio();
   }
   function esperarInicio() {
@@ -169,7 +170,7 @@
     const avance = () => {
       if (!peli.duration || !peli.buffered.length) return;
       const pct = Math.min(100, Math.round(peli.buffered.end(peli.buffered.length - 1) / Math.min(8, peli.duration) * 100));
-      barra.style.width = pct + '%'; txt.textContent = `Cargando el territorio · ${pct}%`;
+      barra.style.width = pct + '%'; txt.textContent = `${GC.t.cargando} · ${pct}%`;
     };
     peli.addEventListener('progress', avance);
     peli.addEventListener('loadeddata', () => { avance(); mostrar(); }, { once: true });
@@ -177,7 +178,7 @@
       if (e.target !== peli) return;  // el video viejo que se descarta al pasar a la copia local
       usarVideo = false; peli.remove(); canvas.style.display = ''; cargarPaquetes();
     }, { once: true });
-    const SRC_VIDEO = GC.tema + '/video/recorrido-1080p30.mp4' + VERSION;
+    const SRC_VIDEO = GC.tema + '/video/recorrido-1080p60.mp4' + VERSION;
     peli.src = SRC_VIDEO;
     // El navegador baja el MP4 de a partes y una búsqueda hacia una parte que no llegó puede quedar colgada.
     // Se baja el archivo entero en segundo plano y, al terminar, se cambia a una copia local (búsquedas
@@ -221,6 +222,9 @@
     let man;
     try { man = await (await fetch(base + 'manifest.json' + VERSION)).json(); } catch (e) { return mostrar(); }
     N = man.n;
+    ESC = (man.fps || FPS_ANCLAS) / FPS_ANCLAS;
+    if (ESC >= 2) PAQUETES_PARA_MOSTRAR = 1;
+    medir();
     paraMostrar = man.paquetes.slice(0, PAQUETES_PARA_MOSTRAR).reduce((s, p) => s + p.c.length, 0);
     const cola = man.paquetes.slice();
     const trabajador = async () => { while (cola.length) await bajarPaquete(base, cola.shift()); };
@@ -250,7 +254,7 @@
   let anclas = [];
   function medir() {
     anclas = [...document.querySelectorAll('[data-cuadro]')].filter(el => el.getClientRects().length)
-      .map(el => [el.getBoundingClientRect().top + scrollY, Math.min(N - 1, Number(el.dataset.cuadro))])
+      .map(el => [el.getBoundingClientRect().top + scrollY, Math.min((N - 1) / ESC, Number(el.dataset.cuadro))])
       .sort((a, b) => a[0] - b[0]);
   }
   function cuadroPara(y) {
@@ -310,7 +314,8 @@
     const meta = cuadroPara(scrollY);
     if (Math.abs(meta - pos) > .5) sentido = meta > pos ? 1 : -1;
     pos = reduce ? meta : pos + (meta - pos) * .1;
-    const a = Math.floor(pos);
+    const pc = usarVideo ? pos : pos * ESC;  // posición en cuadros del paquete
+    const a = Math.floor(pc);
     if (usarVideo) {
       // Un salto por vez: mientras el video busca no se le pide otro, así no se encolan búsquedas.
       const t = pos / FPS_ANCLAS;
@@ -322,7 +327,7 @@
         inicioBusqueda = ahora;
       }
     } else mantenerVentana(a, sentido);
-    if (!usarVideo && Math.abs(pos - ultimo) > .001) {
+    if (!usarVideo && Math.abs(pc - ultimo) > .001) {
       let lo = -1, hi = -1;
       for (let d = 0; d <= 16 && (lo < 0 || hi < 0); d++) {
         if (lo < 0 && bitmaps.has(a - d)) lo = a - d;
@@ -330,9 +335,9 @@
       }
       if (lo >= 0) {
         pintar(bitmaps.get(lo), 1);
-        if (hi > lo) { const f = (pos - lo) / (hi - lo); if (f > .01) pintar(bitmaps.get(hi), Math.min(1, f)); }
+        if (hi > lo) { const f = (pc - lo) / (hi - lo); if (f > .01) pintar(bitmaps.get(hi), Math.min(1, f)); }
         ctx.globalAlpha = 1;
-        ultimo = pos;
+        ultimo = pc;
       } else if (hi >= 0) { pintar(bitmaps.get(hi), 1); ctx.globalAlpha = 1; }
     }
     cab.classList.toggle('solida', scrollY > innerHeight * .6);

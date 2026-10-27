@@ -43,8 +43,56 @@ function gc_defecto( $k ) {
 	return in_array( $c['tipo'], array( 'imagen', 'video', 'url' ), true ) ? gc_resolver( $c['defecto'] ) : $c['defecto'];
 }
 
-function gc_valor( $k ) {
+/** Idioma de la página: ?lang=en para inglés; español por defecto. */
+function gc_lang() {
+	return ( isset( $_GET['lang'] ) && 'en' === $_GET['lang'] && gc_valor_es( 'mostrar_idioma' ) ) ? 'en' : 'es'; // phpcs:ignore WordPress.Security.NonceVerification
+}
+
+function gc_valor_es( $k ) {
 	return get_theme_mod( $k, gc_defecto( $k ) );
+}
+
+/** En inglés, los textos usan su campo _en; si está vacío se muestra el español. */
+function gc_valor( $k ) {
+	$c = gc_campo( $k );
+	if ( 'en' === gc_lang() && isset( $c['en'] ) ) {
+		$v = get_theme_mod( $k . '_en', $c['en'] );
+		if ( '' !== trim( (string) $v ) ) {
+			return $v;
+		}
+	}
+	return gc_valor_es( $k );
+}
+
+function gc_url_idioma( $lang ) {
+	return 'en' === $lang ? add_query_arg( 'lang', 'en', home_url( '/' ) ) : home_url( '/' );
+}
+
+function gc_idioma() {
+	if ( ! gc_valor_es( 'mostrar_idioma' ) ) {
+		return;
+	}
+	echo '<nav class="idioma" aria-label="' . ( 'en' === gc_lang() ? 'Language' : 'Idioma' ) . '">';
+	foreach ( array( 'es' => 'ES', 'en' => 'EN' ) as $l => $txt ) {
+		printf(
+			'<a href="%s" hreflang="%s" lang="%s"%s>%s</a>',
+			esc_url( gc_url_idioma( $l ) ),
+			$l,
+			$l,
+			gc_lang() === $l ? ' aria-current="true"' : '',
+			$txt
+		);
+	}
+	echo '</nav>';
+}
+
+function gc_hreflang() {
+	if ( ! gc_valor_es( 'mostrar_idioma' ) ) {
+		return;
+	}
+	foreach ( array( 'es', 'en' ) as $l ) {
+		printf( '<link rel="alternate" hreflang="%s" href="%s">' . "\n", $l, esc_url( gc_url_idioma( $l ) ) );
+	}
 }
 
 function gc_t( $k ) {
@@ -75,21 +123,21 @@ function gc_srcset( $k_imagen, $srcset ) {
 }
 
 /** Dato real si el admin lo cargó; si no, el aviso amarillo/naranja del diseño. */
-function gc_aviso( $k, $clase, $texto ) {
+function gc_aviso( $k, $clase, $texto, $texto_en = '' ) {
 	$v = gc_valor( $k );
 	if ( '' !== trim( (string) $v ) ) {
 		echo wp_kses( $v, GC_INLINE );
 	} else {
-		echo '<span class="' . esc_attr( $clase ) . '">' . esc_html( $texto ) . '</span>';
+		echo '<span class="' . esc_attr( $clase ) . '">' . esc_html( 'en' === gc_lang() && $texto_en ? $texto_en : $texto ) . '</span>';
 	}
 }
 
-function gc_foto_o_aviso( $k, $texto ) {
+function gc_foto_o_aviso( $k, $texto, $texto_en = '' ) {
 	$v = gc_valor( $k );
 	if ( $v ) {
 		echo '<img src="' . esc_url( $v ) . '" alt="" loading="lazy">';
 	} else {
-		echo '<span class="pend">' . esc_html( $texto ) . '</span>';
+		echo '<span class="pend">' . esc_html( 'en' === gc_lang() && $texto_en ? $texto_en : $texto ) . '</span>';
 	}
 }
 
@@ -101,7 +149,7 @@ function gc_retrato( $k ) {
 }
 
 function gc_oculto( $k ) {
-	if ( ! gc_valor( $k ) ) {
+	if ( ! gc_valor_es( $k ) ) {
 		echo ' hidden';
 	}
 }
@@ -123,6 +171,11 @@ add_action(
 	function () {
 		$v = wp_get_theme()->get( 'Version' );
 		wp_enqueue_style( 'greencarbon', get_stylesheet_uri(), array(), $v );
+		$alfas = '';
+		foreach ( array( 'alfa-hoja', 'alfa-oscuro', 'alfa-tarjeta' ) as $k ) {
+			$alfas .= '--' . $k . ':' . gc_limpiar_opacidad( gc_valor_es( $k ) ) . ';';
+		}
+		wp_add_inline_style( 'greencarbon', ':root{' . $alfas . '}' );
 		wp_enqueue_script( 'greencarbon', get_theme_file_uri( 'js/main.js' ), array(), $v, true );
 		$gc = array(
 			'tema'    => untrailingslashit( get_template_directory_uri() ),
@@ -130,7 +183,15 @@ add_action(
 				'mapas'     => gc_valor( 'enlace_mapas' ),
 				'incendios' => gc_valor( 'enlace_incendios' ),
 			),
+			't'       => array(),
 		);
+		foreach ( gc_secciones() as $s ) {
+			if ( 'js' === $s['id'] ) {
+				foreach ( array_keys( $s['campos'] ) as $k ) {
+					$gc['t'][ substr( $k, 3 ) ] = wp_strip_all_tags( gc_valor( $k ) );
+				}
+			}
+		}
 		wp_add_inline_script( 'greencarbon', 'window.GC = ' . wp_json_encode( $gc ) . ';', 'before' );
 	}
 );
@@ -159,11 +220,12 @@ add_action(
 							'texto'   => 'gc_limpiar_texto',
 							'parrafo' => 'gc_limpiar_texto',
 							'check'   => 'wp_validate_boolean',
+							'opacidad' => 'gc_limpiar_opacidad',
 						)[ $tipo ] ?? 'esc_url_raw',
 					)
 				);
 				$args = array(
-					'label'       => $c['etiqueta'],
+					'label'       => ( isset( $c['en'] ) ? 'ES · ' : '' ) . $c['etiqueta'],
 					'description' => $c['desc'],
 					'section'     => $sid,
 				);
@@ -177,8 +239,30 @@ add_action(
 						'parrafo' => 'textarea',
 						'url'     => 'url',
 						'check'   => 'checkbox',
+						'opacidad' => 'range',
 					)[ $tipo ];
+					if ( 'opacidad' === $tipo ) {
+						$args['input_attrs'] = array( 'min' => 0.3, 'max' => 1, 'step' => 0.02 );
+					}
 					$wp->add_control( $k, $args );
+				}
+				if ( isset( $c['en'] ) ) {
+					$wp->add_setting(
+						$k . '_en',
+						array(
+							'default'           => $c['en'],
+							'sanitize_callback' => 'gc_limpiar_texto',
+						)
+					);
+					$wp->add_control(
+						$k . '_en',
+						array(
+							'label'       => 'EN · ' . $c['etiqueta'],
+							'description' => 'Inglés. Vacío = se muestra el español.',
+							'section'     => $sid,
+							'type'        => $args['type'],
+						)
+					);
 				}
 			}
 		}
@@ -188,6 +272,10 @@ add_action(
 		}
 	}
 );
+
+function gc_limpiar_opacidad( $v ) {
+	return round( min( 1, max( 0.3, (float) $v ) ), 2 );
+}
 
 function gc_limpiar_texto( $v ) {
 	return wp_kses( $v, GC_INLINE );

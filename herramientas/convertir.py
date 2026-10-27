@@ -22,6 +22,19 @@ ETIQUETAS = {'h1': 'Título', 'h2': 'Título', 'h3': 'Subtítulo', 'h4': 'Subtí
              'label': 'Etiqueta del formulario', 'option': 'Opción del formulario', 'q': 'Cita',
              'figcaption': 'Pie de foto', 'dt': 'Rótulo', 'dd': 'Dato', 'small': 'Texto chico'}
 SALTAR_IDS = ('id="loader-txt"', 'id="menu-btn"', 'id="form-estado"')  # textos que reescribe el JS
+TRADUCCION = Path(__file__).resolve().parent / 'traduccion-en.json'  # {texto en español: texto en inglés}
+# Textos que escribe el JS: (literal en main.js, clave en GC.t, texto en español)
+TEXTOS_JS = [
+    ("'MENÚ'", 'menu', 'MENÚ'), ("'CERRAR'", 'cerrar', 'CERRAR'),
+    ('`Cargando el territorio · ${pct}%`', 'cargando', 'Cargando el territorio'),
+    ("'Mapa del territorio'", 'iframe_mapa', 'Mapa del territorio'),
+    ("'Monitoreo de incendios'", 'iframe_incendios', 'Monitoreo de incendios'),
+    ("'Completá nombre, un correo válido y el mensaje.'", 'form_faltan', 'Completá nombre, un correo válido y el mensaje.'),
+    ("'Necesitamos tu consentimiento para responderte.'", 'form_consentimiento', 'Necesitamos tu consentimiento para responderte.'),
+    ("'Enviando…'", 'form_enviando', 'Enviando…'),
+    ("'Hemos recibido tu mensaje.'", 'form_ok', 'Hemos recibido tu mensaje.'),
+    ("'No se pudo enviar. Probá de nuevo en unos minutos.'", 'form_error', 'No se pudo enviar. Probá de nuevo en unos minutos.'),
+]
 
 
 def corto(t, n=48):
@@ -34,6 +47,13 @@ class Campos:
         self.cuenta = {}
         self.imagenes = {}           # src -> clave (el logo se usa dos veces)
         self.ocultos = {}            # (seccion, texto) -> clave, para la marquesina duplicada
+        self.trad = json.loads(TRADUCCION.read_text(encoding='utf-8')) if TRADUCCION.exists() else {}
+        self.sin_traducir = set()
+
+    def en(self, texto):
+        if texto not in self.trad:
+            self.sin_traducir.add(texto)
+        return self.trad.get(texto, '')
 
     def seccion(self, sid, titulo):
         self.secciones.append({'id': sid, 'titulo': titulo, 'campos': {}})
@@ -44,6 +64,8 @@ class Campos:
             self.cuenta[s['id']] = self.cuenta.get(s['id'], 0) + 1
             clave = f"{s['id']}_{self.cuenta[s['id']]:02d}"
         s['campos'][clave] = {'tipo': tipo, 'etiqueta': etiqueta, 'defecto': defecto, 'desc': desc}
+        if tipo in ('texto', 'parrafo'):
+            s['campos'][clave]['en'] = self.en(defecto) if defecto else ''
         return clave
 
 
@@ -57,6 +79,10 @@ def convertir_cuerpo(cuerpo, c):
                     lambda m: f'<div class="bio-foto"><gcbiofoto texto="{m[1]}"></div>', cuerpo)
     cuerpo = re.sub(r'<div class="retrato"><svg class="i"><use href="#i-retrato"/></svg></div>',
                     '<gcretrato>', cuerpo)
+    for viejo, nuevo in (('  <a href="#contacto" class="btn pri cta-cab">', '  <div class="cab-der"><gcidioma>\n  <a href="#contacto" class="btn pri cta-cab">'),
+                         ('</a>\n</header>', '</a></div>\n</header>')):
+        assert cuerpo.count(viejo) == 1, viejo
+        cuerpo = cuerpo.replace(viejo, nuevo)
     cuerpo = re.sub(r'<span class="(pend|ssot)">([^<]*)</span>',
                     lambda m: f'<gcaviso clase="{m[1]}" texto="{m[2]}">', cuerpo)
 
@@ -106,16 +132,18 @@ def convertir_cuerpo(cuerpo, c):
 
 
 def convertir_tag(tok, nombre, c):
+    if nombre == 'gcidioma':
+        return php('gc_idioma')
     if nombre == 'gcaviso':
         m = re.match(r'<gcaviso clase="(\w+)" texto="([^"]*)">', tok)
         texto = html.unescape(m[2])
         clave = c.nuevo('texto', f'Aviso «{corto(texto, 40)}»', '',
                         'Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.')
-        return php('gc_aviso', clave, m[1], texto)
+        return php('gc_aviso', clave, m[1], texto, c.en(texto))
     if nombre == 'gcbiofoto':
         texto = html.unescape(re.match(r'<gcbiofoto texto="([^"]*)">', tok)[1])
         clave = c.nuevo('imagen', 'Foto de la especie', '', 'Vacío = se muestra el aviso «' + texto + '».')
-        return php('gc_foto_o_aviso', clave, texto)
+        return php('gc_foto_o_aviso', clave, texto, c.en(texto))
     if nombre == 'gcretrato':
         clave = c.nuevo('imagen', 'Retrato', '', 'Vacío = se muestra la silueta.')
         return php('gc_retrato', clave)
@@ -135,12 +163,14 @@ def convertir_tag(tok, nombre, c):
             return php('gc_srcset', c.imagenes[src], v)  # el src viene antes que srcset en el HTML
         if a == 'alt' and v:
             return f'{m[1]}alt="{php("gc_a", c.nuevo("texto", f"Texto alternativo: {corto(v)}", v))}"'
+        if a == 'aria-label':
+            return f'{m[1]}aria-label="{php("gc_a", c.nuevo("texto", f"Lector de pantalla: {corto(v)}", v))}"'
         if a in ('href', 'action') and re.match(r'(https?:|mailto:|tel:)', v):
             etiqueta = 'Destino del formulario' if a == 'action' else f'Enlace: {corto(v)}'
             return f'{m[1]}{a}="{php("gc_u", c.nuevo("url", etiqueta, v))}"'
         return m[0]
 
-    tok = re.sub(r'(\s)(src|srcset|alt|href|action)="([^"]*)"', attr, tok)
+    tok = re.sub(r'(\s)(src|srcset|alt|aria-label|href|action)="([^"]*)"', attr, tok)
     if 'id="monitoreo"' in tok:
         clave = c.nuevo('check', 'Mostrar «Del bosque a los datos»', False,
                         'Oculto hasta la certificación (aprox. marzo 2027). Al mostrarlo hay que rehacer las '
@@ -167,18 +197,31 @@ def main():
     c.nuevo('url', 'Enlace embebible del monitoreo de incendios', '',
             'Se muestra en un iframe en «Centro de monitoreo». Vacío = vista previa que abre el dashboard en otra pestaña. '
             'claude.ai no deja embeberse: hace falta hospedarlo en un sitio que lo permita.', clave='enlace_incendios')
+    c.nuevo('check', 'Mostrar el selector de idioma ES | EN', True,
+            'Los textos en inglés vacíos se muestran en español.', clave='mostrar_idioma')
+    for k, etiqueta, defecto in (('alfa-hoja', 'Opacidad de las hojas claras', .84), ('alfa-oscuro', 'Opacidad de las hojas verdes', .74),
+                                 ('alfa-tarjeta', 'Opacidad de las tarjetas', .72)):
+        assert f'--{k}: {str(defecto).lstrip("0")}' in css, k
+        c.nuevo('opacidad', etiqueta, defecto, '1 = tapa el video del todo; más bajo = se ve más el video detrás.', clave=k)
     cuerpo_php = convertir_cuerpo(cuerpo, c)
+    c.seccion('js', 'Mensajes de la página (menú, carga, formulario)')
+    for _, k, es in TEXTOS_JS:
+        c.nuevo('texto', es, es, clave='js_' + k)
     c.secciones = [s for s in c.secciones if s['campos']]
 
     # JS: rutas relativas -> carpeta del tema; ENLACES -> valores del Personalizador.
     reemplazos = [
         (re.compile(r'const ENLACES = \{.*?\n  \};', re.S), 'const ENLACES = window.GC.enlaces;'),
-        ("'video/recorrido-1080p30.mp4'", "GC.tema + '/video/recorrido-1080p30.mp4'"),
+        (re.compile(r"'video/(recorrido-[^']+)'"), r"GC.tema + '/video/\1'"),
         ('`pack/${dir}/`', '`${GC.tema}/pack/${dir}/`'),
     ]
     for viejo, nuevo in reemplazos:
         js, n = (viejo.subn(nuevo, js) if hasattr(viejo, 'subn') else (js.replace(viejo, nuevo), js.count(viejo)))
         assert n == 1, f'reemplazo JS no encontrado una sola vez: {viejo}'
+    for literal, k, es in TEXTOS_JS:
+        nuevo = '`${GC.t.cargando} · ${pct}%`' if k == 'cargando' else f'GC.t.{k}'
+        assert literal in js, literal
+        js = js.replace(literal, nuevo)
 
     if TEMA.exists():
         shutil.rmtree(TEMA)
@@ -193,20 +236,32 @@ def main():
     extra = ('\n/* Fotos que carga el administrador en huecos que eran avisos */\n'
              '.bio-foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }\n'
              '.bio-foto { overflow: hidden; }\n'
-             '.retrato > img { width: 100%; height: 100%; object-fit: cover; }\n')
+             '.retrato > img { width: 100%; height: 100%; object-fit: cover; }\n'
+             '\n/* Selector de idioma */\n'
+             '.cab-der { display: flex; align-items: center; gap: 10px; }\n'
+             '.idioma { display: inline-flex; gap: 2px; padding: 4px; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-borde);\n'
+             '  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }\n'
+             '.idioma a { font: 500 11px/1 var(--f-mono); letter-spacing: .12em; padding: 8px 10px; border-radius: 999px; color: var(--mist-2); text-decoration: none; }\n'
+             '.idioma a:hover { color: var(--mist); }\n'
+             '.idioma a[aria-current] { background: var(--lichen); color: var(--night); }\n'
+             '@media (max-width: 1060px) { .cab-der { margin-left: auto; } .menu-btn { margin-left: 10px; order: 3; } }\n'
+             '/* Celular: el logo no se encoge y el selector muestra solo el otro idioma */\n'
+             '.marca { flex-shrink: 0; }\n'
+             '@media (max-width: 520px) { .idioma a[aria-current] { display: none; } }\n'
+             '@media (max-width: 359px) { .marca-pais { display: none; } }\n')
     (TEMA / 'style.css').write_text(
         '/*\nTheme Name: Green Carbon Bolivia\nDescription: Sitio de una página con recorrido en video. '
-        'Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.\nVersion: 1.0.0\n'
+        'Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.\nVersion: 1.1.0\n'
         'Requires PHP: 8.1\nText Domain: greencarbon\n*/\n' + css + extra, encoding='utf-8')
     (TEMA / 'js' / 'main.js').write_text(js, encoding='utf-8')
     (TEMA / 'inc' / 'campos.json').write_text(json.dumps(c.secciones, ensure_ascii=False, indent=1), encoding='utf-8')
     (TEMA / 'index.php').write_text(
         '<?php /* Generado por herramientas/convertir.py desde greencarbon-web/index.html: no editar a mano. */ ?>\n'
-        '<!doctype html>\n<html lang="es">\n<head>\n<meta charset="utf-8">\n'
+        '<!doctype html>\n<html lang="<?php echo esc_attr( gc_lang() ); ?>">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
         f'<title>{php("gc_t", "gen_titulo")}</title>\n'
         f'<meta name="description" content="{php("gc_a", "gen_descripcion")}">\n'
-        f'{fuentes}\n<?php wp_head(); ?>\n</head>\n<body>\n<?php wp_body_open(); ?>\n'
+        f'<?php gc_hreflang(); ?>\n{fuentes}\n<?php wp_head(); ?>\n</head>\n<body>\n<?php wp_body_open(); ?>\n'
         f'{cuerpo_php}<?php wp_footer(); ?>\n</body>\n</html>\n', encoding='utf-8')
 
     # Auto-chequeo: con los valores predeterminados, el texto visible debe ser el mismo que el original.
@@ -226,6 +281,11 @@ def main():
     simulado = re.sub(r'<\?php (gc_\w+)\((.*?)\); \?>', render, cuerpo_php)
     assert texto_visible(simulado) == texto_visible(cuerpo), 'el texto renderizado no coincide con el original'
     total = sum(len(s['campos']) for s in c.secciones)
+    faltan = Path(__file__).resolve().parent / 'sin-traducir.json'
+    faltan.unlink(missing_ok=True)
+    if c.sin_traducir:
+        faltan.write_text(json.dumps(sorted(c.sin_traducir), ensure_ascii=False, indent=1), encoding='utf-8')
+        print(f'{len(c.sin_traducir)} textos sin traducción al inglés: {faltan}')
     print(f'Tema generado en {TEMA}: {len(c.secciones)} secciones, {total} campos editables.')
 
 

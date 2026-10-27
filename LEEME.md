@@ -1,6 +1,6 @@
 # Green Carbon Bolivia — versión WordPress
 
-Sitio de una sola página con el recorrido en video que avanza con el scroll, convertido en un tema de WordPress. **Todo el contenido** (textos, fotos, enlaces, datos de contacto, avisos pendientes) se edita desde un único administrador, en **Apariencia → Personalizar → Contenido de la web**, con vista previa en vivo.
+Sitio de una sola página, en **español e inglés**, con el recorrido en video que avanza con el scroll, convertido en un tema de WordPress. **Todo el contenido** (textos, fotos, enlaces, datos de contacto, avisos pendientes) se edita desde un único administrador, en **Apariencia → Personalizar → Contenido de la web**, con vista previa en vivo.
 
 ## Levantarlo en local (Docker)
 
@@ -18,17 +18,17 @@ La primera vez, antes de arrancar Apache, el contenedor instala WordPress en esp
 
 `GC_URL` se guarda en la base en la primera instalación. Para cambiar de dominio después: `docker compose exec wordpress wp --allow-root search-replace 'http://viejo' 'https://nuevo'`.
 
-Con la imagen ya construida (`greencarbon-wordpress-1.0.0-amd64.tar.gz`, para servidores x86) no hace falta reconstruir:
+Con la imagen ya construida (`greencarbon-wordpress-1.1.0-amd64.tar.gz`, para servidores x86) no hace falta reconstruir:
 
 ```bash
-docker load -i greencarbon-wordpress-1.0.0-amd64.tar.gz
-docker tag greencarbon-wordpress:1.0.0-amd64 greencarbon-wordpress:1.0.0
+docker load -i greencarbon-wordpress-1.1.0-amd64.tar.gz
+docker tag greencarbon-wordpress:1.1.0-amd64 greencarbon-wordpress:1.1.0
 docker compose up -d --no-build
 ```
 
 ## Qué edita el administrador
 
-21 secciones, en el mismo orden que la página, con 348 campos:
+22 secciones, en el mismo orden que la página, con 372 campos. Cada texto tiene dos campos, **ES** y **EN** (debajo):
 
 | Sección | Qué se edita |
 |---|---|
@@ -36,13 +36,18 @@ docker compose up -d --no-build
 | Cabecera y menú → Pie de página | Cada título, párrafo, botón, ítem del menú, foto (y su texto alternativo), enlace externo, redes sociales y destino del formulario |
 | Avisos «Falta» / «SSOT» | Cada aviso tiene un campo. Si se escribe el dato real, el aviso desaparece y se muestra el dato. Si se deja vacío, vuelve el aviso. |
 | Retratos y foto de especie | Huecos de imagen. Mientras estén vacíos se ve la silueta o el aviso. |
+| General → idioma | Casilla para mostrar el selector **ES \| EN** de la cabecera. El inglés se ve en `?lang=en`. Un texto en inglés vacío se muestra en español. |
+| General → opacidades | Deslizadores para la opacidad de las hojas claras, las hojas verdes y las tarjetas (1 = tapa el video; más bajo = se ve más el video). |
+| Mensajes de la página | Textos que escribe el JavaScript: MENÚ/CERRAR, «Cargando el territorio» y los mensajes del formulario. |
 | 9 · Monitoreo territorial | Casilla para mostrar «Del bosque a los datos», que está oculta hasta la certificación (aprox. marzo de 2027). Al activarla hay que rehacer las anclas `data-cuadro` (ver más abajo). |
+
+**El inglés es un borrador** (`herramientas/traduccion-en.json`): el cliente tiene que aprobarlo. Se corrige desde el panel o en ese archivo, y después se vuelve a correr `convertir.py`.
 
 En los textos se permiten `<em>`, `<strong>`, `<b>`, `<br>` y `<a>`.
 
 ## Qué NO se edita desde el panel (está fijo en el tema)
 
-- **El recorrido en video**: `video/recorrido-1080p30.mp4` en computadora y los cuadros WebP `pack/v` (celular) y `pack/h` (respaldo). Se generan con los scripts de Python del recorrido. Si cambia, hay que reemplazar los archivos y subir `VERSION` en `js/main.js`, porque el navegador los cachea.
+- **El recorrido en video**: `video/recorrido-1080p60.mp4` (60 fps) en computadora y los cuadros WebP `pack/v` a 48 fps en celular. `pack/h` (24 fps) solo es un respaldo si falla el MP4. Los fps altos se interpolaron (minterpolate) desde los de 30 y 24 fps con `herramientas/video/subir_fps.py` (los clips originales de Flow no están en el repo; `recorrido3.py` y `empaquetar.py` son el pipeline original). El manifest de cada paquete trae sus `fps` y el JS convierte las anclas, que siguen en cuadros de 24/s. Se generan con los scripts de Python del recorrido. Si cambia, hay que reemplazar los archivos y subir `VERSION` en `js/main.js`, porque el navegador los cachea.
 - **Las anclas `data-cuadro`** de cada sección, que sincronizan el scroll con el video.
 - **El diseño**: `style.css`, los íconos SVG y la estructura de secciones.
 
