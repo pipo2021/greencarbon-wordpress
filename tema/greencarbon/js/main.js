@@ -295,7 +295,7 @@
   // Cápsula de navegación: marca la sección del menú en la que se está; barra de progreso arriba.
   const MENU = [['#quienes', ['quienes']], ['#trabajo', ['trabajo']],
     ['#proyecto', ['proyecto', 'mapa', 'territorio', 'gobernanza', 'voces', 'biodiversidad', 'clima']],
-    ['#centro', ['centro']], ['#impacto', ['impacto']], ['#transparencia', ['transparencia']], ['#contacto', ['accion', 'contacto']]];
+    ['#centro', ['centro']], ['#impacto', ['impacto']], ['#contacto', ['accion', 'contacto']]];
   const enlacesMenu = MENU.map(([h]) => document.querySelector(`.nav > li > a[href="${h}"]`));
   const seccionesMenu = MENU.flatMap(([, ids], i) => ids.map(id => [document.getElementById(id), i]))
     .sort((x, y) => x[0].compareDocumentPosition(y[0]) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1);  // orden de la página

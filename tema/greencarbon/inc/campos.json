@@ -151,40 +151,26 @@
    },
    "cab_14": {
     "tipo": "texto",
-    "etiqueta": "Botón o enlace: Transparencia",
-    "defecto": "Transparencia",
-    "desc": "",
-    "en": "Transparency"
-   },
-   "cab_15": {
-    "tipo": "texto",
     "etiqueta": "Botón o enlace: Monitoreo",
     "defecto": "Monitoreo",
     "desc": "",
     "en": "Monitoring"
    },
-   "cab_16": {
+   "cab_15": {
     "tipo": "texto",
     "etiqueta": "Botón o enlace: Impacto",
     "defecto": "Impacto",
     "desc": "",
     "en": "Impact"
    },
-   "cab_17": {
-    "tipo": "texto",
-    "etiqueta": "Botón o enlace: Transparencia",
-    "defecto": "Transparencia",
-    "desc": "",
-    "en": "Transparency"
-   },
-   "cab_18": {
+   "cab_16": {
     "tipo": "texto",
     "etiqueta": "Botón o enlace: Contacto",
     "defecto": "Contacto",
     "desc": "",
     "en": "Contact"
    },
-   "cab_19": {
+   "cab_17": {
     "tipo": "texto",
     "etiqueta": "Botón o enlace: Conversemos",
     "defecto": "Conversemos",
@@ -676,10 +662,10 @@
    },
    "s05_19": {
     "tipo": "texto",
-    "etiqueta": "Texto: Versión 1.1",
-    "defecto": "Versión 1.1",
+    "etiqueta": "Texto: Verra",
+    "defecto": "Verra",
     "desc": "",
-    "en": "Version 1.1"
+    "en": "Verra"
    },
    "s05_20": {
     "tipo": "texto",
@@ -1906,139 +1892,23 @@
    },
    "s15_17": {
     "tipo": "texto",
-    "etiqueta": "Dato: VM0015 v1.1",
-    "defecto": "VM0015 v1.1",
+    "etiqueta": "Dato: VM0015",
+    "defecto": "VM0015",
     "desc": "",
-    "en": "VM0015 v1.1"
+    "en": "VM0015"
    },
    "s15_18": {
-    "tipo": "texto",
-    "etiqueta": "Rótulo: VVB",
-    "defecto": "VVB",
-    "desc": "",
-    "en": "VVB"
+    "tipo": "url",
+    "etiqueta": "Enlace: https://registry.verra.org/app/projectDetail/VC…",
+    "defecto": "https://registry.verra.org/app/projectDetail/VCS/3506",
+    "desc": ""
    },
    "s15_19": {
-    "tipo": "texto",
-    "etiqueta": "Dato: EPIC Sustainability",
-    "defecto": "EPIC Sustainability",
-    "desc": "",
-    "en": "EPIC Sustainability"
-   },
-   "s15_20": {
     "tipo": "texto",
     "etiqueta": "Botón o enlace: Ver documentación del proyecto",
     "defecto": "Ver documentación del proyecto",
     "desc": "",
     "en": "View project documentation"
-   }
-  }
- },
- {
-  "id": "s16",
-  "titulo": "16 · Transparencia",
-  "campos": {
-   "s16_01": {
-    "tipo": "texto",
-    "etiqueta": "Párrafo: Transparencia",
-    "defecto": "Transparencia",
-    "desc": "",
-    "en": "Transparency"
-   },
-   "s16_02": {
-    "tipo": "texto",
-    "etiqueta": "Título: Transparencia",
-    "defecto": "Transparencia",
-    "desc": "",
-    "en": "Transparency"
-   },
-   "s16_03": {
-    "tipo": "url",
-    "etiqueta": "Enlace: https://registry.verra.org/app/projectDetail/VC…",
-    "defecto": "https://registry.verra.org/app/projectDetail/VCS/3506",
-    "desc": ""
-   },
-   "s16_04": {
-    "tipo": "texto",
-    "etiqueta": "Subtítulo: Verra Project 3506",
-    "defecto": "Verra Project 3506",
-    "desc": "",
-    "en": "Verra Project 3506"
-   },
-   "s16_05": {
-    "tipo": "texto",
-    "etiqueta": "Texto: Ver en Verra",
-    "defecto": "Ver en Verra",
-    "desc": "",
-    "en": "View on Verra"
-   },
-   "s16_06": {
-    "tipo": "url",
-    "etiqueta": "Enlace: https://registry.verra.org/app/projectDetail/VC…",
-    "defecto": "https://registry.verra.org/app/projectDetail/VCS/3506",
-    "desc": ""
-   },
-   "s16_07": {
-    "tipo": "texto",
-    "etiqueta": "Subtítulo: Documentación pública",
-    "defecto": "Documentación pública",
-    "desc": "",
-    "en": "Public documentation"
-   },
-   "s16_08": {
-    "tipo": "texto",
-    "etiqueta": "Texto: Consultar",
-    "defecto": "Consultar",
-    "desc": "",
-    "en": "View"
-   },
-   "s16_09": {
-    "tipo": "url",
-    "etiqueta": "Enlace: https://registry.verra.org/app/projectDetail/VC…",
-    "defecto": "https://registry.verra.org/app/projectDetail/VCS/3506",
-    "desc": ""
-   },
-   "s16_10": {
-    "tipo": "texto",
-    "etiqueta": "Subtítulo: Metodología",
-    "defecto": "Metodología",
-    "desc": "",
-    "en": "Methodology"
-   },
-   "s16_11": {
-    "tipo": "texto",
-    "etiqueta": "Texto: VM0015 v1.1",
-    "defecto": "VM0015 v1.1",
-    "desc": "",
-    "en": "VM0015 v1.1"
-   },
-   "s16_12": {
-    "tipo": "texto",
-    "etiqueta": "Texto: Consultar",
-    "defecto": "Consultar",
-    "desc": "",
-    "en": "View"
-   },
-   "s16_13": {
-    "tipo": "texto",
-    "etiqueta": "Subtítulo: Monitoreo",
-    "defecto": "Monitoreo",
-    "desc": "",
-    "en": "Monitoring"
-   },
-   "s16_14": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «Falta enlace»",
-    "defecto": "",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
-   },
-   "s16_15": {
-    "tipo": "texto",
-    "etiqueta": "Texto: Consultar",
-    "defecto": "Consultar",
-    "desc": "",
-    "en": "View"
    }
   }
  },
@@ -2552,72 +2422,65 @@
    },
    "pie_16": {
     "tipo": "texto",
-    "etiqueta": "Botón o enlace: Transparencia",
-    "defecto": "Transparencia",
-    "desc": "",
-    "en": "Transparency"
-   },
-   "pie_17": {
-    "tipo": "texto",
     "etiqueta": "Botón o enlace: Contacto",
     "defecto": "Contacto",
     "desc": "",
     "en": "Contact"
    },
-   "pie_18": {
+   "pie_17": {
     "tipo": "texto",
     "etiqueta": "Subtítulo: Redes",
     "defecto": "Redes",
     "desc": "",
     "en": "Social media"
    },
-   "pie_19": {
+   "pie_18": {
     "tipo": "url",
     "etiqueta": "Enlace: https://www.instagram.com/greencarbonbolivia/",
     "defecto": "https://www.instagram.com/greencarbonbolivia/",
     "desc": ""
    },
-   "pie_20": {
+   "pie_19": {
     "tipo": "texto",
     "etiqueta": "Botón o enlace: Instagram",
     "defecto": "Instagram",
     "desc": "",
     "en": "Instagram"
    },
-   "pie_21": {
+   "pie_20": {
     "tipo": "url",
     "etiqueta": "Enlace: https://www.facebook.com/profile.php?id=6158836…",
     "defecto": "https://www.facebook.com/profile.php?id=61588363234428",
     "desc": ""
    },
-   "pie_22": {
+   "pie_21": {
     "tipo": "texto",
     "etiqueta": "Botón o enlace: Facebook",
     "defecto": "Facebook",
     "desc": "",
     "en": "Facebook"
    },
-   "pie_23": {
+   "pie_22": {
     "tipo": "url",
     "etiqueta": "Enlace: https://www.linkedin.com/company/greencarbon-bo…",
     "defecto": "https://www.linkedin.com/company/greencarbon-bolivia/",
     "desc": ""
    },
-   "pie_24": {
+   "pie_23": {
     "tipo": "texto",
     "etiqueta": "Botón o enlace: LinkedIn",
     "defecto": "LinkedIn",
     "desc": "",
     "en": "LinkedIn"
    },
-   "pie_25": {
+   "pie_24": {
     "tipo": "texto",
     "etiqueta": "Párrafo: Green Carbon",
     "defecto": "Green Carbon",
     "desc": "",
     "en": "Green Carbon"
    },
-   "pie_26": {
+   "pie_25": {
     "tipo": "texto",
     "etiqueta": "Texto: © 2026 Green Carbon Bolivia",
     "defecto": "© 2026 Green Carbon Bolivia",

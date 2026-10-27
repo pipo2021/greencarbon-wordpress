@@ -121,6 +121,13 @@ def convertir_cuerpo(cuerpo, c):
                 ultimo = tok
             continue
         texto = tok.strip()
+        # Textos que después reescribe el JS: arrancan con el mismo campo traducible que usa el JS.
+        if texto == 'MENÚ' and 'id="menu-btn"' in ultimo:
+            salida.append(php('gc_t', 'js_menu'))
+            continue
+        if texto.startswith('Cargando el territorio') and 'id="loader-txt"' in ultimo:
+            salida.append(php('gc_t', 'js_cargando') + ' · 0%')
+            continue
         if svg or not texto or not re.search(r'\w', texto) or any(i in ultimo for i in SALTAR_IDS):
             salida.append(tok)
             continue
@@ -259,7 +266,7 @@ def main():
              '@media (max-width: 359px) { .marca-pais { display: none; } }\n')
     (TEMA / 'style.css').write_text(
         '/*\nTheme Name: Green Carbon Bolivia\nDescription: Sitio de una página con recorrido en video. '
-        'Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.\nVersion: 1.2.0\n'
+        'Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.\nVersion: 1.2.1\n'
         'Requires PHP: 8.1\nText Domain: greencarbon\n*/\n' + css + extra, encoding='utf-8')
     (TEMA / 'js' / 'main.js').write_text(js, encoding='utf-8')
     (TEMA / 'inc' / 'campos.json').write_text(json.dumps(c.secciones, ensure_ascii=False, indent=1), encoding='utf-8')

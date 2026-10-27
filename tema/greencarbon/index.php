@@ -45,12 +45,12 @@
 <div id="loader" role="status" aria-live="polite">
   <img src="<?php gc_u("cab_01"); ?>" alt="<?php gc_a("cab_02"); ?>" class="loader-logo">
   <div class="barra"><i id="loader-barra"></i></div>
-  <span id="loader-txt">Cargando el territorio · 0%</span>
+  <span id="loader-txt"><?php gc_t("js_cargando"); ?> · 0%</span>
 </div>
 
 <header class="cab" id="cab">
   <a href="#top" class="marca" aria-label="<?php gc_a("cab_03"); ?>"><img src="<?php gc_u("cab_01"); ?>" alt="<?php gc_a("cab_04"); ?>"><span class="marca-pais"><?php gc_t("cab_05"); ?></span></a>
-  <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">MENÚ</button>
+  <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav"><?php gc_t("js_menu"); ?></button>
   <ul class="nav" id="nav">
     <li><a href="#quienes"><?php gc_t("cab_06"); ?></a></li>
     <li><a href="#trabajo"><?php gc_t("cab_07"); ?></a></li>
@@ -61,16 +61,14 @@
         <li><a href="#gobernanza"><?php gc_t("cab_11"); ?></a></li>
         <li><a href="#voces"><?php gc_t("cab_12"); ?></a></li>
         <li><a href="#biodiversidad"><?php gc_t("cab_13"); ?></a></li>
-        <li><a href="#transparencia"><?php gc_t("cab_14"); ?></a></li>
       </ul>
     </li>
-    <li><a href="#centro"><?php gc_t("cab_15"); ?></a></li>
-    <li><a href="#impacto"><?php gc_t("cab_16"); ?></a></li>
-    <li><a href="#transparencia"><?php gc_t("cab_17"); ?></a></li>
-    <li><a href="#contacto"><?php gc_t("cab_18"); ?></a></li>
+    <li><a href="#centro"><?php gc_t("cab_14"); ?></a></li>
+    <li><a href="#impacto"><?php gc_t("cab_15"); ?></a></li>
+    <li><a href="#contacto"><?php gc_t("cab_16"); ?></a></li>
   </ul>
   <div class="cab-der"><?php gc_idioma(); ?>
-  <a href="#contacto" class="btn pri cta-cab"><?php gc_t("cab_19"); ?> <svg class="i"><use href="#i-flecha"/></svg></a></div>
+  <a href="#contacto" class="btn pri cta-cab"><?php gc_t("cab_17"); ?> <svg class="i"><use href="#i-flecha"/></svg></a></div>
 </header>
 
 <div class="film" aria-hidden="true"><canvas id="film"></canvas></div>
@@ -348,24 +346,9 @@
             <div><dt><?php gc_t("s15_12"); ?></dt><dd><?php gc_t("s15_13"); ?></dd></div>
             <div><dt><?php gc_t("s15_14"); ?></dt><dd><?php gc_t("s15_15"); ?></dd></div>
             <div><dt><?php gc_t("s15_16"); ?></dt><dd><?php gc_t("s15_17"); ?></dd></div>
-            <div><dt><?php gc_t("s15_18"); ?></dt><dd><?php gc_t("s15_19"); ?></dd></div>
           </dl>
-          <div class="acciones"><a href="#transparencia" class="btn pri"><?php gc_t("s15_20"); ?></a></div>
+          <div class="acciones"><a href="<?php gc_u("s15_18"); ?>" target="_blank" rel="noopener" class="btn pri"><?php gc_t("s15_19"); ?></a></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 16 · Transparencia -->
-  <section id="transparencia" class="gris" data-cuadro="1210">
-    <div class="cont reveal">
-      <p class="eyebrow"><?php gc_t("s16_01"); ?></p>
-      <h2><?php gc_t("s16_02"); ?></h2>
-      <div class="docs">
-        <a class="doc item" href="<?php gc_u("s16_03"); ?>" target="_blank" rel="noopener"><svg class="i g"><use href="#i-doc"/></svg><h3><?php gc_t("s16_04"); ?></h3><span class="accion"><?php gc_t("s16_05"); ?> <svg class="i"><use href="#i-ext"/></svg></span></a>
-        <a class="doc item" href="<?php gc_u("s16_06"); ?>" target="_blank" rel="noopener"><svg class="i g"><use href="#i-doc"/></svg><h3><?php gc_t("s16_07"); ?></h3><span class="accion"><?php gc_t("s16_08"); ?> <svg class="i"><use href="#i-ext"/></svg></span></a>
-        <a class="doc item" href="<?php gc_u("s16_09"); ?>" target="_blank" rel="noopener"><svg class="i g"><use href="#i-capas"/></svg><h3><?php gc_t("s16_10"); ?></h3><span class="muted"><?php gc_t("s16_11"); ?></span><span class="accion"><?php gc_t("s16_12"); ?> <svg class="i"><use href="#i-ext"/></svg></span></a>
-        <div class="doc item"><svg class="i g"><use href="#i-satelite"/></svg><h3><?php gc_t("s16_13"); ?></h3><?php gc_aviso("s16_14", "pend", "Falta enlace", "Missing link"); ?><span class="accion" style="opacity:.5"><?php gc_t("s16_15"); ?> <svg class="i"><use href="#i-ext"/></svg></span></div>
       </div>
     </div>
   </section>
@@ -444,19 +427,19 @@
       </div>
       <div>
         <h4><?php gc_t("pie_14"); ?></h4>
-        <ul><li><a href="#impacto"><?php gc_t("pie_15"); ?></a></li><li><a href="#transparencia"><?php gc_t("pie_16"); ?></a></li><li><a href="#contacto"><?php gc_t("pie_17"); ?></a></li></ul>
+        <ul><li><a href="#impacto"><?php gc_t("pie_15"); ?></a></li><li><a href="#contacto"><?php gc_t("pie_16"); ?></a></li></ul>
       </div>
       <div>
-        <h4><?php gc_t("pie_18"); ?></h4>
+        <h4><?php gc_t("pie_17"); ?></h4>
         <ul>
-          <li><a href="<?php gc_u("pie_19"); ?>" target="_blank" rel="noopener"><?php gc_t("pie_20"); ?></a></li>
-          <li><a href="<?php gc_u("pie_21"); ?>" target="_blank" rel="noopener"><?php gc_t("pie_22"); ?></a></li>
-          <li><a href="<?php gc_u("pie_23"); ?>" target="_blank" rel="noopener"><?php gc_t("pie_24"); ?></a></li>
+          <li><a href="<?php gc_u("pie_18"); ?>" target="_blank" rel="noopener"><?php gc_t("pie_19"); ?></a></li>
+          <li><a href="<?php gc_u("pie_20"); ?>" target="_blank" rel="noopener"><?php gc_t("pie_21"); ?></a></li>
+          <li><a href="<?php gc_u("pie_22"); ?>" target="_blank" rel="noopener"><?php gc_t("pie_23"); ?></a></li>
         </ul>
       </div>
     </div>
-    <p class="pie-gigante" aria-hidden="true"><?php gc_t("pie_25"); ?></p>
-    <div class="pie-abajo"><?php gc_t("pie_26"); ?></div>
+    <p class="pie-gigante" aria-hidden="true"><?php gc_t("pie_24"); ?></p>
+    <div class="pie-abajo"><?php gc_t("pie_25"); ?></div>
   </div>
 </footer>
 
