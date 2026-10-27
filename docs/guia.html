@@ -7,7 +7,7 @@
 <style>
 :root { --noche: #0a1712; --verde: #2f6b47; --liquen: #b8d48f; --tinta: #12241b; --tinta-2: #4c5f55; --linea: #dfe5df; --papel: #fbfaf6; --aviso: #b4570f; --sol: #f2b45a; }
 @page { size: A4; margin: 20mm 18mm 20mm 18mm;
-  @bottom-left { content: "Green Carbon Bolivia · Guía WordPress v1.2.1"; font: 8pt Inter, sans-serif; color: #7b8a82; }
+  @bottom-left { content: "Green Carbon Bolivia · Guía WordPress v1.2.2"; font: 8pt Inter, sans-serif; color: #7b8a82; }
   @bottom-right { content: counter(page) " / " counter(pages); font: 8pt Inter, sans-serif; color: #7b8a82; } }
 @page :first { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
 * { box-sizing: border-box; }
@@ -72,9 +72,9 @@ figcaption { font-size: 8.5pt; color: var(--tinta-2); margin-top: 1.5mm; }
     <p class="sub">Guía técnica y de uso: acceso al administrador, qué se puede editar, cómo está hecho el tema, instalación del contenedor y lista de lo que falta completar antes de publicar.</p>
   </div>
   <dl>
-    <dt>Versión</dt><dd>1.2.1 · 27 de octubre de 2026</dd>
+    <dt>Versión</dt><dd>1.2.2 · 27 de octubre de 2026</dd>
     <dt>Repositorio</dt><dd>github.com/pipo2021/greencarbon-wordpress (público)</dd>
-    <dt>Descargas</dt><dd>Release v1.2.1: código fuente (.zip) + imagen Docker amd64 (.tar.gz)</dd>
+    <dt>Descargas</dt><dd>Release v1.2.2: código fuente (.zip) + imagen Docker amd64 (.tar.gz)</dd>
     <dt>Stack</dt><dd>WordPress 6.8.3 · PHP 8.3 · Apache · MariaDB 11.4 · Docker Compose</dd>
     <dt>Idiomas</dt><dd>Español (principal) e inglés (borrador pendiente de aprobación)</dd>
   </dl>
@@ -106,7 +106,7 @@ figcaption { font-size: 8.5pt; color: var(--tinta-2); margin-top: 1.5mm; }
     <tr><td><code>docker/</code></td><td>Script de arranque e instalación automática (<code>instalar.sh</code>).</td></tr>
     <tr><td><code>tema/greencarbon/</code></td><td>El tema de WordPress listo para usar (≈ 250 MB por el video y los cuadros).</td></tr>
     <tr><td><code>herramientas/</code></td><td>Generador del tema (<code>convertir.py</code>), traducción al inglés (<code>traduccion-en.json</code>) y scripts del video.</td></tr>
-    <tr><td><code>greencarbon-wordpress-1.2.1-amd64.tar.gz</code></td><td>Imagen Docker ya construida para servidores x86 (adjunta al Release, no está en el repo).</td></tr>
+    <tr><td><code>greencarbon-wordpress-1.2.2-amd64.tar.gz</code></td><td>Imagen Docker ya construida para servidores x86 (adjunta al Release, no está en el repo).</td></tr>
   </table>
   <div class="nota"><b>¿No usan Git?</b> No hace falta. En la página del Release (<span class="mono">github.com/pipo2021/greencarbon-wordpress/releases</span>) se descarga «Source code (zip)» y la imagen desde el navegador. El repositorio es público: no hace falta cuenta de GitHub ni invitación.</div>
 </section>
@@ -121,7 +121,7 @@ figcaption { font-size: 8.5pt; color: var(--tinta-2); margin-top: 1.5mm; }
     <li>Internet en la primera instalación (descarga WordPress en español). Sin internet funciona igual, con el admin en inglés.</li>
   </ul>
   <h3>Pasos</h3>
-  <div class="paso"><span class="num">1</span><div><p><b>Descargar y descomprimir</b> el «Source code (zip)» del Release v1.2.1. Queda una carpeta <code>greencarbon-wordpress-1.2.1</code>. Abrir una terminal dentro de esa carpeta.</p></div></div>
+  <div class="paso"><span class="num">1</span><div><p><b>Descargar y descomprimir</b> el «Source code (zip)» del Release v1.2.2. Queda una carpeta <code>greencarbon-wordpress-1.2.2</code>. Abrir una terminal dentro de esa carpeta.</p></div></div>
   <div class="paso"><span class="num">2</span><div><p><b>Crear el archivo de configuración</b> copiando la plantilla:</p>
 <pre>cp .env.ejemplo .env        <span class="c"># en Windows (PowerShell): copy .env.ejemplo .env</span></pre></div></div>
   <div class="paso"><span class="num">3</span><div><p><b>Editar <code>.env</code></b> con cualquier editor de texto y cambiar como mínimo las dos contraseñas:</p>
@@ -143,9 +143,9 @@ figcaption { font-size: 8.5pt; color: var(--tinta-2); margin-top: 1.5mm; }
   <div class="paso"><span class="num">6</span><div><p><b>Abrir</b> el sitio en <code>http://localhost:8080</code> y el administrador en <code>http://localhost:8080/wp-admin</code>.</p></div></div>
 
   <h3>Alternativa: usar la imagen ya construida (servidores x86)</h3>
-  <p>Evita el paso de construcción. Descargar <code>greencarbon-wordpress-1.2.1-amd64.tar.gz</code> del Release y ponerlo en la misma carpeta:</p>
-<pre>docker load -i greencarbon-wordpress-1.2.1-amd64.tar.gz
-docker tag greencarbon-wordpress:1.2.1-amd64 greencarbon-wordpress:1.2.1
+  <p>Evita el paso de construcción. Descargar <code>greencarbon-wordpress-1.2.2-amd64.tar.gz</code> del Release y ponerlo en la misma carpeta:</p>
+<pre>docker load -i greencarbon-wordpress-1.2.2-amd64.tar.gz
+docker tag greencarbon-wordpress:1.2.2-amd64 greencarbon-wordpress:1.2.2
 docker compose up -d --no-build</pre>
   <div class="nota">En Mac con Apple Silicon usar el paso 4 (construye la imagen nativa). La imagen amd64 también funciona ahí, pero emulada y más lenta.</div>
 
@@ -218,7 +218,7 @@ docker compose up -d --no-build</pre>
     <tr><td>El recorrido en video</td><td>Computadora: <code>video/recorrido-1080p60.mp4</code> (1080p, 60 fps, 75 MB). Celular: cuadros WebP en <code>pack/v</code> (540×960, 48 fps, 102 MB en 8 paquetes de grueso a fino). Respaldo: <code>pack/h</code> (24 fps). Se generan con los scripts de <code>herramientas/video/</code>. Si se reemplazan, hay que subir <code>VERSION</code> en <code>js/main.js</code>: los archivos se llaman igual y el navegador los guarda en caché.</td></tr>
     <tr><td>Anclas <code>data-cuadro</code></td><td>Atan cada sección a un cuadro del video. Están en el HTML fuente.</td></tr>
     <tr><td>Diseño, íconos y orden de secciones</td><td><code>style.css</code> e <code>index.php</code>, generados desde el HTML original.</td></tr>
-    <tr><td>Cantidad de elementos</td><td>Hay 5 testimonios, 4 cifras de impacto, 1 especie y 5 piezas en «Actividades en campo». Para agregar o quitar elementos hay que tocar el HTML fuente y regenerar.</td></tr>
+    <tr><td>Cantidad de elementos</td><td>Hay 5 testimonios, 4 cifras de impacto, 1 especie y 5 piezas en «Comunidades en acción». Para agregar o quitar elementos hay que tocar el HTML fuente y regenerar.</td></tr>
   </table>
   <div class="nota">No se usan plugins: son menos puntos de falla y menos actualizaciones. El editor de archivos del admin está desactivado (<code>DISALLOW_FILE_EDIT</code>) y la barra de administración se oculta en el frente, porque tapa la cabecera fija.</div>
 
@@ -333,7 +333,7 @@ docker compose exec -T db sh -c 'mariadb -u greencarbon -p"$MARIADB_PASSWORD" gr
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>4 cifras de impacto respaldadas y su período (hoy «XX»)</td><td>13 · Impacto</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Especie con evidencia territorial: foto, nombre común, nombre científico, descripción</td><td>14 · Biodiversidad</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Enlace a los datos de monitoreo del proyecto (para cuando se muestre «Del bosque a los datos»)</td><td>9 · Monitoreo territorial</td></tr>
-    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Noticia: titular, responsable editorial y frecuencia</td><td>17 · Actividades en campo</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Noticia: titular, responsable editorial y frecuencia</td><td>17 · Comunidades en acción</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Destino del Canal de Integridad (separado del contacto)</td><td>18 · Contacto</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Flujo interno y privacidad para activar «Reportar una alerta»</td><td>11 · Reportar una alerta</td></tr>
   </table>

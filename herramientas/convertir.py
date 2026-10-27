@@ -268,7 +268,7 @@ def main():
              '@media (max-width: 359px) { .marca-pais { display: none; } }\n')
     (TEMA / 'style.css').write_text(
         '/*\nTheme Name: Green Carbon Bolivia\nDescription: Sitio de una página con recorrido en video. '
-        'Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.\nVersion: 1.2.1\n'
+        'Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.\nVersion: 1.2.2\n'
         'Requires PHP: 8.1\nText Domain: greencarbon\n*/\n' + css + extra, encoding='utf-8')
     (TEMA / 'js' / 'main.js').write_text(js, encoding='utf-8')
     (TEMA / 'inc' / 'campos.json').write_text(json.dumps(c.secciones, ensure_ascii=False, indent=1), encoding='utf-8')

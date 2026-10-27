@@ -316,10 +316,10 @@
    },
    "s02_02": {
     "tipo": "texto",
-    "etiqueta": "Texto alternativo: Integrante del equipo de Green Carbon Bolivia t…",
-    "defecto": "Integrante del equipo de Green Carbon Bolivia tomando un rumbo con brújula en el bosque",
+    "etiqueta": "Texto alternativo: Monitor comunitario tomando un rumbo con brújul…",
+    "defecto": "Monitor comunitario tomando un rumbo con brújula en el bosque",
     "desc": "",
-    "en": "Green Carbon Bolivia team member taking a compass bearing in the forest"
+    "en": "A community monitor taking a compass bearing in the forest"
    },
    "s02_03": {
     "tipo": "texto",
@@ -330,10 +330,10 @@
    },
    "s02_04": {
     "tipo": "texto",
-    "etiqueta": "Destacado: Equipo de Green Carbon Bolivia",
-    "defecto": "Equipo de Green Carbon Bolivia",
+    "etiqueta": "Destacado: Monitor comunitario",
+    "defecto": "Monitor comunitario",
     "desc": "",
-    "en": "Green Carbon Bolivia team"
+    "en": "Community monitor"
    },
    "s02_05": {
     "tipo": "texto",
@@ -1914,21 +1914,21 @@
  },
  {
   "id": "s17",
-  "titulo": "17 · Actividades en campo",
+  "titulo": "17 · Comunidades en acción",
   "campos": {
    "s17_01": {
     "tipo": "texto",
-    "etiqueta": "Párrafo: Actividades en campo",
-    "defecto": "Actividades en campo",
+    "etiqueta": "Párrafo: Comunidades en acción",
+    "defecto": "Comunidades en acción",
     "desc": "",
-    "en": "Field activities"
+    "en": "Communities in action"
    },
    "s17_02": {
     "tipo": "texto",
-    "etiqueta": "Título: Actividades en campo",
-    "defecto": "Actividades en campo",
+    "etiqueta": "Título: Comunidades en acción",
+    "defecto": "Comunidades en acción",
     "desc": "",
-    "en": "Field activities"
+    "en": "Communities in action"
    },
    "s17_03": {
     "tipo": "texto",
@@ -1974,30 +1974,30 @@
    },
    "s17_09": {
     "tipo": "imagen",
-    "etiqueta": "Imagen: equipo-camioneta.webp",
-    "defecto": "assets/fotos/equipo-camioneta.webp",
+    "etiqueta": "Imagen: community1.webp",
+    "defecto": "assets/community1.webp",
     "desc": ""
    },
    "s17_10": {
     "tipo": "texto",
-    "etiqueta": "Texto alternativo: Equipo de campo junto a la camioneta en un cami…",
-    "defecto": "Equipo de campo junto a la camioneta en un camino del territorio",
+    "etiqueta": "Texto alternativo: Comunarios tocan flautas tradicionales durante…",
+    "defecto": "Comunarios tocan flautas tradicionales durante un encuentro comunitario",
     "desc": "",
-    "en": "Field team next to the pickup truck on a road in the territory"
+    "en": "Community members play traditional flutes during a community gathering"
    },
    "s17_11": {
     "tipo": "texto",
-    "etiqueta": "Texto: Territorio",
-    "defecto": "Territorio",
+    "etiqueta": "Texto: Comunidades",
+    "defecto": "Comunidades",
     "desc": "",
-    "en": "Territory"
+    "en": "Communities"
    },
    "s17_12": {
     "tipo": "texto",
-    "etiqueta": "Destacado: Equipo de campo en el territorio",
-    "defecto": "Equipo de campo en el territorio",
+    "etiqueta": "Destacado: Encuentro comunitario",
+    "defecto": "Encuentro comunitario",
     "desc": "",
-    "en": "Field team in the territory"
+    "en": "Community gathering"
    },
    "s17_13": {
     "tipo": "video",
@@ -2013,10 +2013,10 @@
    },
    "s17_15": {
     "tipo": "texto",
-    "etiqueta": "Lector de pantalla: Instalación de una cámara trampa en un árbol",
-    "defecto": "Instalación de una cámara trampa en un árbol",
+    "etiqueta": "Lector de pantalla: Monitor comunitario instala una cámara trampa e…",
+    "defecto": "Monitor comunitario instala una cámara trampa en un árbol",
     "desc": "",
-    "en": "Installing a camera trap on a tree"
+    "en": "A community monitor installs a camera trap on a tree"
    },
    "s17_16": {
     "tipo": "texto",
@@ -2027,23 +2027,23 @@
    },
    "s17_17": {
     "tipo": "texto",
-    "etiqueta": "Destacado: Instalación de cámaras trampa",
-    "defecto": "Instalación de cámaras trampa",
+    "etiqueta": "Destacado: Monitores comunitarios instalan cámaras trampa",
+    "defecto": "Monitores comunitarios instalan cámaras trampa",
     "desc": "",
-    "en": "Camera trap installation"
+    "en": "Community monitors install camera traps"
    },
    "s17_18": {
     "tipo": "imagen",
-    "etiqueta": "Imagen: firma-acta.webp",
-    "defecto": "assets/fotos/firma-acta.webp",
+    "etiqueta": "Imagen: community2.webp",
+    "defecto": "assets/community2.webp",
     "desc": ""
    },
    "s17_19": {
     "tipo": "texto",
-    "etiqueta": "Texto alternativo: Firma de actas en una reunión de trabajo",
-    "defecto": "Firma de actas en una reunión de trabajo",
+    "etiqueta": "Texto alternativo: Comunarios celebran tomados de las manos durant…",
+    "defecto": "Comunarios celebran tomados de las manos durante una actividad en la comunidad",
     "desc": "",
-    "en": "Signing of meeting minutes at a working session"
+    "en": "Community members celebrate hand in hand during a community activity"
    },
    "s17_20": {
     "tipo": "texto",
@@ -2054,37 +2054,37 @@
    },
    "s17_21": {
     "tipo": "texto",
-    "etiqueta": "Destacado: Reunión de trabajo",
-    "defecto": "Reunión de trabajo",
+    "etiqueta": "Destacado: Celebración en la comunidad",
+    "defecto": "Celebración en la comunidad",
     "desc": "",
-    "en": "Working meeting"
+    "en": "Community celebration"
    },
    "s17_22": {
     "tipo": "imagen",
-    "etiqueta": "Imagen: equipo-bosque.webp",
-    "defecto": "assets/fotos/equipo-bosque.webp",
+    "etiqueta": "Imagen: community3.webp",
+    "defecto": "assets/community3.webp",
     "desc": ""
    },
    "s17_23": {
     "tipo": "texto",
-    "etiqueta": "Texto alternativo: Monitores en el interior del bosque",
-    "defecto": "Monitores en el interior del bosque",
+    "etiqueta": "Texto alternativo: Vista aérea de viviendas de una comunidad rodea…",
+    "defecto": "Vista aérea de viviendas de una comunidad rodeada de bosque",
     "desc": "",
-    "en": "Monitors inside the forest"
+    "en": "Aerial view of homes in a community surrounded by forest"
    },
    "s17_24": {
     "tipo": "texto",
-    "etiqueta": "Texto: Bosque",
-    "defecto": "Bosque",
+    "etiqueta": "Texto: Territorio",
+    "defecto": "Territorio",
     "desc": "",
-    "en": "Forest"
+    "en": "Territory"
    },
    "s17_25": {
     "tipo": "texto",
-    "etiqueta": "Destacado: Recorrido en el bosque",
-    "defecto": "Recorrido en el bosque",
+    "etiqueta": "Destacado: Comunidad en el bosque",
+    "defecto": "Comunidad en el bosque",
     "desc": "",
-    "en": "Walk through the forest"
+    "en": "A community in the forest"
    },
    "s17_26": {
     "tipo": "texto",
