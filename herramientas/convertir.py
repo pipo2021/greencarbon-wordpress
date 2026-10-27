@@ -170,6 +170,8 @@ def convertir_tag(tok, nombre, c):
             clave = c.imagenes.get(v) or c.nuevo('imagen', f'Imagen: {Path(v).name}', v)
             c.imagenes[v] = clave
             return f'{m[1]}src="{php("gc_u", clave)}"'
+        if a == 'poster':
+            return f'{m[1]}poster="{php("gc_u", c.nuevo("imagen", f"Portada del video: {Path(v).name}", v))}"'
         if a == 'src' and nombre == 'video':
             return f'{m[1]}src="{php("gc_u", c.nuevo("video", f"Video: {Path(v).name}", v))}"'
         if a == 'srcset':
@@ -184,7 +186,7 @@ def convertir_tag(tok, nombre, c):
             return f'{m[1]}{a}="{php("gc_u", c.nuevo("url", etiqueta, v))}"'
         return m[0]
 
-    tok = re.sub(r'(\s)(src|srcset|alt|aria-label|href|action)="([^"]*)"', attr, tok)
+    tok = re.sub(r'(\s)(src|srcset|alt|aria-label|href|action|poster)="([^"]*)"', attr, tok)
     if 'id="monitoreo"' in tok:
         clave = c.nuevo('check', 'Mostrar «Del bosque a los datos»', False,
                         'Oculto hasta la certificación (aprox. marzo 2027). Al mostrarlo hay que rehacer las '

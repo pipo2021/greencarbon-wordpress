@@ -353,7 +353,7 @@
     </div>
   </section>
 
-  <!-- 17 · Green Carbon en acción -->
+  <!-- 17 · Actividades en campo -->
   <section id="accion" class="claro" data-cuadro="1260">
     <div class="cont reveal">
       <p class="eyebrow"><?php gc_t("s17_01"); ?></p>
@@ -367,10 +367,10 @@
       </div>
       <div class="editorial">
         <div class="pieza grande item" data-cat="territorio"><img src="<?php gc_u("s17_09"); ?>" alt="<?php gc_a("s17_10"); ?>" loading="lazy"><div class="pie"><span><?php gc_t("s17_11"); ?></span><b><?php gc_t("s17_12"); ?></b></div></div>
-        <div class="pieza item" data-cat="monitoreo"><video src="<?php gc_u("s17_13"); ?>" muted loop playsinline preload="none" aria-label="<?php gc_a("s17_14"); ?>"></video><span class="play"><svg class="i"><use href="#i-play"/></svg></span><div class="pie"><span><?php gc_t("s17_15"); ?></span><b><?php gc_t("s17_16"); ?></b></div></div>
-        <div class="pieza item" data-cat="comunidades"><img src="<?php gc_u("s17_17"); ?>" alt="<?php gc_a("s17_18"); ?>" loading="lazy"><div class="pie"><span><?php gc_t("s17_19"); ?></span><b><?php gc_t("s17_20"); ?></b></div></div>
-        <div class="pieza item" data-cat="bosque"><img src="<?php gc_u("s17_21"); ?>" alt="<?php gc_a("s17_22"); ?>" loading="lazy"><div class="pie"><span><?php gc_t("s17_23"); ?></span><b><?php gc_t("s17_24"); ?></b></div></div>
-        <div class="pieza noticia item" data-cat="territorio comunidades bosque monitoreo"><?php gc_aviso("s17_25", "pend", "Falta noticia · responsable editorial y frecuencia", "Missing news item · editorial owner and frequency"); ?><div class="pie"><span><?php gc_t("s17_26"); ?></span><b><?php gc_t("s17_27"); ?></b></div></div>
+        <div class="pieza item" data-cat="monitoreo"><video src="<?php gc_u("s17_13"); ?>" poster="<?php gc_u("s17_14"); ?>" muted loop playsinline preload="none" aria-label="<?php gc_a("s17_15"); ?>"></video><span class="play"><svg class="i"><use href="#i-play"/></svg></span><div class="pie"><span><?php gc_t("s17_16"); ?></span><b><?php gc_t("s17_17"); ?></b></div></div>
+        <div class="pieza item" data-cat="comunidades"><img src="<?php gc_u("s17_18"); ?>" alt="<?php gc_a("s17_19"); ?>" loading="lazy"><div class="pie"><span><?php gc_t("s17_20"); ?></span><b><?php gc_t("s17_21"); ?></b></div></div>
+        <div class="pieza item" data-cat="bosque"><img src="<?php gc_u("s17_22"); ?>" alt="<?php gc_a("s17_23"); ?>" loading="lazy"><div class="pie"><span><?php gc_t("s17_24"); ?></span><b><?php gc_t("s17_25"); ?></b></div></div>
+        <div class="pieza noticia item" data-cat="territorio comunidades bosque monitoreo"><?php gc_aviso("s17_26", "pend", "Falta noticia · responsable editorial y frecuencia", "Missing news item · editorial owner and frequency"); ?><div class="pie"><span><?php gc_t("s17_27"); ?></span><b><?php gc_t("s17_28"); ?></b></div></div>
       </div>
     </div>
   </section>

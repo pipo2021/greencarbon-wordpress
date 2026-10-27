@@ -1914,21 +1914,21 @@
  },
  {
   "id": "s17",
-  "titulo": "17 · Green Carbon en acción",
+  "titulo": "17 · Actividades en campo",
   "campos": {
    "s17_01": {
     "tipo": "texto",
-    "etiqueta": "Párrafo: Green Carbon en acción",
-    "defecto": "Green Carbon en acción",
+    "etiqueta": "Párrafo: Actividades en campo",
+    "defecto": "Actividades en campo",
     "desc": "",
-    "en": "Green Carbon in action"
+    "en": "Field activities"
    },
    "s17_02": {
     "tipo": "texto",
-    "etiqueta": "Título: Green Carbon en acción",
-    "defecto": "Green Carbon en acción",
+    "etiqueta": "Título: Actividades en campo",
+    "defecto": "Actividades en campo",
     "desc": "",
-    "en": "Green Carbon in action"
+    "en": "Field activities"
    },
    "s17_03": {
     "tipo": "texto",
@@ -2006,95 +2006,101 @@
     "desc": ""
    },
    "s17_14": {
+    "tipo": "imagen",
+    "etiqueta": "Portada del video: camara-trampa-portada.webp",
+    "defecto": "assets/fotos/camara-trampa-portada.webp",
+    "desc": ""
+   },
+   "s17_15": {
     "tipo": "texto",
     "etiqueta": "Lector de pantalla: Instalación de una cámara trampa en un árbol",
     "defecto": "Instalación de una cámara trampa en un árbol",
     "desc": "",
     "en": "Installing a camera trap on a tree"
    },
-   "s17_15": {
+   "s17_16": {
     "tipo": "texto",
     "etiqueta": "Texto: Monitoreo",
     "defecto": "Monitoreo",
     "desc": "",
     "en": "Monitoring"
    },
-   "s17_16": {
+   "s17_17": {
     "tipo": "texto",
     "etiqueta": "Destacado: Instalación de cámaras trampa",
     "defecto": "Instalación de cámaras trampa",
     "desc": "",
     "en": "Camera trap installation"
    },
-   "s17_17": {
+   "s17_18": {
     "tipo": "imagen",
     "etiqueta": "Imagen: firma-acta.webp",
     "defecto": "assets/fotos/firma-acta.webp",
     "desc": ""
    },
-   "s17_18": {
+   "s17_19": {
     "tipo": "texto",
     "etiqueta": "Texto alternativo: Firma de actas en una reunión de trabajo",
     "defecto": "Firma de actas en una reunión de trabajo",
     "desc": "",
     "en": "Signing of meeting minutes at a working session"
    },
-   "s17_19": {
+   "s17_20": {
     "tipo": "texto",
     "etiqueta": "Texto: Comunidades",
     "defecto": "Comunidades",
     "desc": "",
     "en": "Communities"
    },
-   "s17_20": {
+   "s17_21": {
     "tipo": "texto",
     "etiqueta": "Destacado: Reunión de trabajo",
     "defecto": "Reunión de trabajo",
     "desc": "",
     "en": "Working meeting"
    },
-   "s17_21": {
+   "s17_22": {
     "tipo": "imagen",
     "etiqueta": "Imagen: equipo-bosque.webp",
     "defecto": "assets/fotos/equipo-bosque.webp",
     "desc": ""
    },
-   "s17_22": {
+   "s17_23": {
     "tipo": "texto",
     "etiqueta": "Texto alternativo: Monitores en el interior del bosque",
     "defecto": "Monitores en el interior del bosque",
     "desc": "",
     "en": "Monitors inside the forest"
    },
-   "s17_23": {
+   "s17_24": {
     "tipo": "texto",
     "etiqueta": "Texto: Bosque",
     "defecto": "Bosque",
     "desc": "",
     "en": "Forest"
    },
-   "s17_24": {
+   "s17_25": {
     "tipo": "texto",
     "etiqueta": "Destacado: Recorrido en el bosque",
     "defecto": "Recorrido en el bosque",
     "desc": "",
     "en": "Walk through the forest"
    },
-   "s17_25": {
+   "s17_26": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta noticia · responsable editorial y…»",
     "defecto": "",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },
-   "s17_26": {
+   "s17_27": {
     "tipo": "texto",
     "etiqueta": "Texto: Noticia",
     "defecto": "Noticia",
     "desc": "",
     "en": "News"
    },
-   "s17_27": {
+   "s17_28": {
     "tipo": "texto",
     "etiqueta": "Destacado: Titular de la nota",
     "defecto": "Titular de la nota",

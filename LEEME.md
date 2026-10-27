@@ -30,7 +30,7 @@ docker compose up -d --no-build
 
 ## Qué edita el administrador
 
-21 secciones, en el mismo orden que la página, con 353 campos. Cada texto tiene dos campos, **ES** y **EN** (debajo):
+21 secciones, en el mismo orden que la página, con 354 campos. Cada texto tiene dos campos, **ES** y **EN** (debajo):
 
 | Sección | Qué se edita |
 |---|---|

@@ -188,7 +188,7 @@ docker compose up -d --no-build</pre>
 
 <section style="break-before: auto; margin-top: 8mm">
   <h2><span class="n">04</span>Qué se puede modificar</h2>
-  <p>El panel <b>Contenido de la web</b> tiene <b>21 secciones en el mismo orden que la página</b> y 353 campos. Cada cambio se ve al instante en la vista previa, pero <b>no se publica hasta pulsar «Publicar»</b>, arriba a la izquierda. También se puede guardar como borrador o programar.</p>
+  <p>El panel <b>Contenido de la web</b> tiene <b>21 secciones en el mismo orden que la página</b> y 354 campos. Cada cambio se ve al instante en la vista previa, pero <b>no se publica hasta pulsar «Publicar»</b>, arriba a la izquierda. También se puede guardar como borrador o programar.</p>
   <div class="dos">
     <figure><img src="img/03-secciones.jpg" alt="Lista de secciones"><figcaption>Secciones del panel, una por bloque de la página.</figcaption></figure>
     <figure><img src="img/04-campos-es-en.jpg" alt="Campos ES y EN"><figcaption>Cada texto tiene su campo <b>ES</b> y debajo su <b>EN</b>.</figcaption></figure>
@@ -218,7 +218,7 @@ docker compose up -d --no-build</pre>
     <tr><td>El recorrido en video</td><td>Computadora: <code>video/recorrido-1080p60.mp4</code> (1080p, 60 fps, 75 MB). Celular: cuadros WebP en <code>pack/v</code> (540×960, 48 fps, 102 MB en 8 paquetes de grueso a fino). Respaldo: <code>pack/h</code> (24 fps). Se generan con los scripts de <code>herramientas/video/</code>. Si se reemplazan, hay que subir <code>VERSION</code> en <code>js/main.js</code>: los archivos se llaman igual y el navegador los guarda en caché.</td></tr>
     <tr><td>Anclas <code>data-cuadro</code></td><td>Atan cada sección a un cuadro del video. Están en el HTML fuente.</td></tr>
     <tr><td>Diseño, íconos y orden de secciones</td><td><code>style.css</code> e <code>index.php</code>, generados desde el HTML original.</td></tr>
-    <tr><td>Cantidad de elementos</td><td>Hay 5 testimonios, 4 cifras de impacto, 1 especie y 5 piezas en «En acción». Para agregar o quitar elementos hay que tocar el HTML fuente y regenerar.</td></tr>
+    <tr><td>Cantidad de elementos</td><td>Hay 5 testimonios, 4 cifras de impacto, 1 especie y 5 piezas en «Actividades en campo». Para agregar o quitar elementos hay que tocar el HTML fuente y regenerar.</td></tr>
   </table>
   <div class="nota">No se usan plugins: son menos puntos de falla y menos actualizaciones. El editor de archivos del admin está desactivado (<code>DISALLOW_FILE_EDIT</code>) y la barra de administración se oculta en el frente, porque tapa la cabecera fija.</div>
 
@@ -236,7 +236,7 @@ docker compose up -d --no-build</pre>
   <table>
     <tr><th style="width:42mm">Archivo del tema</th><th>Qué contiene</th></tr>
     <tr><td><code>index.php</code></td><td>La página entera. Cada texto es una llamada como <code>gc_t("s01_02")</code>. <b>Generado: no editar a mano.</b></td></tr>
-    <tr><td><code>inc/campos.json</code></td><td>Definición de los 353 campos: sección, tipo, etiqueta, valor predeterminado (ES) y traducción (EN).</td></tr>
+    <tr><td><code>inc/campos.json</code></td><td>Definición de los 354 campos: sección, tipo, etiqueta, valor predeterminado (ES) y traducción (EN).</td></tr>
     <tr><td><code>functions.php</code></td><td>Registra el Personalizador a partir de <code>campos.json</code>, funciones de salida con escape (<code>gc_t</code>, <code>gc_a</code>, <code>gc_u</code>, <code>gc_aviso</code>…), idioma, opacidades y carga de CSS/JS.</td></tr>
     <tr><td><code>style.css</code> / <code>js/main.js</code></td><td>CSS y JS del original. El JS recibe <code>window.GC</code> con la ruta del tema, los enlaces y los textos traducidos.</td></tr>
     <tr><td><code>assets/</code>, <code>video/</code>, <code>pack/</code></td><td>Fotos, íconos, MP4 y paquetes de cuadros.</td></tr>
@@ -333,7 +333,7 @@ docker compose exec -T db sh -c 'mariadb -u greencarbon -p"$MARIADB_PASSWORD" gr
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>4 cifras de impacto respaldadas y su período (hoy «XX»)</td><td>13 · Impacto</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Especie con evidencia territorial: foto, nombre común, nombre científico, descripción</td><td>14 · Biodiversidad</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Enlace a los datos de monitoreo del proyecto (para cuando se muestre «Del bosque a los datos»)</td><td>9 · Monitoreo territorial</td></tr>
-    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Noticia: titular, responsable editorial y frecuencia</td><td>17 · En acción</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Noticia: titular, responsable editorial y frecuencia</td><td>17 · Actividades en campo</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Destino del Canal de Integridad (separado del contacto)</td><td>18 · Contacto</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Flujo interno y privacidad para activar «Reportar una alerta»</td><td>11 · Reportar una alerta</td></tr>
   </table>

@@ -342,7 +342,7 @@ a.doc:hover { border-color: var(--green); transform: translateY(-2px); }
 @media (max-width: 960px) { .docs { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .docs { grid-template-columns: 1fr; } .doc { min-height: 0; } }
 
-/* ---- 17 · Green Carbon en acción ---- */
+/* ---- 17 · Actividades en campo ---- */
 .cats { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 30px; }
 .cats button { font: 500 12px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; padding: 11px 16px; border-radius: 999px; border: 1px solid var(--ink-line); background: none; color: var(--ink-2); cursor: pointer; }
 .cats button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
