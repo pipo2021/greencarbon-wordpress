@@ -1,0 +1,2216 @@
+[
+ {
+  "id": "general",
+  "titulo": "General",
+  "campos": {
+   "gen_titulo": {
+    "tipo": "texto",
+    "etiqueta": "Título de la pestaña del navegador",
+    "defecto": "Green Carbon Bolivia",
+    "desc": ""
+   },
+   "gen_descripcion": {
+    "tipo": "parrafo",
+    "etiqueta": "Descripción para buscadores",
+    "defecto": "Green Carbon Bolivia integra conocimiento territorial, gobernanza indígena y evidencia técnica para impulsar soluciones climáticas de largo plazo.",
+    "desc": ""
+   },
+   "enlace_mapas": {
+    "tipo": "url",
+    "etiqueta": "Enlace de los mapas interactivos",
+    "defecto": "",
+    "desc": "Se muestra en un iframe en «Explora el territorio». Vacío = aviso «Falta enlace de mapas»."
+   },
+   "enlace_incendios": {
+    "tipo": "url",
+    "etiqueta": "Enlace embebible del monitoreo de incendios",
+    "defecto": "",
+    "desc": "Se muestra en un iframe en «Centro de monitoreo». Vacío = vista previa que abre el dashboard en otra pestaña. claude.ai no deja embeberse: hace falta hospedarlo en un sitio que lo permita."
+   }
+  }
+ },
+ {
+  "id": "cab",
+  "titulo": "Cabecera y menú",
+  "campos": {
+   "cab_01": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: logo-white.webp",
+    "defecto": "assets/logo-white.webp",
+    "desc": ""
+   },
+   "cab_02": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Green Carbon Bolivia",
+    "defecto": "Green Carbon Bolivia",
+    "desc": ""
+   },
+   "cab_03": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Green Carbon",
+    "defecto": "Green Carbon",
+    "desc": ""
+   },
+   "cab_04": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Bolivia",
+    "defecto": "Bolivia",
+    "desc": ""
+   },
+   "cab_05": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Quiénes somos",
+    "defecto": "Quiénes somos",
+    "desc": ""
+   },
+   "cab_06": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Nuestro trabajo",
+    "defecto": "Nuestro trabajo",
+    "desc": ""
+   },
+   "cab_07": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Proyecto",
+    "defecto": "Proyecto",
+    "desc": ""
+   },
+   "cab_08": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Monte Verde & Lomerío",
+    "defecto": "Monte Verde & Lomerío",
+    "desc": ""
+   },
+   "cab_09": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Territorio",
+    "defecto": "Territorio",
+    "desc": ""
+   },
+   "cab_10": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Gobernanza",
+    "defecto": "Gobernanza",
+    "desc": ""
+   },
+   "cab_11": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Voces del territorio",
+    "defecto": "Voces del territorio",
+    "desc": ""
+   },
+   "cab_12": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Biodiversidad",
+    "defecto": "Biodiversidad",
+    "desc": ""
+   },
+   "cab_13": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Transparencia",
+    "defecto": "Transparencia",
+    "desc": ""
+   },
+   "cab_14": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "cab_15": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Impacto",
+    "defecto": "Impacto",
+    "desc": ""
+   },
+   "cab_16": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Transparencia",
+    "defecto": "Transparencia",
+    "desc": ""
+   },
+   "cab_17": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Contacto",
+    "defecto": "Contacto",
+    "desc": ""
+   },
+   "cab_18": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Conversemos",
+    "defecto": "Conversemos",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s01",
+  "titulo": "1 · Portada",
+  "campos": {
+   "s01_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Territorios indígenas · Chiquitanía · Bolivia",
+    "defecto": "Territorios indígenas · Chiquitanía · Bolivia",
+    "desc": ""
+   },
+   "s01_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Conservar el bosque",
+    "defecto": "Conservar el bosque",
+    "desc": ""
+   },
+   "s01_03": {
+    "tipo": "texto",
+    "etiqueta": "Resaltado: con quienes lo habitan.",
+    "defecto": "con quienes lo habitan.",
+    "desc": ""
+   },
+   "s01_04": {
+    "tipo": "parrafo",
+    "etiqueta": "Párrafo: Green Carbon Bolivia integra conocimiento terri…",
+    "defecto": "Green Carbon Bolivia integra conocimiento territorial, gobernanza indígena y evidencia técnica para impulsar soluciones climáticas de largo plazo.",
+    "desc": ""
+   },
+   "s01_05": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Conoce nuestro trabajo",
+    "defecto": "Conoce nuestro trabajo",
+    "desc": ""
+   },
+   "s01_06": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Explora el territorio",
+    "defecto": "Explora el territorio",
+    "desc": ""
+   },
+   "s01_07": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Conservación",
+    "defecto": "Conservación",
+    "desc": ""
+   },
+   "s01_08": {
+    "tipo": "texto",
+    "etiqueta": "Texto chico: Ecosistemas forestales",
+    "defecto": "Ecosistemas forestales",
+    "desc": ""
+   },
+   "s01_09": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Gobernanza territorial",
+    "defecto": "Gobernanza territorial",
+    "desc": ""
+   },
+   "s01_10": {
+    "tipo": "texto",
+    "etiqueta": "Texto chico: Organizaciones y autoridades",
+    "defecto": "Organizaciones y autoridades",
+    "desc": ""
+   },
+   "s01_11": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Desarrollo comunitario",
+    "defecto": "Desarrollo comunitario",
+    "desc": ""
+   },
+   "s01_12": {
+    "tipo": "texto",
+    "etiqueta": "Texto chico: Capacidades e iniciativas",
+    "defecto": "Capacidades e iniciativas",
+    "desc": ""
+   },
+   "s01_13": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "s01_14": {
+    "tipo": "texto",
+    "etiqueta": "Texto chico: Seguimiento y evidencia",
+    "defecto": "Seguimiento y evidencia",
+    "desc": ""
+   },
+   "s01_15": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Bosque chiquitano · Santa Cruz, Bolivia",
+    "defecto": "Bosque chiquitano · Santa Cruz, Bolivia",
+    "desc": ""
+   },
+   "s01_16": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Desliza para recorrer el territorio",
+    "defecto": "Desliza para recorrer el territorio",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s02",
+  "titulo": "2 · Quiénes somos",
+  "campos": {
+   "s02_01": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: campo-brujula.webp",
+    "defecto": "assets/fotos/campo-brujula.webp",
+    "desc": ""
+   },
+   "s02_02": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Integrante del equipo de Green Carbon Bolivia t…",
+    "defecto": "Integrante del equipo de Green Carbon Bolivia tomando un rumbo con brújula en el bosque",
+    "desc": ""
+   },
+   "s02_03": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Monitoreo en campo",
+    "defecto": "Monitoreo en campo",
+    "desc": ""
+   },
+   "s02_04": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Equipo de Green Carbon Bolivia",
+    "defecto": "Equipo de Green Carbon Bolivia",
+    "desc": ""
+   },
+   "s02_05": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Green Carbon Bolivia",
+    "defecto": "Green Carbon Bolivia",
+    "desc": ""
+   },
+   "s02_06": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Origen y propósito",
+    "defecto": "Origen y propósito",
+    "desc": ""
+   },
+   "s02_07": {
+    "tipo": "texto",
+    "etiqueta": "Título: Acción climática",
+    "defecto": "Acción climática",
+    "desc": ""
+   },
+   "s02_08": {
+    "tipo": "texto",
+    "etiqueta": "Resaltado: desde el territorio.",
+    "defecto": "desde el territorio.",
+    "desc": ""
+   },
+   "s02_09": {
+    "tipo": "parrafo",
+    "etiqueta": "Párrafo: Somos una empresa boliviana especializada en la…",
+    "defecto": "Somos una empresa boliviana especializada en la implementación territorial de soluciones climáticas basadas en la naturaleza, con experiencia en conservación de bosques, gobernanza indígena, monitoreo ambiental y desarrollo comunitario.",
+    "desc": ""
+   },
+   "s02_10": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Trabajamos donde la conservación realmente ocur…",
+    "defecto": "Trabajamos donde la conservación realmente ocurre: en el territorio.",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s03",
+  "titulo": "3 · Qué hacemos",
+  "campos": {
+   "s03_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Nuestro trabajo",
+    "defecto": "Nuestro trabajo",
+    "desc": ""
+   },
+   "s03_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Qué",
+    "defecto": "Qué",
+    "desc": ""
+   },
+   "s03_03": {
+    "tipo": "texto",
+    "etiqueta": "Resaltado: hacemos",
+    "defecto": "hacemos",
+    "desc": ""
+   },
+   "s03_04": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Conservación",
+    "defecto": "Conservación",
+    "desc": ""
+   },
+   "s03_05": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Protección de ecosistemas forestales y reducció…",
+    "defecto": "Protección de ecosistemas forestales y reducción de amenazas.",
+    "desc": ""
+   },
+   "s03_06": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Gobernanza territorial",
+    "defecto": "Gobernanza territorial",
+    "desc": ""
+   },
+   "s03_07": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Trabajo coordinado con organizaciones y autorid…",
+    "defecto": "Trabajo coordinado con organizaciones y autoridades.",
+    "desc": ""
+   },
+   "s03_08": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "s03_09": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Información territorial, seguimiento ambiental…",
+    "defecto": "Información territorial, seguimiento ambiental y evidencia.",
+    "desc": ""
+   },
+   "s03_10": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Desarrollo comunitario",
+    "defecto": "Desarrollo comunitario",
+    "desc": ""
+   },
+   "s03_11": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Fortalecimiento de capacidades e iniciativas so…",
+    "defecto": "Fortalecimiento de capacidades e iniciativas sostenibles.",
+    "desc": ""
+   },
+   "s03_12": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Conservación",
+    "defecto": "Conservación",
+    "desc": ""
+   },
+   "s03_13": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Gobernanza territorial",
+    "defecto": "Gobernanza territorial",
+    "desc": ""
+   },
+   "s03_14": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "s03_15": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Desarrollo comunitario",
+    "defecto": "Desarrollo comunitario",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s04",
+  "titulo": "4 · Separador empresa → proyecto",
+  "campos": {
+   "s04_01": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: aerea-territorio.webp",
+    "defecto": "assets/fotos/aerea-territorio.webp",
+    "desc": ""
+   },
+   "s04_02": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Vista aérea del bosque en el territorio, con un…",
+    "defecto": "Vista aérea del bosque en el territorio, con un camino de tierra y vehículos del equipo",
+    "desc": ""
+   },
+   "s04_03": {
+    "tipo": "texto",
+    "etiqueta": "Título: Un territorio de más de un millón de hectáreas…",
+    "defecto": "Un territorio de más de un millón de hectáreas de bosque.",
+    "desc": ""
+   },
+   "s04_04": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Superficie exacta a validar · SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s04_05": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Conoce nuestro proyecto principal",
+    "defecto": "Conoce nuestro proyecto principal",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s05",
+  "titulo": "5 · Proyecto REDD+ Monte Verde & Lomerío",
+  "campos": {
+   "s05_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Nuestro proyecto principal",
+    "defecto": "Nuestro proyecto principal",
+    "desc": ""
+   },
+   "s05_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: REDD+ Territorios Indígenas Monte Verde y Lomer…",
+    "defecto": "REDD+ Territorios Indígenas Monte Verde y Lomerío",
+    "desc": ""
+   },
+   "s05_03": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 01 / Ubicación",
+    "defecto": "01 / Ubicación",
+    "desc": ""
+   },
+   "s05_04": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Santa Cruz",
+    "defecto": "Santa Cruz",
+    "desc": ""
+   },
+   "s05_05": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Bolivia",
+    "defecto": "Bolivia",
+    "desc": ""
+   },
+   "s05_06": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 02 / Superficie",
+    "defecto": "02 / Superficie",
+    "desc": ""
+   },
+   "s05_07": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s05_08": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: 1.133.035 ha",
+    "defecto": "1.133.035 ha",
+    "desc": ""
+   },
+   "s05_09": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Superficie del proyecto",
+    "defecto": "Superficie del proyecto",
+    "desc": ""
+   },
+   "s05_10": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 03 / Comunidades",
+    "defecto": "03 / Comunidades",
+    "desc": ""
+   },
+   "s05_11": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s05_12": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: 82",
+    "defecto": "82",
+    "desc": ""
+   },
+   "s05_13": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Comunidades",
+    "defecto": "Comunidades",
+    "desc": ""
+   },
+   "s05_14": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 04 / Registro",
+    "defecto": "04 / Registro",
+    "desc": ""
+   },
+   "s05_15": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: 3506",
+    "defecto": "3506",
+    "desc": ""
+   },
+   "s05_16": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Verra Project ID",
+    "defecto": "Verra Project ID",
+    "desc": ""
+   },
+   "s05_17": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 05 / Metodología",
+    "defecto": "05 / Metodología",
+    "desc": ""
+   },
+   "s05_18": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: VM0015",
+    "defecto": "VM0015",
+    "desc": ""
+   },
+   "s05_19": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Versión 1.1",
+    "defecto": "Versión 1.1",
+    "desc": ""
+   },
+   "s05_20": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Explorar el territorio",
+    "defecto": "Explorar el territorio",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s06",
+  "titulo": "6 · Explora el territorio — mapa",
+  "campos": {
+   "s06_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Explora el territorio",
+    "defecto": "Explora el territorio",
+    "desc": ""
+   },
+   "s06_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Explora el territorio",
+    "defecto": "Explora el territorio",
+    "desc": ""
+   },
+   "s06_03": {
+    "tipo": "parrafo",
+    "etiqueta": "Párrafo: Dos territorios indígenas. Un paisaje forestal…",
+    "defecto": "Dos territorios indígenas. Un paisaje forestal de importancia climática y social.",
+    "desc": ""
+   },
+   "s06_04": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Bolivia",
+    "defecto": "Bolivia",
+    "desc": ""
+   },
+   "s06_05": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Santa Cruz",
+    "defecto": "Santa Cruz",
+    "desc": ""
+   },
+   "s06_06": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Monte Verde",
+    "defecto": "Monte Verde",
+    "desc": ""
+   },
+   "s06_07": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Mapa interactivo del proyecto",
+    "defecto": "Mapa interactivo del proyecto",
+    "desc": ""
+   },
+   "s06_08": {
+    "tipo": "parrafo",
+    "etiqueta": "Párrafo: Se alimenta del enlace de los mapas de monitore…",
+    "defecto": "Se alimenta del enlace de los mapas de monitoreo del proyecto: polígonos reales y capas validadas.",
+    "desc": ""
+   },
+   "s06_09": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta enlace de mapas»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s06_10": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Monte Verde",
+    "defecto": "Monte Verde",
+    "desc": ""
+   },
+   "s06_11": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Lomerío",
+    "defecto": "Lomerío",
+    "desc": ""
+   },
+   "s06_12": {
+    "tipo": "texto",
+    "etiqueta": "Rótulo: Nombre",
+    "defecto": "Nombre",
+    "desc": ""
+   },
+   "s06_13": {
+    "tipo": "texto",
+    "etiqueta": "Dato: TIOC Monte Verde",
+    "defecto": "TIOC Monte Verde",
+    "desc": ""
+   },
+   "s06_14": {
+    "tipo": "texto",
+    "etiqueta": "Rótulo: Superficie",
+    "defecto": "Superficie",
+    "desc": ""
+   },
+   "s06_15": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s06_16": {
+    "tipo": "texto",
+    "etiqueta": "Rótulo: Comunidades",
+    "defecto": "Comunidades",
+    "desc": ""
+   },
+   "s06_17": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s06_18": {
+    "tipo": "texto",
+    "etiqueta": "Rótulo: Cobertura forestal",
+    "defecto": "Cobertura forestal",
+    "desc": ""
+   },
+   "s06_19": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s06_20": {
+    "tipo": "texto",
+    "etiqueta": "Rótulo: Organización territorial",
+    "defecto": "Organización territorial",
+    "desc": ""
+   },
+   "s06_21": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s06_22": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Explorar territorio",
+    "defecto": "Explorar territorio",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s07",
+  "titulo": "7 · Territorio y gobernanza",
+  "campos": {
+   "s07_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Territorio y gobernanza",
+    "defecto": "Territorio y gobernanza",
+    "desc": ""
+   },
+   "s07_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: La conservación comienza",
+    "defecto": "La conservación comienza",
+    "desc": ""
+   },
+   "s07_03": {
+    "tipo": "texto",
+    "etiqueta": "Resaltado: con quienes viven en el bosque.",
+    "defecto": "con quienes viven en el bosque.",
+    "desc": ""
+   },
+   "s07_04": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: monte-verde-cartel.webp",
+    "defecto": "assets/fotos/monte-verde-cartel.webp",
+    "desc": ""
+   },
+   "s07_05": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Equipo junto al letrero del Territorio Indígena…",
+    "defecto": "Equipo junto al letrero del Territorio Indígena Monte Verde",
+    "desc": ""
+   },
+   "s07_06": {
+    "tipo": "texto",
+    "etiqueta": "Pie de foto: Monte Verde",
+    "defecto": "Monte Verde",
+    "desc": ""
+   },
+   "s07_07": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: reunion-territorial.webp",
+    "defecto": "assets/fotos/reunion-territorial.webp",
+    "desc": ""
+   },
+   "s07_08": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Reunión de trabajo con representantes territori…",
+    "defecto": "Reunión de trabajo con representantes territoriales",
+    "desc": ""
+   },
+   "s07_09": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta foto de Lomerío»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s07_10": {
+    "tipo": "texto",
+    "etiqueta": "Pie de foto: Lomerío",
+    "defecto": "Lomerío",
+    "desc": ""
+   },
+   "s07_11": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: monitoreo-comunitario.webp",
+    "defecto": "assets/fotos/monitoreo-comunitario.webp",
+    "desc": ""
+   },
+   "s07_12": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Monitores en el bosque registrando datos con br…",
+    "defecto": "Monitores en el bosque registrando datos con brújula y planilla",
+    "desc": ""
+   },
+   "s07_13": {
+    "tipo": "texto",
+    "etiqueta": "Pie de foto: Monitoreo comunitario",
+    "defecto": "Monitoreo comunitario",
+    "desc": ""
+   },
+   "s07_14": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Conoce cómo funciona la gobernanza",
+    "defecto": "Conoce cómo funciona la gobernanza",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s08",
+  "titulo": "8 · Diagrama de gobernanza",
+  "campos": {
+   "s08_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Gobernanza",
+    "defecto": "Gobernanza",
+    "desc": ""
+   },
+   "s08_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Roles en el",
+    "defecto": "Roles en el",
+    "desc": ""
+   },
+   "s08_03": {
+    "tipo": "texto",
+    "etiqueta": "Resaltado: territorio.",
+    "defecto": "territorio.",
+    "desc": ""
+   },
+   "s08_04": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 01",
+    "defecto": "01",
+    "desc": ""
+   },
+   "s08_05": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Territorios indígenas",
+    "defecto": "Territorios indígenas",
+    "desc": ""
+   },
+   "s08_06": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 02",
+    "defecto": "02",
+    "desc": ""
+   },
+   "s08_07": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Organizaciones y autoridades",
+    "defecto": "Organizaciones y autoridades",
+    "desc": ""
+   },
+   "s08_08": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 03",
+    "defecto": "03",
+    "desc": ""
+   },
+   "s08_09": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Coordinación e implementación",
+    "defecto": "Coordinación e implementación",
+    "desc": ""
+   },
+   "s08_10": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 04",
+    "defecto": "04",
+    "desc": ""
+   },
+   "s08_11": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Green Carbon Bolivia",
+    "defecto": "Green Carbon Bolivia",
+    "desc": ""
+   },
+   "s08_12": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "s08_13": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Actividades",
+    "defecto": "Actividades",
+    "desc": ""
+   },
+   "s08_14": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Evidencia",
+    "defecto": "Evidencia",
+    "desc": ""
+   },
+   "s08_15": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Reportes",
+    "defecto": "Reportes",
+    "desc": ""
+   },
+   "s08_16": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Verificación y registro",
+    "defecto": "Verificación y registro",
+    "desc": ""
+   },
+   "s08_17": {
+    "tipo": "texto",
+    "etiqueta": "Texto: VVB",
+    "defecto": "VVB",
+    "desc": ""
+   },
+   "s08_18": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: EPIC Sustainability",
+    "defecto": "EPIC Sustainability",
+    "desc": ""
+   },
+   "s08_19": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Estándar y registro",
+    "defecto": "Estándar y registro",
+    "desc": ""
+   },
+   "s08_20": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Verra",
+    "defecto": "Verra",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s09",
+  "titulo": "9 · Monitoreo territorial",
+  "campos": {
+   "mostrar_monitoreo": {
+    "tipo": "check",
+    "etiqueta": "Mostrar «Del bosque a los datos»",
+    "defecto": false,
+    "desc": "Oculto hasta la certificación (aprox. marzo 2027). Al mostrarlo hay que rehacer las anclas data-cuadro de #monitoreo a #impacto para que el video siga fluido."
+   },
+   "s09_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Monitoreo territorial",
+    "defecto": "Monitoreo territorial",
+    "desc": ""
+   },
+   "s09_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Del bosque",
+    "defecto": "Del bosque",
+    "desc": ""
+   },
+   "s09_03": {
+    "tipo": "texto",
+    "etiqueta": "Resaltado: a los datos.",
+    "defecto": "a los datos.",
+    "desc": ""
+   },
+   "s09_04": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 1",
+    "defecto": "1",
+    "desc": ""
+   },
+   "s09_05": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Registro",
+    "defecto": "Registro",
+    "desc": ""
+   },
+   "s09_06": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 2",
+    "defecto": "2",
+    "desc": ""
+   },
+   "s09_07": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Georreferenciación",
+    "defecto": "Georreferenciación",
+    "desc": ""
+   },
+   "s09_08": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 3",
+    "defecto": "3",
+    "desc": ""
+   },
+   "s09_09": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Análisis",
+    "defecto": "Análisis",
+    "desc": ""
+   },
+   "s09_10": {
+    "tipo": "texto",
+    "etiqueta": "Texto: 4",
+    "defecto": "4",
+    "desc": ""
+   },
+   "s09_11": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Seguimiento",
+    "defecto": "Seguimiento",
+    "desc": ""
+   },
+   "s09_12": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Fuente de datos: enlace de monitoreo del proyec…",
+    "defecto": "Fuente de datos: enlace de monitoreo del proyecto",
+    "desc": ""
+   },
+   "s09_13": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta enlace»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   }
+  }
+ },
+ {
+  "id": "s10",
+  "titulo": "10 · Centro de monitoreo",
+  "campos": {
+   "s10_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Centro de monitoreo",
+    "defecto": "Centro de monitoreo",
+    "desc": ""
+   },
+   "s10_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Centro de monitoreo",
+    "defecto": "Centro de monitoreo",
+    "desc": ""
+   },
+   "s10_03": {
+    "tipo": "parrafo",
+    "etiqueta": "Párrafo: Consola de operaciones de incendios del territo…",
+    "defecto": "Consola de operaciones de incendios del territorio: detecciones satelitales, eventos activos y respuesta de brigadas.",
+    "desc": ""
+   },
+   "s10_04": {
+    "tipo": "url",
+    "etiqueta": "Enlace: https://claude.ai/public/artifacts/0472e73c-8fa…",
+    "defecto": "https://claude.ai/public/artifacts/0472e73c-8fa4-4ee4-a576-23d643b17c1a",
+    "desc": ""
+   },
+   "s10_05": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: fire-ops-vista.webp",
+    "defecto": "assets/fotos/fire-ops-vista.webp",
+    "desc": ""
+   },
+   "s10_06": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Vista del centro de operaciones de incendios: m…",
+    "defecto": "Vista del centro de operaciones de incendios: mapa de TIOC Monte Verde con detecciones y panel de despacho",
+    "desc": ""
+   },
+   "s10_07": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Abrir el centro de monitoreo",
+    "defecto": "Abrir el centro de monitoreo",
+    "desc": ""
+   },
+   "s10_08": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Se abre en una pestaña nueva.",
+    "defecto": "Se abre en una pestaña nueva.",
+    "desc": ""
+   },
+   "s10_09": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Confirmar si los datos son en vivo ante…»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   }
+  }
+ },
+ {
+  "id": "s11",
+  "titulo": "11 · Reportar una alerta",
+  "campos": {
+   "s11_01": {
+    "tipo": "texto",
+    "etiqueta": "Título: ¿Detectaste una amenaza en el territorio?",
+    "defecto": "¿Detectaste una amenaza en el territorio?",
+    "desc": ""
+   },
+   "s11_02": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Incendios, desmontes u otras situaciones que pu…",
+    "defecto": "Incendios, desmontes u otras situaciones que puedan afectar el bosque.",
+    "desc": ""
+   },
+   "s11_03": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Green Carbon Bolivia no sustituye a las autorid…",
+    "defecto": "Green Carbon Bolivia no sustituye a las autoridades competentes.",
+    "desc": ""
+   },
+   "s11_04": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Se activa al definir privacidad y flujo…»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s11_05": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Reportar una alerta",
+    "defecto": "Reportar una alerta",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s12",
+  "titulo": "12 · Voces del territorio",
+  "campos": {
+   "s12_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Voces del territorio",
+    "defecto": "Voces del territorio",
+    "desc": ""
+   },
+   "s12_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Voces del territorio",
+    "defecto": "Voces del territorio",
+    "desc": ""
+   },
+   "s12_03": {
+    "tipo": "imagen",
+    "etiqueta": "Retrato",
+    "defecto": "",
+    "desc": "Vacío = se muestra la silueta."
+   },
+   "s12_04": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Nombre Apellido",
+    "defecto": "Nombre Apellido",
+    "desc": ""
+   },
+   "s12_05": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Comunidad · Rol",
+    "defecto": "Comunidad · Rol",
+    "desc": ""
+   },
+   "s12_06": {
+    "tipo": "texto",
+    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
+    "defecto": "Testimonio de hasta dos líneas.",
+    "desc": ""
+   },
+   "s12_07": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s12_08": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Ver historia",
+    "defecto": "Ver historia",
+    "desc": ""
+   },
+   "s12_09": {
+    "tipo": "imagen",
+    "etiqueta": "Retrato",
+    "defecto": "",
+    "desc": "Vacío = se muestra la silueta."
+   },
+   "s12_10": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Nombre Apellido",
+    "defecto": "Nombre Apellido",
+    "desc": ""
+   },
+   "s12_11": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Comunidad · Rol",
+    "defecto": "Comunidad · Rol",
+    "desc": ""
+   },
+   "s12_12": {
+    "tipo": "texto",
+    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
+    "defecto": "Testimonio de hasta dos líneas.",
+    "desc": ""
+   },
+   "s12_13": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s12_14": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Ver historia",
+    "defecto": "Ver historia",
+    "desc": ""
+   },
+   "s12_15": {
+    "tipo": "imagen",
+    "etiqueta": "Retrato",
+    "defecto": "",
+    "desc": "Vacío = se muestra la silueta."
+   },
+   "s12_16": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Nombre Apellido",
+    "defecto": "Nombre Apellido",
+    "desc": ""
+   },
+   "s12_17": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Comunidad · Rol",
+    "defecto": "Comunidad · Rol",
+    "desc": ""
+   },
+   "s12_18": {
+    "tipo": "texto",
+    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
+    "defecto": "Testimonio de hasta dos líneas.",
+    "desc": ""
+   },
+   "s12_19": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s12_20": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Ver historia",
+    "defecto": "Ver historia",
+    "desc": ""
+   },
+   "s12_21": {
+    "tipo": "imagen",
+    "etiqueta": "Retrato",
+    "defecto": "",
+    "desc": "Vacío = se muestra la silueta."
+   },
+   "s12_22": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Nombre Apellido",
+    "defecto": "Nombre Apellido",
+    "desc": ""
+   },
+   "s12_23": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Comunidad · Rol",
+    "defecto": "Comunidad · Rol",
+    "desc": ""
+   },
+   "s12_24": {
+    "tipo": "texto",
+    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
+    "defecto": "Testimonio de hasta dos líneas.",
+    "desc": ""
+   },
+   "s12_25": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s12_26": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Ver historia",
+    "defecto": "Ver historia",
+    "desc": ""
+   },
+   "s12_27": {
+    "tipo": "imagen",
+    "etiqueta": "Retrato",
+    "defecto": "",
+    "desc": "Vacío = se muestra la silueta."
+   },
+   "s12_28": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Nombre Apellido",
+    "defecto": "Nombre Apellido",
+    "desc": ""
+   },
+   "s12_29": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Comunidad · Rol",
+    "defecto": "Comunidad · Rol",
+    "desc": ""
+   },
+   "s12_30": {
+    "tipo": "texto",
+    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
+    "defecto": "Testimonio de hasta dos líneas.",
+    "desc": ""
+   },
+   "s12_31": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s12_32": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Ver historia",
+    "defecto": "Ver historia",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s13",
+  "titulo": "13 · Impacto",
+  "campos": {
+   "s13_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Impacto",
+    "defecto": "Impacto",
+    "desc": ""
+   },
+   "s13_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Nuestro trabajo en el territorio",
+    "defecto": "Nuestro trabajo en el territorio",
+    "desc": ""
+   },
+   "s13_03": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Bosque",
+    "defecto": "Bosque",
+    "desc": ""
+   },
+   "s13_04": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Comunidades",
+    "defecto": "Comunidades",
+    "desc": ""
+   },
+   "s13_05": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "s13_06": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Capacidades",
+    "defecto": "Capacidades",
+    "desc": ""
+   },
+   "s13_07": {
+    "tipo": "texto",
+    "etiqueta": "Texto: XX",
+    "defecto": "XX",
+    "desc": ""
+   },
+   "s13_08": {
+    "tipo": "texto",
+    "etiqueta": "Texto chico: ha",
+    "defecto": "ha",
+    "desc": ""
+   },
+   "s13_09": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Período: a definir ·",
+    "defecto": "Período: a definir ·",
+    "desc": ""
+   },
+   "s13_10": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Solo cifras respaldadas · SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s13_11": {
+    "tipo": "texto",
+    "etiqueta": "Texto: XX",
+    "defecto": "XX",
+    "desc": ""
+   },
+   "s13_12": {
+    "tipo": "texto",
+    "etiqueta": "Texto chico: personas capacitadas",
+    "defecto": "personas capacitadas",
+    "desc": ""
+   },
+   "s13_13": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Período: a definir ·",
+    "defecto": "Período: a definir ·",
+    "desc": ""
+   },
+   "s13_14": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Solo cifras respaldadas · SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s13_15": {
+    "tipo": "texto",
+    "etiqueta": "Texto: XX",
+    "defecto": "XX",
+    "desc": ""
+   },
+   "s13_16": {
+    "tipo": "texto",
+    "etiqueta": "Texto chico: acciones de monitoreo",
+    "defecto": "acciones de monitoreo",
+    "desc": ""
+   },
+   "s13_17": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Período: a definir ·",
+    "defecto": "Período: a definir ·",
+    "desc": ""
+   },
+   "s13_18": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Solo cifras respaldadas · SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s13_19": {
+    "tipo": "texto",
+    "etiqueta": "Texto: XX",
+    "defecto": "XX",
+    "desc": ""
+   },
+   "s13_20": {
+    "tipo": "texto",
+    "etiqueta": "Texto chico: acciones de prevención/respuesta",
+    "defecto": "acciones de prevención/respuesta",
+    "desc": ""
+   },
+   "s13_21": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Período: a definir ·",
+    "defecto": "Período: a definir ·",
+    "desc": ""
+   },
+   "s13_22": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Solo cifras respaldadas · SSOT»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   }
+  }
+ },
+ {
+  "id": "s14",
+  "titulo": "14 · Biodiversidad",
+  "campos": {
+   "s14_01": {
+    "tipo": "imagen",
+    "etiqueta": "Foto de la especie",
+    "defecto": "",
+    "desc": "Vacío = se muestra el aviso «Falta foto de especie con evidencia territorial»."
+   },
+   "s14_02": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Biodiversidad",
+    "defecto": "Biodiversidad",
+    "desc": ""
+   },
+   "s14_03": {
+    "tipo": "texto",
+    "etiqueta": "Título: Nombre común",
+    "defecto": "Nombre común",
+    "desc": ""
+   },
+   "s14_04": {
+    "tipo": "texto",
+    "etiqueta": "Resaltado: Nombre científico",
+    "defecto": "Nombre científico",
+    "desc": ""
+   },
+   "s14_05": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Descripción breve de la especie.",
+    "defecto": "Descripción breve de la especie.",
+    "desc": ""
+   },
+   "s14_06": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta especie con evidencia territorial…»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s14_07": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Siguiente especie",
+    "defecto": "Siguiente especie",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s15",
+  "titulo": "15 · Clima / carbono",
+  "campos": {
+   "s15_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Clima y carbono",
+    "defecto": "Clima y carbono",
+    "desc": ""
+   },
+   "s15_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Acción climática",
+    "defecto": "Acción climática",
+    "desc": ""
+   },
+   "s15_03": {
+    "tipo": "texto",
+    "etiqueta": "Resaltado: con integridad",
+    "defecto": "con integridad",
+    "desc": ""
+   },
+   "s15_04": {
+    "tipo": "texto",
+    "etiqueta": "Ítem: Bosque conservado",
+    "defecto": "Bosque conservado",
+    "desc": ""
+   },
+   "s15_05": {
+    "tipo": "texto",
+    "etiqueta": "Ítem: Monitoreo y medición",
+    "defecto": "Monitoreo y medición",
+    "desc": ""
+   },
+   "s15_06": {
+    "tipo": "texto",
+    "etiqueta": "Ítem: MRV",
+    "defecto": "MRV",
+    "desc": ""
+   },
+   "s15_07": {
+    "tipo": "texto",
+    "etiqueta": "Ítem: Verificación independiente",
+    "defecto": "Verificación independiente",
+    "desc": ""
+   },
+   "s15_08": {
+    "tipo": "texto",
+    "etiqueta": "Ítem: Registro",
+    "defecto": "Registro",
+    "desc": ""
+   },
+   "s15_09": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: gobierno-monte-verde.webp",
+    "defecto": "assets/fotos/gobierno-monte-verde.webp",
+    "desc": ""
+   },
+   "s15_10": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Equipo de Green Carbon Bolivia junto a represen…",
+    "defecto": "Equipo de Green Carbon Bolivia junto a representantes del Gobierno Territorial de Monte Verde",
+    "desc": ""
+   },
+   "s15_11": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Ficha técnica",
+    "defecto": "Ficha técnica",
+    "desc": ""
+   },
+   "s15_12": {
+    "tipo": "texto",
+    "etiqueta": "Rótulo: Verra ID",
+    "defecto": "Verra ID",
+    "desc": ""
+   },
+   "s15_13": {
+    "tipo": "texto",
+    "etiqueta": "Dato: 3506",
+    "defecto": "3506",
+    "desc": ""
+   },
+   "s15_14": {
+    "tipo": "texto",
+    "etiqueta": "Rótulo: Estándar",
+    "defecto": "Estándar",
+    "desc": ""
+   },
+   "s15_15": {
+    "tipo": "texto",
+    "etiqueta": "Dato: VCS",
+    "defecto": "VCS",
+    "desc": ""
+   },
+   "s15_16": {
+    "tipo": "texto",
+    "etiqueta": "Rótulo: Metodología",
+    "defecto": "Metodología",
+    "desc": ""
+   },
+   "s15_17": {
+    "tipo": "texto",
+    "etiqueta": "Dato: VM0015 v1.1",
+    "defecto": "VM0015 v1.1",
+    "desc": ""
+   },
+   "s15_18": {
+    "tipo": "texto",
+    "etiqueta": "Rótulo: VVB",
+    "defecto": "VVB",
+    "desc": ""
+   },
+   "s15_19": {
+    "tipo": "texto",
+    "etiqueta": "Dato: EPIC Sustainability",
+    "defecto": "EPIC Sustainability",
+    "desc": ""
+   },
+   "s15_20": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Ver documentación del proyecto",
+    "defecto": "Ver documentación del proyecto",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s16",
+  "titulo": "16 · Transparencia",
+  "campos": {
+   "s16_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Transparencia",
+    "defecto": "Transparencia",
+    "desc": ""
+   },
+   "s16_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Transparencia",
+    "defecto": "Transparencia",
+    "desc": ""
+   },
+   "s16_03": {
+    "tipo": "url",
+    "etiqueta": "Enlace: https://registry.verra.org/app/projectDetail/VC…",
+    "defecto": "https://registry.verra.org/app/projectDetail/VCS/3506",
+    "desc": ""
+   },
+   "s16_04": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Verra Project 3506",
+    "defecto": "Verra Project 3506",
+    "desc": ""
+   },
+   "s16_05": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Ver en Verra",
+    "defecto": "Ver en Verra",
+    "desc": ""
+   },
+   "s16_06": {
+    "tipo": "url",
+    "etiqueta": "Enlace: https://registry.verra.org/app/projectDetail/VC…",
+    "defecto": "https://registry.verra.org/app/projectDetail/VCS/3506",
+    "desc": ""
+   },
+   "s16_07": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Documentación pública",
+    "defecto": "Documentación pública",
+    "desc": ""
+   },
+   "s16_08": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Consultar",
+    "defecto": "Consultar",
+    "desc": ""
+   },
+   "s16_09": {
+    "tipo": "url",
+    "etiqueta": "Enlace: https://registry.verra.org/app/projectDetail/VC…",
+    "defecto": "https://registry.verra.org/app/projectDetail/VCS/3506",
+    "desc": ""
+   },
+   "s16_10": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Metodología",
+    "defecto": "Metodología",
+    "desc": ""
+   },
+   "s16_11": {
+    "tipo": "texto",
+    "etiqueta": "Texto: VM0015 v1.1",
+    "defecto": "VM0015 v1.1",
+    "desc": ""
+   },
+   "s16_12": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Consultar",
+    "defecto": "Consultar",
+    "desc": ""
+   },
+   "s16_13": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "s16_14": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta enlace»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s16_15": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Consultar",
+    "defecto": "Consultar",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s17",
+  "titulo": "17 · Green Carbon en acción",
+  "campos": {
+   "s17_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Green Carbon en acción",
+    "defecto": "Green Carbon en acción",
+    "desc": ""
+   },
+   "s17_02": {
+    "tipo": "texto",
+    "etiqueta": "Título: Green Carbon en acción",
+    "defecto": "Green Carbon en acción",
+    "desc": ""
+   },
+   "s17_03": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Todo",
+    "defecto": "Todo",
+    "desc": ""
+   },
+   "s17_04": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Territorio",
+    "defecto": "Territorio",
+    "desc": ""
+   },
+   "s17_05": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Comunidades",
+    "defecto": "Comunidades",
+    "desc": ""
+   },
+   "s17_06": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Bosque",
+    "defecto": "Bosque",
+    "desc": ""
+   },
+   "s17_07": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "s17_08": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: equipo-camioneta.webp",
+    "defecto": "assets/fotos/equipo-camioneta.webp",
+    "desc": ""
+   },
+   "s17_09": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Equipo de campo junto a la camioneta en un cami…",
+    "defecto": "Equipo de campo junto a la camioneta en un camino del territorio",
+    "desc": ""
+   },
+   "s17_10": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Territorio",
+    "defecto": "Territorio",
+    "desc": ""
+   },
+   "s17_11": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Equipo de campo en el territorio",
+    "defecto": "Equipo de campo en el territorio",
+    "desc": ""
+   },
+   "s17_12": {
+    "tipo": "video",
+    "etiqueta": "Video: camara-trampa.mp4",
+    "defecto": "assets/fotos/camara-trampa.mp4",
+    "desc": ""
+   },
+   "s17_13": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "s17_14": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Instalación de cámaras trampa",
+    "defecto": "Instalación de cámaras trampa",
+    "desc": ""
+   },
+   "s17_15": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: firma-acta.webp",
+    "defecto": "assets/fotos/firma-acta.webp",
+    "desc": ""
+   },
+   "s17_16": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Firma de actas en una reunión de trabajo",
+    "defecto": "Firma de actas en una reunión de trabajo",
+    "desc": ""
+   },
+   "s17_17": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Comunidades",
+    "defecto": "Comunidades",
+    "desc": ""
+   },
+   "s17_18": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Reunión de trabajo",
+    "defecto": "Reunión de trabajo",
+    "desc": ""
+   },
+   "s17_19": {
+    "tipo": "imagen",
+    "etiqueta": "Imagen: equipo-bosque.webp",
+    "defecto": "assets/fotos/equipo-bosque.webp",
+    "desc": ""
+   },
+   "s17_20": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Monitores en el interior del bosque",
+    "defecto": "Monitores en el interior del bosque",
+    "desc": ""
+   },
+   "s17_21": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Bosque",
+    "defecto": "Bosque",
+    "desc": ""
+   },
+   "s17_22": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Recorrido en el bosque",
+    "defecto": "Recorrido en el bosque",
+    "desc": ""
+   },
+   "s17_23": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta noticia · responsable editorial y…»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s17_24": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Noticia",
+    "defecto": "Noticia",
+    "desc": ""
+   },
+   "s17_25": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: Titular de la nota",
+    "defecto": "Titular de la nota",
+    "desc": ""
+   }
+  }
+ },
+ {
+  "id": "s18",
+  "titulo": "18 · Contacto",
+  "campos": {
+   "s18_01": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Contacto",
+    "defecto": "Contacto",
+    "desc": ""
+   },
+   "s18_02": {
+    "tipo": "texto",
+    "etiqueta": "Resaltado: Conversemos.",
+    "defecto": "Conversemos.",
+    "desc": ""
+   },
+   "s18_03": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Dirección",
+    "defecto": "Dirección",
+    "desc": ""
+   },
+   "s18_04": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s18_05": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Correo",
+    "defecto": "Correo",
+    "desc": ""
+   },
+   "s18_06": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s18_07": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Teléfono",
+    "defecto": "Teléfono",
+    "desc": ""
+   },
+   "s18_08": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s18_09": {
+    "tipo": "url",
+    "etiqueta": "Destino del formulario",
+    "defecto": "https://submit-form.com/zAQqp9upk",
+    "desc": ""
+   },
+   "s18_10": {
+    "tipo": "texto",
+    "etiqueta": "Etiqueta del formulario: Nombre *",
+    "defecto": "Nombre *",
+    "desc": ""
+   },
+   "s18_11": {
+    "tipo": "texto",
+    "etiqueta": "Etiqueta del formulario: Organización",
+    "defecto": "Organización",
+    "desc": ""
+   },
+   "s18_12": {
+    "tipo": "texto",
+    "etiqueta": "Etiqueta del formulario: Cargo",
+    "defecto": "Cargo",
+    "desc": ""
+   },
+   "s18_13": {
+    "tipo": "texto",
+    "etiqueta": "Etiqueta del formulario: País",
+    "defecto": "País",
+    "desc": ""
+   },
+   "s18_14": {
+    "tipo": "texto",
+    "etiqueta": "Etiqueta del formulario: Correo *",
+    "defecto": "Correo *",
+    "desc": ""
+   },
+   "s18_15": {
+    "tipo": "texto",
+    "etiqueta": "Etiqueta del formulario: Motivo",
+    "defecto": "Motivo",
+    "desc": ""
+   },
+   "s18_16": {
+    "tipo": "texto",
+    "etiqueta": "Opción del formulario: Elegí un motivo",
+    "defecto": "Elegí un motivo",
+    "desc": ""
+   },
+   "s18_17": {
+    "tipo": "texto",
+    "etiqueta": "Opción del formulario: Consulta institucional",
+    "defecto": "Consulta institucional",
+    "desc": ""
+   },
+   "s18_18": {
+    "tipo": "texto",
+    "etiqueta": "Opción del formulario: Alianzas y cooperación",
+    "defecto": "Alianzas y cooperación",
+    "desc": ""
+   },
+   "s18_19": {
+    "tipo": "texto",
+    "etiqueta": "Opción del formulario: Prensa",
+    "defecto": "Prensa",
+    "desc": ""
+   },
+   "s18_20": {
+    "tipo": "texto",
+    "etiqueta": "Opción del formulario: Otro",
+    "defecto": "Otro",
+    "desc": ""
+   },
+   "s18_21": {
+    "tipo": "texto",
+    "etiqueta": "Etiqueta del formulario: Mensaje *",
+    "defecto": "Mensaje *",
+    "desc": ""
+   },
+   "s18_22": {
+    "tipo": "texto",
+    "etiqueta": "Etiqueta del formulario: Adjunto opcional",
+    "defecto": "Adjunto opcional",
+    "desc": ""
+   },
+   "s18_23": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Requiere servicio con adjuntos»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s18_24": {
+    "tipo": "parrafo",
+    "etiqueta": "Texto: Acepto que Green Carbon Bolivia use estos datos…",
+    "defecto": "Acepto que Green Carbon Bolivia use estos datos para responder mi consulta.",
+    "desc": ""
+   },
+   "s18_25": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta texto de privacidad»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "s18_26": {
+    "tipo": "texto",
+    "etiqueta": "Botón: Enviar mensaje",
+    "defecto": "Enviar mensaje",
+    "desc": ""
+   },
+   "s18_27": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Canal de Integridad",
+    "defecto": "Canal de Integridad",
+    "desc": ""
+   },
+   "s18_28": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Canal separado del contacto institucional.",
+    "defecto": "Canal separado del contacto institucional.",
+    "desc": ""
+   },
+   "s18_29": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta destino del canal»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   }
+  }
+ },
+ {
+  "id": "pie",
+  "titulo": "Pie de página",
+  "campos": {
+   "pie_01": {
+    "tipo": "texto",
+    "etiqueta": "Destacado: GREEN CARBON BOLIVIA",
+    "defecto": "GREEN CARBON BOLIVIA",
+    "desc": ""
+   },
+   "pie_02": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Dirección",
+    "defecto": "Dirección",
+    "desc": ""
+   },
+   "pie_03": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "pie_04": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Correo",
+    "defecto": "Correo",
+    "desc": ""
+   },
+   "pie_05": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "pie_06": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Teléfono",
+    "defecto": "Teléfono",
+    "desc": ""
+   },
+   "pie_07": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta»",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso."
+   },
+   "pie_08": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Canal de Integridad",
+    "defecto": "Canal de Integridad",
+    "desc": ""
+   },
+   "pie_09": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Navegación",
+    "defecto": "Navegación",
+    "desc": ""
+   },
+   "pie_10": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Quiénes somos",
+    "defecto": "Quiénes somos",
+    "desc": ""
+   },
+   "pie_11": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Nuestro trabajo",
+    "defecto": "Nuestro trabajo",
+    "desc": ""
+   },
+   "pie_12": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Proyecto",
+    "defecto": "Proyecto",
+    "desc": ""
+   },
+   "pie_13": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Monitoreo",
+    "defecto": "Monitoreo",
+    "desc": ""
+   },
+   "pie_14": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo:  ",
+    "defecto": " ",
+    "desc": ""
+   },
+   "pie_15": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Impacto",
+    "defecto": "Impacto",
+    "desc": ""
+   },
+   "pie_16": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Transparencia",
+    "defecto": "Transparencia",
+    "desc": ""
+   },
+   "pie_17": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Contacto",
+    "defecto": "Contacto",
+    "desc": ""
+   },
+   "pie_18": {
+    "tipo": "texto",
+    "etiqueta": "Subtítulo: Redes",
+    "defecto": "Redes",
+    "desc": ""
+   },
+   "pie_19": {
+    "tipo": "url",
+    "etiqueta": "Enlace: https://www.instagram.com/greencarbonbolivia/",
+    "defecto": "https://www.instagram.com/greencarbonbolivia/",
+    "desc": ""
+   },
+   "pie_20": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Instagram",
+    "defecto": "Instagram",
+    "desc": ""
+   },
+   "pie_21": {
+    "tipo": "url",
+    "etiqueta": "Enlace: https://www.facebook.com/profile.php?id=6158836…",
+    "defecto": "https://www.facebook.com/profile.php?id=61588363234428",
+    "desc": ""
+   },
+   "pie_22": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: Facebook",
+    "defecto": "Facebook",
+    "desc": ""
+   },
+   "pie_23": {
+    "tipo": "url",
+    "etiqueta": "Enlace: https://www.linkedin.com/company/greencarbon-bo…",
+    "defecto": "https://www.linkedin.com/company/greencarbon-bolivia/",
+    "desc": ""
+   },
+   "pie_24": {
+    "tipo": "texto",
+    "etiqueta": "Botón o enlace: LinkedIn",
+    "defecto": "LinkedIn",
+    "desc": ""
+   },
+   "pie_25": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Green Carbon",
+    "defecto": "Green Carbon",
+    "desc": ""
+   },
+   "pie_26": {
+    "tipo": "texto",
+    "etiqueta": "Texto: © 2026 Green Carbon Bolivia",
+    "defecto": "© 2026 Green Carbon Bolivia",
+    "desc": ""
+   }
+  }
+ }
+]

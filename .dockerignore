@@ -1,0 +1,5 @@
+.env
+.git
+*.tar.gz
+*.zip
+herramientas

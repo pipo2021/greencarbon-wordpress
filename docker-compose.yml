@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: greencarbon
+      MARIADB_USER: greencarbon
+      MARIADB_PASSWORD: ${DB_PASSWORD:?falta DB_PASSWORD en .env}
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 30
+
+  wordpress:
+    build: .
+    image: greencarbon-wordpress:1.0.0
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${GC_PUERTO:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: greencarbon
+      WORDPRESS_DB_USER: greencarbon
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_CONFIG_EXTRA: "define('DISALLOW_FILE_EDIT', true);"
+      GC_URL: ${GC_URL:?falta GC_URL en .env (URL pública del sitio)}
+      GC_ADMIN_USER: ${GC_ADMIN_USER:-admin-greencarbon}
+      GC_ADMIN_PASSWORD: ${GC_ADMIN_PASSWORD:?falta GC_ADMIN_PASSWORD en .env}
+      GC_ADMIN_EMAIL: ${GC_ADMIN_EMAIL:-admin@greencarbon.local}
+    volumes:
+      - uploads:/var/www/html/wp-content/uploads
+
+volumes:
+  db:
+  uploads:
