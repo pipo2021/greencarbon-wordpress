@@ -1,6 +1,7 @@
 # Green Carbon Bolivia — versión WordPress
 
 **Guía completa (instalación, acceso, qué se edita, qué falta completar): [`docs/Guia-Green-Carbon-WordPress.pdf`](docs/Guia-Green-Carbon-WordPress.pdf).**
+
 Sitio de una sola página, en **español e inglés**, con el recorrido en video que avanza con el scroll, convertido en un tema de WordPress. **Todo el contenido** (textos, fotos, enlaces, datos de contacto, avisos pendientes) se edita desde un único administrador, en **Apariencia → Personalizar → Contenido de la web**, con vista previa en vivo.
 
 ## Levantarlo en local (Docker)
