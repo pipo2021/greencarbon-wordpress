@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía técnica y de uso · Green Carbon Bolivia en WordPress</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root { --noche: #0a1712; --verde: #2f6b47; --liquen: #b8d48f; --tinta: #12241b; --tinta-2: #4c5f55; --linea: #dfe5df; --papel: #fbfaf6; --aviso: #b4570f; --sol: #f2b45a; }
+@page { size: A4; margin: 20mm 18mm 20mm 18mm;
+  @bottom-left { content: "Green Carbon Bolivia · Guía WordPress v1.1.1"; font: 8pt Inter, sans-serif; color: #7b8a82; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt Inter, sans-serif; color: #7b8a82; } }
+@page :first { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
+* { box-sizing: border-box; }
+body { margin: 0; font: 10pt/1.55 Inter, system-ui, sans-serif; color: var(--tinta); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+h1, h2, h3 { font-family: 'Inter Tight', Inter, sans-serif; line-height: 1.2; color: var(--noche); }
+h2 { font-size: 18pt; margin: 0 0 4mm; padding-top: 2mm; break-after: avoid; }
+h2 .n { color: var(--verde); font-weight: 500; margin-right: 6px; }
+h3 { font-size: 12pt; margin: 6mm 0 2mm; break-after: avoid; }
+p { margin: 0 0 3mm; }
+ul, ol { margin: 0 0 3mm; padding-left: 5.5mm; }
+li { margin-bottom: 1.2mm; }
+code, .mono { font: 8.6pt/1.4 'JetBrains Mono', ui-monospace, monospace; }
+p code, li code, td code { background: #eef2ee; padding: 0.3mm 1.2mm; border-radius: 3px; }
+pre { font: 8.6pt/1.5 'JetBrains Mono', monospace; background: var(--noche); color: #e6efe8; padding: 3.5mm 4mm; border-radius: 6px; margin: 0 0 4mm; white-space: pre-wrap; word-break: break-word; break-inside: avoid; }
+pre .c { color: #8fa79a; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 4mm; font-size: 9pt; break-inside: auto; }
+th, td { text-align: left; vertical-align: top; padding: 2mm 2.5mm; border-bottom: 1px solid var(--linea); }
+th { font: 600 8pt 'Inter Tight', sans-serif; text-transform: uppercase; letter-spacing: .04em; color: var(--tinta-2); background: #f3f6f2; }
+tr { break-inside: avoid; }
+section { break-before: page; }
+.portada { height: 297mm; background: var(--noche); color: #eef3ef; padding: 30mm 22mm; display: flex; flex-direction: column; justify-content: space-between;
+  background-image: radial-gradient(120% 70% at 90% 0%, rgba(47,107,71,.55), transparent 60%); }
+.portada .chip { font: 500 8pt 'JetBrains Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--liquen); border: 1px solid rgba(184,212,143,.4); border-radius: 4px; padding: 1.2mm 2.4mm; display: inline-block; }
+.portada h1 { color: #fff; font-size: 34pt; margin: 8mm 0 4mm; letter-spacing: -.02em; }
+.portada h1 em { font-style: normal; color: var(--liquen); }
+.portada .sub { font-size: 13pt; color: #a9bcb1; max-width: 140mm; }
+.portada dl { display: grid; grid-template-columns: 38mm 1fr; gap: 2mm 6mm; font-size: 9.5pt; color: #cfdcd3; margin: 0; }
+.portada dt { color: #8fa79a; font: 500 8pt 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; padding-top: 1mm; }
+.portada dd { margin: 0; }
+.indice { columns: 2; column-gap: 10mm; padding: 0; list-style: none; counter-reset: i; }
+.indice li { counter-increment: i; padding: 1.6mm 0; border-bottom: 1px solid var(--linea); break-inside: avoid; }
+.indice li::before { content: counter(i, decimal-leading-zero); font: 500 8.5pt 'JetBrains Mono', monospace; color: var(--verde); margin-right: 3mm; }
+.nota, .alerta, .ok { border-radius: 6px; padding: 3mm 4mm; margin: 0 0 4mm; break-inside: avoid; font-size: 9.4pt; }
+.nota { background: #eef4ec; border-left: 3px solid var(--verde); }
+.alerta { background: #fdf1e6; border-left: 3px solid var(--aviso); }
+.ok { background: #f3f6f2; border-left: 3px solid var(--liquen); }
+figure { margin: 0 0 5mm; break-inside: avoid; }
+figure img { width: auto; max-width: 100%; max-height: 88mm; border: 1px solid var(--linea); border-radius: 6px; display: block; }
+figcaption { font-size: 8.5pt; color: var(--tinta-2); margin-top: 1.5mm; }
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.paso { display: grid; grid-template-columns: 8mm 1fr; gap: 3mm; margin-bottom: 3mm; break-inside: avoid; }
+.paso .num { width: 7mm; height: 7mm; border-radius: 50%; background: var(--noche); color: var(--liquen); font: 600 9pt 'Inter Tight', sans-serif; display: grid; place-items: center; }
+.paso p:last-child, .paso pre:last-child { margin-bottom: 0; }
+.tag { display: inline-block; font: 600 7.5pt 'JetBrains Mono', monospace; letter-spacing: .06em; text-transform: uppercase; padding: .5mm 1.6mm; border-radius: 3px; white-space: nowrap; }
+.tag.ob { background: #fbe1cf; color: #8a3f08; }
+.tag.cl { background: #fdf0d2; color: #7a5208; }
+.tag.dev { background: #dfeee3; color: #1f4d36; }
+.tag.op { background: #eceeeb; color: #4c5f55; }
+.check td:first-child { width: 6mm; font-size: 11pt; color: var(--verde); }
+.diagrama { display: flex; align-items: stretch; gap: 2mm; margin: 0 0 4mm; font-size: 8.6pt; break-inside: avoid; }
+.diagrama div { flex: 1; border: 1px solid var(--linea); border-radius: 6px; padding: 2.5mm; background: #f8faf7; }
+.diagrama b { display: block; font-family: 'Inter Tight', sans-serif; margin-bottom: 1mm; }
+.diagrama .flecha { flex: 0 0 5mm; border: 0; background: none; display: grid; place-items: center; color: var(--verde); font-size: 13pt; padding: 0; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <div>
+    <span class="chip">Entrega técnica · Equipo de desarrollo</span>
+    <h1>Green Carbon Bolivia <em>en WordPress</em></h1>
+    <p class="sub">Guía técnica y de uso: acceso al administrador, qué se puede editar, cómo está hecho el tema, instalación del contenedor y lista de lo que falta completar antes de publicar.</p>
+  </div>
+  <dl>
+    <dt>Versión</dt><dd>1.1.1 · 27 de octubre de 2026</dd>
+    <dt>Repositorio</dt><dd>github.com/pipo2021/greencarbon-wordpress (privado)</dd>
+    <dt>Descargas</dt><dd>Release v1.1.1: código fuente (.zip) + imagen Docker amd64 (.tar.gz)</dd>
+    <dt>Stack</dt><dd>WordPress 6.8.3 · PHP 8.3 · Apache · MariaDB 11.4 · Docker Compose</dd>
+    <dt>Idiomas</dt><dd>Español (principal) e inglés (borrador pendiente de aprobación)</dd>
+  </dl>
+</div>
+
+<section style="break-before: auto">
+  <h2>Contenido</h2>
+  <ol class="indice">
+    <li>Qué se entrega</li>
+    <li>Instalación rápida con Docker</li>
+    <li>Acceso al administrador y credenciales</li>
+    <li>Qué se puede modificar</li>
+    <li>Qué NO se modifica desde el panel</li>
+    <li>Cómo está hecho el tema</li>
+    <li>Instalar en un WordPress existente (sin Docker)</li>
+    <li>Pasar a producción</li>
+    <li>Mantenimiento: respaldos y actualizaciones</li>
+    <li>Solución de problemas</li>
+    <li>Qué se debe cambiar y/o completar</li>
+  </ol>
+
+  <h2 style="margin-top:8mm"><span class="n">01</span>Qué se entrega</h2>
+  <p>El sitio de una sola página de Green Carbon Bolivia, con el recorrido en video que avanza con el scroll, convertido en un <b>tema de WordPress</b>. Todo el contenido (textos en español e inglés, fotos, enlaces, datos de contacto y avisos pendientes) se edita desde un único administrador, con vista previa en vivo. Viene empaquetado en un <b>contenedor Docker</b> que instala todo solo.</p>
+  <table>
+    <tr><th style="width:52mm">Archivo / carpeta</th><th>Para qué sirve</th></tr>
+    <tr><td><code>LEEME.md</code></td><td>Resumen técnico (este PDF lo amplía).</td></tr>
+    <tr><td><code>docker-compose.yml</code>, <code>Dockerfile</code></td><td>Definen los dos contenedores: WordPress (con el tema adentro) y la base de datos.</td></tr>
+    <tr><td><code>.env.ejemplo</code></td><td>Plantilla de configuración: contraseñas, usuario admin, URL y puerto. Se copia a <code>.env</code>.</td></tr>
+    <tr><td><code>docker/</code></td><td>Script de arranque e instalación automática (<code>instalar.sh</code>).</td></tr>
+    <tr><td><code>tema/greencarbon/</code></td><td>El tema de WordPress listo para usar (≈ 250 MB por el video y los cuadros).</td></tr>
+    <tr><td><code>herramientas/</code></td><td>Generador del tema (<code>convertir.py</code>), traducción al inglés (<code>traduccion-en.json</code>) y scripts del video.</td></tr>
+    <tr><td><code>greencarbon-wordpress-1.1.1-amd64.tar.gz</code></td><td>Imagen Docker ya construida para servidores x86 (adjunta al Release, no está en el repo).</td></tr>
+  </table>
+  <div class="nota"><b>¿No usan Git?</b> No hace falta. En la página del Release (<span class="mono">github.com/pipo2021/greencarbon-wordpress/releases</span>) se descarga «Source code (zip)» y la imagen desde el navegador. Para entrar al repositorio privado hace falta una cuenta de GitHub con invitación.</div>
+</section>
+
+<section>
+  <h2><span class="n">02</span>Instalación rápida con Docker</h2>
+  <p>Pensado para alguien con conocimientos básicos. Se hace una sola vez; tarda unos 5 minutos más la descarga.</p>
+  <h3>Requisitos</h3>
+  <ul>
+    <li><b>Docker Desktop</b> (Windows / macOS) o Docker Engine + Compose v2 (Linux). Se descarga de <span class="mono">docker.com</span>.</li>
+    <li>2 GB de RAM libres y 3 GB de disco.</li>
+    <li>Internet en la primera instalación (descarga WordPress en español). Sin internet funciona igual, con el admin en inglés.</li>
+  </ul>
+  <h3>Pasos</h3>
+  <div class="paso"><span class="num">1</span><div><p><b>Descargar y descomprimir</b> el «Source code (zip)» del Release v1.1.1. Queda una carpeta <code>greencarbon-wordpress-1.1.1</code>. Abrir una terminal dentro de esa carpeta.</p></div></div>
+  <div class="paso"><span class="num">2</span><div><p><b>Crear el archivo de configuración</b> copiando la plantilla:</p>
+<pre>cp .env.ejemplo .env        <span class="c"># en Windows (PowerShell): copy .env.ejemplo .env</span></pre></div></div>
+  <div class="paso"><span class="num">3</span><div><p><b>Editar <code>.env</code></b> con cualquier editor de texto y cambiar como mínimo las dos contraseñas:</p>
+  <table>
+    <tr><th style="width:42mm">Variable</th><th>Qué poner</th></tr>
+    <tr><td><code>DB_PASSWORD</code></td><td>Contraseña de la base de datos. Larga y aleatoria; nadie la escribe a mano.</td></tr>
+    <tr><td><code>GC_ADMIN_USER</code></td><td>Usuario del administrador. Por defecto <code>admin-greencarbon</code>.</td></tr>
+    <tr><td><code>GC_ADMIN_PASSWORD</code></td><td>Contraseña del administrador (mínimo 12 caracteres).</td></tr>
+    <tr><td><code>GC_ADMIN_EMAIL</code></td><td>Correo del administrador (para recuperar la contraseña).</td></tr>
+    <tr><td><code>GC_URL</code></td><td>Dirección del sitio. En local: <code>http://localhost:8080</code>. En producción: <code>https://dominio</code>.</td></tr>
+    <tr><td><code>GC_PUERTO</code></td><td>Puerto de la máquina donde se publica (por defecto 8080). Debe coincidir con el de <code>GC_URL</code> en local.</td></tr>
+    <tr><td><code>GC_INDEXAR</code></td><td><code>0</code> = los buscadores no indexan (pruebas). <code>1</code> = producción.</td></tr>
+  </table></div></div>
+  <div class="paso"><span class="num">4</span><div><p><b>Levantar los contenedores</b> (la primera vez construye la imagen, 1–3 minutos):</p>
+<pre>docker compose up -d --build</pre></div></div>
+  <div class="paso"><span class="num">5</span><div><p><b>Esperar el mensaje «Listo»</b>. El servidor web arranca recién cuando terminó la instalación:</p>
+<pre>docker compose logs -f wordpress      <span class="c"># salir con Ctrl+C</span>
+[gc-instalar] Listo: http://localhost:8080/wp-admin (usuario admin-greencarbon).</pre></div></div>
+  <div class="paso"><span class="num">6</span><div><p><b>Abrir</b> el sitio en <code>http://localhost:8080</code> y el administrador en <code>http://localhost:8080/wp-admin</code>.</p></div></div>
+
+  <h3>Alternativa: usar la imagen ya construida (servidores x86)</h3>
+  <p>Evita el paso de construcción. Descargar <code>greencarbon-wordpress-1.1.1-amd64.tar.gz</code> del Release y ponerlo en la misma carpeta:</p>
+<pre>docker load -i greencarbon-wordpress-1.1.1-amd64.tar.gz
+docker tag greencarbon-wordpress:1.1.1-amd64 greencarbon-wordpress:1.1.1
+docker compose up -d --no-build</pre>
+  <div class="nota">En Mac con Apple Silicon usar el paso 4 (construye la imagen nativa). La imagen amd64 también funciona ahí, pero emulada y más lenta.</div>
+
+  <h3>Comandos de todos los días</h3>
+  <table>
+    <tr><th style="width:70mm">Comando</th><th>Qué hace</th></tr>
+    <tr><td><code>docker compose ps</code></td><td>Ver si están corriendo.</td></tr>
+    <tr><td><code>docker compose stop</code> / <code>start</code></td><td>Detener / volver a arrancar sin perder nada.</td></tr>
+    <tr><td><code>docker compose logs -f wordpress</code></td><td>Ver el registro del servidor.</td></tr>
+    <tr><td><code>docker compose up -d --build</code></td><td>Aplicar una versión nueva del tema (no borra contenido).</td></tr>
+    <tr><td><code>docker compose down</code></td><td>Apagar y quitar contenedores (el contenido queda en los volúmenes).</td></tr>
+    <tr><td><code>docker compose down -v</code></td><td><b>Borra todo</b>, incluido el contenido cargado. Solo para empezar de cero.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">03</span>Acceso al administrador y credenciales</h2>
+  <div class="dos">
+    <figure><img src="img/01-login.jpg" alt="Pantalla de acceso de WordPress"><figcaption>Pantalla de acceso: <span class="mono">/wp-admin</span> o <span class="mono">/wp-login.php</span>.</figcaption></figure>
+    <div>
+      <table>
+        <tr><th>Dato</th><th>Valor</th></tr>
+        <tr><td>Dirección</td><td><code>GC_URL</code> + <code>/wp-admin</code><br>(local: <code>http://localhost:8080/wp-admin</code>)</td></tr>
+        <tr><td>Usuario</td><td>El de <code>GC_ADMIN_USER</code> en <code>.env</code>. Por defecto <code>admin-greencarbon</code>.</td></tr>
+        <tr><td>Contraseña</td><td>La de <code>GC_ADMIN_PASSWORD</code> en <code>.env</code>.</td></tr>
+        <tr><td>Rol</td><td>Administrador (único usuario).</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="alerta"><b>Las credenciales no viajan en la entrega.</b> El repositorio y el zip traen solo <code>.env.ejemplo</code>, con valores <code>cambiar-esto</code>. Cada instalación define sus propias contraseñas en <code>.env</code>, y ese archivo nunca se sube a Git. La instalación de prueba de Álvaro tiene las suyas en su <code>.env</code> local: si se necesitan, pedirlas por un canal privado, nunca por correo abierto.</div>
+  <p>Las credenciales del <code>.env</code> se usan <b>solo en la primera instalación</b>. Después, cambiar la contraseña en el <code>.env</code> no cambia la del sitio. Para cambiarla:</p>
+  <ul>
+    <li>Desde el admin: <b>Usuarios → Perfil → Nueva contraseña</b>.</li>
+    <li>Desde la terminal, si se olvidó:</li>
+  </ul>
+<pre>docker compose exec wordpress wp --allow-root user update admin-greencarbon --user_pass='NuevaClaveSegura'</pre>
+  <p>Al entrar, el contenido está en <b>Apariencia → Personalizar → Contenido de la web</b>. También se llega desde el escritorio del admin.</p>
+  <figure><img style="max-height:68mm" src="img/02-personalizar.jpg" alt="Personalizador con el panel Contenido de la web"><figcaption>El Personalizador: a la izquierda los paneles, a la derecha la página en vivo.</figcaption></figure>
+</section>
+
+<section style="break-before: auto; margin-top: 8mm">
+  <h2><span class="n">04</span>Qué se puede modificar</h2>
+  <p>El panel <b>Contenido de la web</b> tiene <b>22 secciones en el mismo orden que la página</b> y 372 campos. Cada cambio se ve al instante en la vista previa, pero <b>no se publica hasta pulsar «Publicar»</b>, arriba a la izquierda. También se puede guardar como borrador o programar.</p>
+  <div class="dos">
+    <figure><img src="img/03-secciones.jpg" alt="Lista de secciones"><figcaption>Secciones del panel, una por bloque de la página.</figcaption></figure>
+    <figure><img src="img/04-campos-es-en.jpg" alt="Campos ES y EN"><figcaption>Cada texto tiene su campo <b>ES</b> y debajo su <b>EN</b>.</figcaption></figure>
+  </div>
+  <table>
+    <tr><th style="width:44mm">Tipo de contenido</th><th>Cómo se edita</th></tr>
+    <tr><td><b>Textos</b> (títulos, párrafos, botones, menú, pie, formulario)</td><td>Campo de texto. Se permiten <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;br&gt;</code> y <code>&lt;a href&gt;</code>; el resto se elimina por seguridad. Los títulos con una parte en verde están divididos en dos campos («Título» y «Resaltado»).</td></tr>
+    <tr><td><b>Inglés</b></td><td>Campo «EN ·» debajo de cada texto. Si se deja vacío, en inglés se muestra el español. La versión en inglés se ve en <code>?lang=en</code> o con el botón <b>ES | EN</b> de la cabecera.</td></tr>
+    <tr><td><b>Fotos</b></td><td>Botón «Cambiar imagen»: se sube a la Biblioteca de medios o se elige una existente. Cada foto tiene además su <b>texto alternativo</b> (ES/EN) para accesibilidad.</td></tr>
+    <tr><td><b>Retratos y foto de especie</b></td><td>Huecos de imagen. Vacíos muestran la silueta o el aviso «Falta».</td></tr>
+    <tr><td><b>Avisos «Falta» / «SSOT»</b></td><td>Cada aviso naranja o amarillo tiene su campo. Al escribir el dato real, el aviso desaparece y se muestra el dato. Vacío = vuelve el aviso.</td></tr>
+    <tr><td><b>Enlaces externos</b></td><td>Redes sociales, Verra, destino del formulario, centro de monitoreo: campo URL.</td></tr>
+    <tr><td><b>General</b></td><td>Título de la pestaña y descripción para buscadores (ES/EN), enlace de <b>mapas</b> y de <b>monitoreo de incendios</b> (se muestran en un iframe), selector de idioma, opacidades.</td></tr>
+    <tr><td><b>Opacidad</b> de hojas y tarjetas</td><td>Tres deslizadores (hojas claras, hojas verdes, tarjetas): 1 tapa el video; más bajo deja ver el recorrido detrás.</td></tr>
+    <tr><td><b>Mensajes de la página</b></td><td>Textos que escribe el JavaScript: MENÚ/CERRAR, «Cargando el territorio», mensajes del formulario (ES/EN).</td></tr>
+    <tr><td><b>«Del bosque a los datos»</b></td><td>Casilla en la sección 9 para mostrarla (oculta hasta la certificación, aprox. marzo 2027). <b>Ver sección 11:</b> al activarla, desarrollo tiene que ajustar las anclas del video.</td></tr>
+  </table>
+  <figure><img src="img/05-general-opacidad.jpg" alt="Sección General con enlaces, selector de idioma y opacidades"><figcaption>Sección General: enlaces embebibles, selector ES | EN y deslizadores de opacidad.</figcaption></figure>
+</section>
+
+<section style="break-before: auto; margin-top: 8mm">
+  <h2><span class="n">05</span>Qué NO se modifica desde el panel</h2>
+  <table>
+    <tr><th style="width:46mm">Elemento</th><th>Por qué / cómo se cambia</th></tr>
+    <tr><td>El recorrido en video</td><td>Computadora: <code>video/recorrido-1080p60.mp4</code> (1080p, 60 fps, 75 MB). Celular: cuadros WebP en <code>pack/v</code> (540×960, 48 fps, 102 MB en 8 paquetes de grueso a fino). Respaldo: <code>pack/h</code> (24 fps). Se generan con los scripts de <code>herramientas/video/</code>. Si se reemplazan, hay que subir <code>VERSION</code> en <code>js/main.js</code>: los archivos se llaman igual y el navegador los guarda en caché.</td></tr>
+    <tr><td>Anclas <code>data-cuadro</code></td><td>Atan cada sección a un cuadro del video. Están en el HTML fuente.</td></tr>
+    <tr><td>Diseño, íconos y orden de secciones</td><td><code>style.css</code> e <code>index.php</code>, generados desde el HTML original.</td></tr>
+    <tr><td>Cantidad de elementos</td><td>Hay 5 testimonios, 4 cifras de impacto, 1 especie y 5 piezas en «En acción». Para agregar o quitar elementos hay que tocar el HTML fuente y regenerar.</td></tr>
+  </table>
+  <div class="nota">No se usan plugins: son menos puntos de falla y menos actualizaciones. El editor de archivos del admin está desactivado (<code>DISALLOW_FILE_EDIT</code>) y la barra de administración se oculta en el frente, porque tapa la cabecera fija.</div>
+
+  <h2 style="margin-top:8mm"><span class="n">06</span>Cómo está hecho el tema</h2>
+  <p>El sitio original es un único <code>index.html</code> (HTML + CSS + JS). En vez de reescribirlo a mano, un generador lo convierte en tema. Así el diseño queda <b>idéntico</b>, y cualquier cambio de diseño se sigue haciendo en un solo archivo.</p>
+  <div class="diagrama">
+    <div><b>index.html</b>Sitio estático original (greencarbon-web)</div>
+    <div class="flecha">→</div>
+    <div><b>convertir.py</b>Cada texto, imagen, enlace y aviso pasa a ser un campo con su valor actual como predeterminado</div>
+    <div class="flecha">→</div>
+    <div><b>tema/greencarbon</b>index.php · style.css · js/main.js · inc/campos.json · functions.php</div>
+    <div class="flecha">→</div>
+    <div><b>Imagen Docker</b>WordPress + tema + instalación automática</div>
+  </div>
+  <table>
+    <tr><th style="width:42mm">Archivo del tema</th><th>Qué contiene</th></tr>
+    <tr><td><code>index.php</code></td><td>La página entera. Cada texto es una llamada como <code>gc_t("s01_02")</code>. <b>Generado: no editar a mano.</b></td></tr>
+    <tr><td><code>inc/campos.json</code></td><td>Definición de los 372 campos: sección, tipo, etiqueta, valor predeterminado (ES) y traducción (EN).</td></tr>
+    <tr><td><code>functions.php</code></td><td>Registra el Personalizador a partir de <code>campos.json</code>, funciones de salida con escape (<code>gc_t</code>, <code>gc_a</code>, <code>gc_u</code>, <code>gc_aviso</code>…), idioma, opacidades y carga de CSS/JS.</td></tr>
+    <tr><td><code>style.css</code> / <code>js/main.js</code></td><td>CSS y JS del original. El JS recibe <code>window.GC</code> con la ruta del tema, los enlaces y los textos traducidos.</td></tr>
+    <tr><td><code>assets/</code>, <code>video/</code>, <code>pack/</code></td><td>Fotos, íconos, MP4 y paquetes de cuadros.</td></tr>
+  </table>
+  <h3>Idiomas</h3>
+  <p>Español por defecto; inglés con <code>?lang=en</code>. Cada campo de texto <code>clave</code> tiene un gemelo <code>clave_en</code>. <code>gc_valor()</code> elige según el idioma y, si el inglés está vacío, usa el español. La página emite <code>&lt;html lang&gt;</code> correcto y <code>&lt;link rel="alternate" hreflang&gt;</code>.</p>
+  <h3>Video y scroll</h3>
+  <p>En computadora el scroll mueve <code>currentTime</code> del MP4: se descarga entero a un blob local para que los saltos sean instantáneos (mediana medida: 6,6 ms por salto). En celular se dibujan cuadros WebP en un canvas, con fundido entre cuadros vecinos. Las anclas están en cuadros de 24 por segundo. El <code>manifest.json</code> de cada paquete declara sus <code>fps</code> y el JS hace la conversión. Los 60 y 48 fps se obtuvieron interpolando (ffmpeg <code>minterpolate</code>).</p>
+  <h3>Regenerar el tema después de cambiar el HTML</h3>
+<pre>python3 herramientas/convertir.py ../greencarbon-web tema/greencarbon
+docker compose up -d --build</pre>
+  <div class="alerta">Las claves de los campos (<code>s05_03</code>…) son <b>posicionales</b>: agregar o quitar un texto en una sección corre las claves siguientes de esa sección, y el contenido ya cargado en esos campos queda desfasado. Después de un cambio de estructura hay que revisar esa sección en el panel. El generador verifica solo que, con los valores predeterminados, el texto visible sea idéntico al del HTML original.</div>
+</section>
+
+<section>
+  <h2><span class="n">07</span>Instalar en un WordPress existente (sin Docker)</h2>
+  <p>Si el hosting ya tiene WordPress (6.4 o superior, PHP 8.1 o superior):</p>
+  <ol>
+    <li>Subir la carpeta <code>tema/greencarbon</code> completa a <code>wp-content/themes/</code> por SFTP o el administrador de archivos del hosting. Pesa unos 250 MB: el subidor de temas del admin no lo acepta por tamaño.</li>
+    <li>En el admin: <b>Apariencia → Temas → Green Carbon Bolivia → Activar</b>.</li>
+    <li>Subir el límite de subida de archivos a 64 MB (en <code>php.ini</code> o el panel del hosting) para poder cargar fotos grandes.</li>
+    <li>En <b>Ajustes → Lectura</b>, la página de inicio puede quedar en «Tus últimas entradas»: el tema muestra la página única en cualquier caso.</li>
+    <li>Recomendado: agregar <code>define('DISALLOW_FILE_EDIT', true);</code> en <code>wp-config.php</code>.</li>
+  </ol>
+  <div class="nota">El servidor tiene que entregar <code>.mp4</code> con <code>Accept-Ranges</code> (lo normal en Apache y Nginx) y no comprimir los <code>.bin</code> de <code>pack/</code> al vuelo (ya están comprimidos).</div>
+
+  <h2 style="margin-top:8mm"><span class="n">08</span>Pasar a producción</h2>
+  <ol>
+    <li><b>Dominio y HTTPS</b>: poner un proxy inverso (Nginx, Caddy, Traefik o el del hosting) con certificado delante del contenedor. Publicar el puerto solo en local cambiando en <code>docker-compose.yml</code> <code>"${GC_PUERTO}:80"</code> por <code>"127.0.0.1:${GC_PUERTO}:80"</code>.</li>
+    <li><b><code>GC_URL</code></b> con <code>https://dominio</code> <i>antes</i> de la primera instalación. Si se instaló con otra URL:
+<pre>docker compose exec wordpress wp --allow-root search-replace 'http://localhost:8080' 'https://dominio'</pre></li>
+    <li><b><code>GC_INDEXAR=1</code></b> cuando el cliente apruebe publicar, y <code>docker compose up -d</code>.</li>
+    <li>Contraseñas fuertes y únicas en <code>.env</code>. Las variables se ven con <code>docker inspect</code>: en servidores compartidos conviene usar secretos del orquestador.</li>
+    <li>Completar la lista de la sección 11.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="n">09</span>Mantenimiento: respaldos y actualizaciones</h2>
+  <p>Hay dos volúmenes que respaldar: <code>db</code> (base de datos: todo el contenido del panel) y <code>uploads</code> (fotos subidas).</p>
+<pre><span class="c"># Respaldo de la base</span>
+docker compose exec db sh -c 'mariadb-dump -u greencarbon -p"$MARIADB_PASSWORD" greencarbon' > respaldo-$(date +%F).sql
+
+<span class="c"># Respaldo de las fotos subidas</span>
+docker compose cp wordpress:/var/www/html/wp-content/uploads ./uploads-$(date +%F)
+
+<span class="c"># Restaurar la base</span>
+docker compose exec -T db sh -c 'mariadb -u greencarbon -p"$MARIADB_PASSWORD" greencarbon' &lt; respaldo-AAAA-MM-DD.sql</pre>
+  <h3>Actualizar el tema</h3>
+  <p>Con una versión nueva del repositorio: <code>docker compose up -d --build</code>. Al arrancar, el contenedor copia el tema nuevo y conserva el contenido.</p>
+  <h3>Actualizar WordPress</h3>
+  <p>Las actualizaciones menores de seguridad se aplican solas. Para una versión mayor, se puede actualizar desde el admin (queda en el volumen) o cambiar la versión en la primera línea del <code>Dockerfile</code> y reconstruir. Hay que hacer un respaldo antes.</p>
+
+  <h2 style="margin-top:8mm"><span class="n">10</span>Solución de problemas</h2>
+  <table>
+    <tr><th style="width:56mm">Síntoma</th><th>Solución</th></tr>
+    <tr><td>«port is already allocated»</td><td>El puerto está en uso: cambiar <code>GC_PUERTO</code> (y el puerto de <code>GC_URL</code>) en <code>.env</code>.</td></tr>
+    <tr><td>«falta GC_ADMIN_PASSWORD / GC_URL en .env»</td><td>No se creó <code>.env</code> o falta esa línea (paso 2 y 3).</td></tr>
+    <tr><td>El sitio no abre después de <code>up</code></td><td>Todavía está instalando: <code>docker compose logs -f wordpress</code> hasta ver «Listo».</td></tr>
+    <tr><td>Redirige a otra dirección</td><td><code>GC_URL</code> distinto del real: usar <code>search-replace</code> (sección 08).</td></tr>
+    <tr><td>Olvidé la contraseña</td><td>Comando <code>wp user update</code> de la sección 03.</td></tr>
+    <tr><td>Cambié el video y se ve el viejo</td><td>Subir <code>VERSION</code> en <code>js/main.js</code> (caché del navegador).</td></tr>
+    <tr><td>El video se ve a saltos en una pestaña de fondo</td><td>Normal: el navegador frena las animaciones de pestañas que no se ven. Probar con la pestaña en primer plano.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">11</span>Qué se debe cambiar y/o completar</h2>
+  <p>Lista explícita de lo que falta para publicar. <span class="tag ob">Obligatorio</span> = antes de salir a producción. <span class="tag cl">Cliente</span> = lo entrega Green Carbon y se carga en el panel. <span class="tag dev">Desarrollo</span> = tarea técnica. <span class="tag op">Opcional</span>.</p>
+
+  <h3>A. Configuración y seguridad</h3>
+  <table class="check">
+    <tr><th></th><th style="width:22mm">Tipo</th><th>Qué</th><th style="width:48mm">Dónde</th></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Contraseñas propias de base de datos y administrador</td><td><code>.env</code> antes de instalar</td></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Dominio real en <code>GC_URL</code> y HTTPS delante del contenedor</td><td><code>.env</code> + proxy (sección 08)</td></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Correo real del administrador</td><td><code>GC_ADMIN_EMAIL</code> o Usuarios → Perfil</td></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Permitir buscadores cuando se apruebe (<code>GC_INDEXAR=1</code>)</td><td><code>.env</code></td></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Verificar el destino del formulario de contacto. Hoy apunta a <code>submit-form.com/zAQqp9upk</code>: confirmar que los mensajes llegan al correo del cliente o cambiarlo</td><td>Panel → 18 · Contacto → «Destino del formulario»</td></tr>
+    <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td>Programar respaldos de <code>db</code> y <code>uploads</code></td><td>Sección 09</td></tr>
+    <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td>Invitar al equipo al repositorio privado</td><td>GitHub → Settings → Collaborators</td></tr>
+  </table>
+
+  <h3>B. Contenido que falta (lo entrega el cliente)</h3>
+  <table class="check">
+    <tr><th></th><th style="width:22mm">Tipo</th><th>Qué</th><th style="width:48mm">Panel → sección</th></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td><b>Aprobar o corregir la traducción al inglés</b>. Es un borrador automático y revisado, no aprobado. Si no se aprueba a tiempo, desactivar el selector ES | EN</td><td>Cada sección (campos EN) · General → selector</td></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Dirección, correo y teléfono (contacto y pie)</td><td>18 · Contacto · Pie de página</td></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Texto de privacidad del consentimiento del formulario</td><td>18 · Contacto</td></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Validar cifras marcadas SSOT: superficie (1.133.035 ha, «más de un millón de hectáreas»), 82 comunidades</td><td>4 · Separador · 5 · Proyecto</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Ficha de cada territorio: superficie, comunidades, cobertura forestal, organización territorial</td><td>6 · Explora el territorio</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Enlace embebible de los mapas interactivos del proyecto</td><td>General → Enlace de mapas</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Monitoreo de incendios: hospedar el dashboard en un sitio embebible (claude.ai no lo permite) y <b>confirmar si los datos son en vivo</b>. El brief prohíbe simular datos en vivo</td><td>General → Enlace de monitoreo · 10 · Centro</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Foto de Lomerío (hoy se usa una foto de reunión con aviso)</td><td>7 · Territorio y gobernanza</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>5 testimonios: retrato, nombre, comunidad y rol, cita, <b>con consentimiento firmado</b></td><td>12 · Voces del territorio</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>4 cifras de impacto respaldadas y su período (hoy «XX»)</td><td>13 · Impacto</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Especie con evidencia territorial: foto, nombre común, nombre científico, descripción</td><td>14 · Biodiversidad</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Enlace a los datos de monitoreo del proyecto</td><td>16 · Transparencia · 9 · Monitoreo</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Noticia: titular, responsable editorial y frecuencia</td><td>17 · En acción</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Destino del Canal de Integridad (separado del contacto)</td><td>18 · Contacto</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Flujo interno y privacidad para activar «Reportar una alerta»</td><td>11 · Reportar una alerta</td></tr>
+  </table>
+
+  <h3>C. Desarrollo pendiente</h3>
+  <table class="check">
+    <tr><th></th><th style="width:22mm">Tipo</th><th>Qué</th></tr>
+    <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td><b>Botón «Reportar una alerta»</b>: hoy está deshabilitado. Hace falta un formulario o destino una vez que el cliente defina el flujo.</td></tr>
+    <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td><b>Adjunto del formulario</b>: deshabilitado. Requiere un servicio de formularios que acepte archivos.</td></tr>
+    <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td><b>Activar «Del bosque a los datos»</b> (aprox. marzo 2027). Además de la casilla del panel, hay que rehacer las anclas <code>data-cuadro</code> de <code>#monitoreo</code> a <code>#impacto</code> en el HTML fuente para que la escena del dron no quede cortada, y regenerar.</td></tr>
+    <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td>Botones «Ver historia» (testimonios) y «Siguiente especie»: hoy deshabilitados, sin destino.</td></tr>
+    <tr><td>☐</td><td><span class="tag op">Opcional</span></td><td>Volver a generar el video desde los clips originales de Flow, que no están en el repo. Los 60/48 fps actuales son interpolados de las versiones de 30/24, y una escena rápida puede mostrar algún artefacto leve.</td></tr>
+    <tr><td>☐</td><td><span class="tag op">Opcional</span></td><td>Si el cliente quiere más de 5 testimonios, 4 cifras o 1 especie: ampliar en el HTML fuente y regenerar.</td></tr>
+  </table>
+  <div class="ok">Para ubicar rápido cada pendiente en la página: los avisos <b>naranjas</b> («Falta …») son contenido que falta y los <b>amarillos</b> («SSOT») son datos a validar. Al completar el campo del panel, el aviso desaparece solo.</div>
+</section>
+
+</body>
+</html>

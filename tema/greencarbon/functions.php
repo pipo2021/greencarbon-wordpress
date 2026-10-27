@@ -156,6 +156,15 @@ function gc_oculto( $k ) {
 
 add_filter( 'show_admin_bar', '__return_false' ); // la barra tapa la cabecera fija del diseño
 
+// El menú se edita como texto en «Cabecera y menú»: el panel de menús de WordPress no aplica (se registra con prioridad 11).
+add_action(
+	'customize_register',
+	function ( WP_Customize_Manager $wp ) {
+		$wp->remove_panel( 'nav_menus' );
+	},
+	20
+);
+
 // El tema no tiene áreas de widgets: sin esto el núcleo imprime la plantilla del panel inexistente y avisa en el log.
 add_action(
 	'customize_register',
