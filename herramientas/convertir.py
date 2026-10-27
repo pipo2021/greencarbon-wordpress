@@ -92,6 +92,13 @@ def convertir_cuerpo(cuerpo, c):
     for tok in re.split(r'(<!--.*?-->|<[^>]+>)', cuerpo, flags=re.S):
         if not tok:
             continue
+        if tok == '<!-- gc:mapa-img -->':
+            img = c.nuevo('imagen', 'Imagen estática del mapa del proyecto', '',
+                          'Mapa de ubicación de las TCO exportado de Global Nature Watch (horizontal, mín. 1600 px de ancho). '
+                          'Vacío = se muestra el aviso «Falta imagen del mapa».')
+            alt = 'Mapa de ubicación de los territorios indígenas Monte Verde y Lomerío'
+            salida.append(php('gc_mapa_img', img, c.nuevo('texto', f'Texto alternativo: {corto(alt)}', alt)))
+            continue
         if tok.startswith('<!--'):
             m = re.match(r'<!-- (\d+) · (.+?) -->', tok)
             if m:
@@ -193,10 +200,11 @@ def main():
     c.nuevo('texto', 'Título de la pestaña del navegador', html.unescape(titulo), clave='gen_titulo')
     c.nuevo('parrafo', 'Descripción para buscadores', html.unescape(descripcion), clave='gen_descripcion')
     c.nuevo('url', 'Enlace de los mapas interactivos', '',
-            'Se muestra en un iframe en «Explora el territorio». Vacío = aviso «Falta enlace de mapas».', clave='enlace_mapas')
+            'Opcional, para más adelante: si se completa, reemplaza la imagen estática del mapa por un iframe. '
+            'El sitio enlazado tiene que permitir ser embebido.', clave='enlace_mapas')
     c.nuevo('url', 'Enlace embebible del monitoreo de incendios', '',
-            'Se muestra en un iframe en «Centro de monitoreo». Vacío = vista previa que abre el dashboard en otra pestaña. '
-            'claude.ai no deja embeberse: hace falta hospedarlo en un sitio que lo permita.', clave='enlace_incendios')
+            'Opcional, para más adelante: si se completa, reemplaza la imagen estática del Centro de Operaciones de Incendios '
+            'por el dashboard en un iframe. Tiene que estar publicado fuera de claude.ai y permitir ser embebido en el dominio.', clave='enlace_incendios')
     c.nuevo('check', 'Mostrar el selector de idioma ES | EN', True,
             'Los textos en inglés vacíos se muestran en español.', clave='mostrar_idioma')
     for k, etiqueta, defecto in (('alfa-hoja', 'Opacidad de las hojas claras', .84), ('alfa-oscuro', 'Opacidad de las hojas verdes', .74),
@@ -251,7 +259,7 @@ def main():
              '@media (max-width: 359px) { .marca-pais { display: none; } }\n')
     (TEMA / 'style.css').write_text(
         '/*\nTheme Name: Green Carbon Bolivia\nDescription: Sitio de una página con recorrido en video. '
-        'Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.\nVersion: 1.1.1\n'
+        'Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.\nVersion: 1.2.0\n'
         'Requires PHP: 8.1\nText Domain: greencarbon\n*/\n' + css + extra, encoding='utf-8')
     (TEMA / 'js' / 'main.js').write_text(js, encoding='utf-8')
     (TEMA / 'inc' / 'campos.json').write_text(json.dumps(c.secciones, ensure_ascii=False, indent=1), encoding='utf-8')

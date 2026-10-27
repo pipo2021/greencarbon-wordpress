@@ -4,7 +4,7 @@
   function embeber(id, url, titulo) {
     if (!url) return;
     const caja = document.getElementById(id);
-    caja.querySelector('.mapa-vacio, .vista').remove();
+    caja.querySelectorAll('.mapa-vacio, .vista, .mapa-img, .mapa-fuente').forEach(el => el.remove());
     const f = document.createElement('iframe');
     f.src = url; f.title = titulo; f.loading = 'lazy';
     caja.appendChild(f);

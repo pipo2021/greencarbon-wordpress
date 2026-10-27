@@ -21,13 +21,13 @@
     "tipo": "url",
     "etiqueta": "Enlace de los mapas interactivos",
     "defecto": "",
-    "desc": "Se muestra en un iframe en «Explora el territorio». Vacío = aviso «Falta enlace de mapas»."
+    "desc": "Opcional, para más adelante: si se completa, reemplaza la imagen estática del mapa por un iframe. El sitio enlazado tiene que permitir ser embebido."
    },
    "enlace_incendios": {
     "tipo": "url",
     "etiqueta": "Enlace embebible del monitoreo de incendios",
     "defecto": "",
-    "desc": "Se muestra en un iframe en «Centro de monitoreo». Vacío = vista previa que abre el dashboard en otra pestaña. claude.ai no deja embeberse: hace falta hospedarlo en un sitio que lo permita."
+    "desc": "Opcional, para más adelante: si se completa, reemplaza la imagen estática del Centro de Operaciones de Incendios por el dashboard en un iframe. Tiene que estar publicado fuera de claude.ai y permitir ser embebido en el dominio."
    },
    "mostrar_idioma": {
     "tipo": "check",
@@ -744,118 +744,138 @@
     "en": "Monte Verde"
    },
    "s06_08": {
-    "tipo": "texto",
-    "etiqueta": "Destacado: Mapa interactivo del proyecto",
-    "defecto": "Mapa interactivo del proyecto",
-    "desc": "",
-    "en": "Interactive project map"
+    "tipo": "imagen",
+    "etiqueta": "Imagen estática del mapa del proyecto",
+    "defecto": "",
+    "desc": "Mapa de ubicación de las TCO exportado de Global Nature Watch (horizontal, mín. 1600 px de ancho). Vacío = se muestra el aviso «Falta imagen del mapa»."
    },
    "s06_09": {
-    "tipo": "parrafo",
-    "etiqueta": "Párrafo: Se alimenta del enlace de los mapas de monitore…",
-    "defecto": "Se alimenta del enlace de los mapas de monitoreo del proyecto: polígonos reales y capas validadas.",
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Mapa de ubicación de los territorios indígenas…",
+    "defecto": "Mapa de ubicación de los territorios indígenas Monte Verde y Lomerío",
     "desc": "",
-    "en": "Fed by the link to the project's monitoring maps: real polygons and validated layers."
+    "en": "Location map of the Monte Verde and Lomerío indigenous territories"
    },
    "s06_10": {
     "tipo": "texto",
-    "etiqueta": "Aviso «Falta enlace de mapas»",
+    "etiqueta": "Destacado: Mapa del área del proyecto",
+    "defecto": "Mapa del área del proyecto",
+    "desc": "",
+    "en": "Project area map"
+   },
+   "s06_11": {
+    "tipo": "texto",
+    "etiqueta": "Párrafo: Ubicación de los territorios indígenas Monte Ve…",
+    "defecto": "Ubicación de los territorios indígenas Monte Verde y Lomerío.",
+    "desc": "",
+    "en": "Location of the Monte Verde and Lomerío indigenous territories."
+   },
+   "s06_12": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «Falta imagen del mapa»",
     "defecto": "",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },
-   "s06_11": {
+   "s06_13": {
+    "tipo": "texto",
+    "etiqueta": "Texto: Fuente: Global Nature Watch",
+    "defecto": "Fuente: Global Nature Watch",
+    "desc": "",
+    "en": "Source: Global Nature Watch"
+   },
+   "s06_14": {
     "tipo": "texto",
     "etiqueta": "Lector de pantalla: Territorio",
     "defecto": "Territorio",
     "desc": "",
     "en": "Territory"
    },
-   "s06_12": {
+   "s06_15": {
     "tipo": "texto",
     "etiqueta": "Botón: Monte Verde",
     "defecto": "Monte Verde",
     "desc": "",
     "en": "Monte Verde"
    },
-   "s06_13": {
+   "s06_16": {
     "tipo": "texto",
     "etiqueta": "Botón: Lomerío",
     "defecto": "Lomerío",
     "desc": "",
     "en": "Lomerío"
    },
-   "s06_14": {
+   "s06_17": {
     "tipo": "texto",
     "etiqueta": "Rótulo: Nombre",
     "defecto": "Nombre",
     "desc": "",
     "en": "Name"
    },
-   "s06_15": {
+   "s06_18": {
     "tipo": "texto",
     "etiqueta": "Dato: TIOC Monte Verde",
     "defecto": "TIOC Monte Verde",
     "desc": "",
     "en": "TIOC Monte Verde"
    },
-   "s06_16": {
+   "s06_19": {
     "tipo": "texto",
     "etiqueta": "Rótulo: Superficie",
     "defecto": "Superficie",
     "desc": "",
     "en": "Area"
    },
-   "s06_17": {
+   "s06_20": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT»",
     "defecto": "",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },
-   "s06_18": {
+   "s06_21": {
     "tipo": "texto",
     "etiqueta": "Rótulo: Comunidades",
     "defecto": "Comunidades",
     "desc": "",
     "en": "Communities"
    },
-   "s06_19": {
+   "s06_22": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT»",
     "defecto": "",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },
-   "s06_20": {
+   "s06_23": {
     "tipo": "texto",
     "etiqueta": "Rótulo: Cobertura forestal",
     "defecto": "Cobertura forestal",
     "desc": "",
     "en": "Forest cover"
    },
-   "s06_21": {
+   "s06_24": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT»",
     "defecto": "",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },
-   "s06_22": {
+   "s06_25": {
     "tipo": "texto",
     "etiqueta": "Rótulo: Organización territorial",
     "defecto": "Organización territorial",
     "desc": "",
     "en": "Territorial organization"
    },
-   "s06_23": {
+   "s06_26": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT»",
     "defecto": "",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },
-   "s06_24": {
+   "s06_27": {
     "tipo": "texto",
     "etiqueta": "Botón o enlace: Explorar territorio",
     "defecto": "Explorar territorio",
@@ -1240,44 +1260,24 @@
     "en": "Territorial fire operations console: satellite detections, active events and brigade response."
    },
    "s10_04": {
-    "tipo": "url",
-    "etiqueta": "Enlace: https://claude.ai/public/artifacts/0472e73c-8fa…",
-    "defecto": "https://claude.ai/public/artifacts/0472e73c-8fa4-4ee4-a576-23d643b17c1a",
-    "desc": ""
-   },
-   "s10_05": {
     "tipo": "imagen",
     "etiqueta": "Imagen: fire-ops-vista.webp",
     "defecto": "assets/fotos/fire-ops-vista.webp",
     "desc": ""
    },
+   "s10_05": {
+    "tipo": "texto",
+    "etiqueta": "Texto alternativo: Vista del Centro de Operaciones de Incendios: m…",
+    "defecto": "Vista del Centro de Operaciones de Incendios: mapa de TIOC Monte Verde con detecciones y panel de despacho",
+    "desc": "",
+    "en": "Fire Operations Center view: map of TIOC Monte Verde with detections and dispatch panel"
+   },
    "s10_06": {
     "tipo": "texto",
-    "etiqueta": "Texto alternativo: Vista del centro de operaciones de incendios: m…",
-    "defecto": "Vista del centro de operaciones de incendios: mapa de TIOC Monte Verde con detecciones y panel de despacho",
+    "etiqueta": "Párrafo: Imagen ilustrativa del Centro de Operaciones de…",
+    "defecto": "Imagen ilustrativa del Centro de Operaciones de Incendios.",
     "desc": "",
-    "en": "View of the fire operations center: map of TIOC Monte Verde with detections and dispatch panel"
-   },
-   "s10_07": {
-    "tipo": "texto",
-    "etiqueta": "Texto: Abrir el centro de monitoreo",
-    "defecto": "Abrir el centro de monitoreo",
-    "desc": "",
-    "en": "Open the monitoring center"
-   },
-   "s10_08": {
-    "tipo": "texto",
-    "etiqueta": "Párrafo: Se abre en una pestaña nueva.",
-    "defecto": "Se abre en una pestaña nueva.",
-    "desc": "",
-    "en": "Opens in a new tab."
-   },
-   "s10_09": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «Confirmar si los datos son en vivo ante…»",
-    "defecto": "",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "Illustrative image of the Fire Operations Center."
    }
   }
  },

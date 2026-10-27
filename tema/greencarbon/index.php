@@ -168,26 +168,28 @@
       <div class="mapa-wrap item">
         <div class="mapa" id="mapa-territorio">
           <div class="migas" aria-label="<?php gc_a("s06_04"); ?>"><span><?php gc_t("s06_05"); ?></span><span><?php gc_t("s06_06"); ?></span><span id="migas-territorio"><?php gc_t("s06_07"); ?></span></div>
+          <?php gc_mapa_img("s06_08", "s06_09"); ?>
           <div class="mapa-vacio">
             <svg class="i"><use href="#i-capas"/></svg>
-            <b><?php gc_t("s06_08"); ?></b>
-            <p class="muted" style="max-width:42ch;margin:0"><?php gc_t("s06_09"); ?></p>
-            <?php gc_aviso("s06_10", "pend", "Falta enlace de mapas", "Missing maps link"); ?>
+            <b><?php gc_t("s06_10"); ?></b>
+            <p class="muted" style="max-width:42ch;margin:0"><?php gc_t("s06_11"); ?></p>
+            <?php gc_aviso("s06_12", "pend", "Falta imagen del mapa", "Map image missing"); ?>
           </div>
+          <span class="mapa-fuente"><?php gc_t("s06_13"); ?></span>
         </div>
         <div class="mapa-panel">
-          <div class="tabs-t" role="tablist" aria-label="<?php gc_a("s06_11"); ?>">
-            <button type="button" role="tab" aria-selected="true" data-territorio="Monte Verde"><?php gc_t("s06_12"); ?></button>
-            <button type="button" role="tab" aria-selected="false" data-territorio="Lomerío"><?php gc_t("s06_13"); ?></button>
+          <div class="tabs-t" role="tablist" aria-label="<?php gc_a("s06_14"); ?>">
+            <button type="button" role="tab" aria-selected="true" data-territorio="Monte Verde"><?php gc_t("s06_15"); ?></button>
+            <button type="button" role="tab" aria-selected="false" data-territorio="Lomerío"><?php gc_t("s06_16"); ?></button>
           </div>
           <dl class="ficha">
-            <div><dt><?php gc_t("s06_14"); ?></dt><dd id="t-nombre"><?php gc_t("s06_15"); ?></dd></div>
-            <div><dt><?php gc_t("s06_16"); ?></dt><dd><?php gc_aviso("s06_17", "ssot", "SSOT", "SSOT"); ?></dd></div>
-            <div><dt><?php gc_t("s06_18"); ?></dt><dd><?php gc_aviso("s06_19", "ssot", "SSOT", "SSOT"); ?></dd></div>
-            <div><dt><?php gc_t("s06_20"); ?></dt><dd><?php gc_aviso("s06_21", "ssot", "SSOT", "SSOT"); ?></dd></div>
-            <div><dt><?php gc_t("s06_22"); ?></dt><dd><?php gc_aviso("s06_23", "ssot", "SSOT", "SSOT"); ?></dd></div>
+            <div><dt><?php gc_t("s06_17"); ?></dt><dd id="t-nombre"><?php gc_t("s06_18"); ?></dd></div>
+            <div><dt><?php gc_t("s06_19"); ?></dt><dd><?php gc_aviso("s06_20", "ssot", "SSOT", "SSOT"); ?></dd></div>
+            <div><dt><?php gc_t("s06_21"); ?></dt><dd><?php gc_aviso("s06_22", "ssot", "SSOT", "SSOT"); ?></dd></div>
+            <div><dt><?php gc_t("s06_23"); ?></dt><dd><?php gc_aviso("s06_24", "ssot", "SSOT", "SSOT"); ?></dd></div>
+            <div><dt><?php gc_t("s06_25"); ?></dt><dd><?php gc_aviso("s06_26", "ssot", "SSOT", "SSOT"); ?></dd></div>
           </dl>
-          <a href="#territorio" class="btn sec" style="justify-content:center"><?php gc_t("s06_24"); ?> <svg class="i"><use href="#i-flecha"/></svg></a>
+          <a href="#territorio" class="btn sec" style="justify-content:center"><?php gc_t("s06_27"); ?> <svg class="i"><use href="#i-flecha"/></svg></a>
         </div>
       </div>
     </div>
@@ -255,12 +257,11 @@
       <h2><?php gc_t("s10_02"); ?></h2>
       <p class="lead" style="color:var(--mist-2)"><?php gc_t("s10_03"); ?></p>
       <div class="mapa centro-vista" id="mapa-monitoreo">
-        <a class="vista" id="vista-monitoreo" href="<?php gc_u("s10_04"); ?>" target="_blank" rel="noopener">
-          <img src="<?php gc_u("s10_05"); ?>" alt="<?php gc_a("s10_06"); ?>" loading="lazy">
-          <span class="btn pri"><?php gc_t("s10_07"); ?> <svg class="i"><use href="#i-ext"/></svg></span>
-        </a>
+        <figure class="vista" id="vista-monitoreo">
+          <img src="<?php gc_u("s10_04"); ?>" alt="<?php gc_a("s10_05"); ?>" loading="lazy">
+        </figure>
       </div>
-      <p class="muted nota-centro"><?php gc_t("s10_08"); ?> <?php gc_aviso("s10_09", "pend", "Confirmar si los datos son en vivo antes de publicar", "Confirm the data is live before publishing"); ?></p>
+      <p class="muted nota-centro"><?php gc_t("s10_06"); ?></p>
     </div>
   </section>
 

@@ -141,6 +141,14 @@ function gc_foto_o_aviso( $k, $texto, $texto_en = '' ) {
 	}
 }
 
+/** Imagen estática del mapa: solo se imprime si el admin la cargó (el CSS oculta entonces el aviso). */
+function gc_mapa_img( $k, $k_alt ) {
+	$v = gc_valor( $k );
+	if ( $v ) {
+		echo '<img class="mapa-img" src="' . esc_url( $v ) . '" alt="' . esc_attr( wp_strip_all_tags( gc_valor( $k_alt ) ) ) . '" loading="lazy">';
+	}
+}
+
 function gc_retrato( $k ) {
 	$v = gc_valor( $k );
 	echo '<div class="retrato">' . ( $v
