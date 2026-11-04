@@ -1,7 +1,7 @@
 /*
 Theme Name: Green Carbon Bolivia
 Description: Sitio de una página con recorrido en video. Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.
-Version: 1.2.2
+Version: 1.2.3
 Requires PHP: 8.1
 Text Domain: greencarbon
 */
@@ -763,6 +763,15 @@ h1 em, h2 em { font-weight: 300; letter-spacing: -.045em; }
 .cuatro article, .doc, .nodo:not(.fuerte), .lateral .rol, .tabs { background: rgba(255,255,255,var(--alfa-tarjeta)); }
 .mapa-panel { background: rgba(15,34,26,var(--alfa-tarjeta)); }
 :root { --panel: rgba(10,23,18,.62); }
+/* ===== Tipografía (2026-11-04): Barlow, a pedido del cliente (Inter se veía genérica).
+   Títulos en Barlow Condensed mayúscula, texto en Barlow; las etiquetas pasan de mono a Barlow Semi Condensed.
+   Una condensada en mayúsculas no necesita el tracking negativo que tenía Inter Tight. */
+:root { --f-display: 'Barlow Condensed', 'Arial Narrow', sans-serif; --f-body: 'Barlow', 'Segoe UI', system-ui, sans-serif;
+  --f-mono: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif; }
+h1, h2 { text-transform: uppercase; }
+h1, h2, h3, h1 em, h2 em, .hero h1, .hero h1 em, .paso h3, .cifra-grande, .cinta span, .indicador b, .cuatro article::after, .pie-gigante { letter-spacing: -.005em; }
+h2, .hero h1 { line-height: .92; }
+.pie-gigante { font-size: min(18.8cqi, 330px); } /* la condensada es más angosta: recalculado para que llene el ancho */
 
 /* Fotos que carga el administrador en huecos que eran avisos */
 .bio-foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }

@@ -8,7 +8,7 @@
 <meta name="description" content="<?php gc_a("gen_descripcion"); ?>">
 <?php gc_hreflang(); ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@400;500&display=swap">
 <?php wp_head(); ?>
 </head>
 <body>
