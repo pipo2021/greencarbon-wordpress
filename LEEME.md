@@ -78,4 +78,4 @@ Dockerfile, docker-compose.yml
 
 ## Pendientes del cliente (se cargan desde el panel cuando lleguen)
 
-Enlaces de mapas y de monitoreo de incendios (el dashboard actual vive en claude.ai, que no deja embeberse), foto de Lomerío, retratos y testimonios con consentimiento, especie de biodiversidad, cifras de impacto, dirección, correo y teléfono, destino del Canal de Integridad, texto de privacidad y confirmar si los datos del centro de monitoreo son en vivo. La traducción al inglés no está incluida: el sitio es solo en español.
+Enlaces de mapas y de monitoreo de incendios (el dashboard actual vive en claude.ai, que no deja embeberse), foto de Lomerío, especie de biodiversidad, cifras de impacto, dirección, correo y teléfono, destino del Canal de Integridad, texto de privacidad y confirmar si los datos del centro de monitoreo son en vivo. La traducción al inglés no está incluida: el sitio es solo en español.
