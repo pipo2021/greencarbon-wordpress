@@ -1350,36 +1350,35 @@
    "s12_06": {
     "tipo": "imagen",
     "etiqueta": "Retrato",
-    "defecto": "",
+    "defecto": "assets/testimonios/felipe-antonio-castro.webp",
     "desc": "Vacío = se muestra la silueta."
    },
    "s12_07": {
     "tipo": "texto",
-    "etiqueta": "Destacado: Nombre Apellido",
-    "defecto": "Nombre Apellido",
+    "etiqueta": "Destacado: Felipe Antonio Castro",
+    "defecto": "Felipe Antonio Castro",
     "desc": "",
-    "en": "Full Name"
+    "en": "Felipe Antonio Castro"
    },
    "s12_08": {
     "tipo": "texto",
-    "etiqueta": "Texto: Comunidad · Rol",
-    "defecto": "Comunidad · Rol",
+    "etiqueta": "Texto: Nación Chiquitana · Gran Cacique",
+    "defecto": "Nación Chiquitana · Gran Cacique",
     "desc": "",
-    "en": "Community · Role"
+    "en": "Chiquitano Nation · Grand Cacique"
    },
    "s12_09": {
     "tipo": "texto",
-    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
-    "defecto": "Testimonio de hasta dos líneas.",
+    "etiqueta": "Cita: El bosque es parte de nosotros, es vida.",
+    "defecto": "El bosque es parte de nosotros, es vida.",
     "desc": "",
-    "en": "Testimonial of up to two lines."
+    "en": "The forest is part of us, it is life."
    },
    "s12_10": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
-    "defecto": "",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "tipo": "video",
+    "etiqueta": "Video: historia de Felipe Antonio Castro",
+    "defecto": "assets/testimonios/felipe-antonio-castro.mp4",
+    "desc": "Se abre con «Ver historia»."
    },
    "s12_11": {
     "tipo": "texto",
@@ -1391,36 +1390,35 @@
    "s12_12": {
     "tipo": "imagen",
     "etiqueta": "Retrato",
-    "defecto": "",
+    "defecto": "assets/testimonios/maria-flores.webp",
     "desc": "Vacío = se muestra la silueta."
    },
    "s12_13": {
     "tipo": "texto",
-    "etiqueta": "Destacado: Nombre Apellido",
-    "defecto": "Nombre Apellido",
+    "etiqueta": "Destacado: María Flores",
+    "defecto": "María Flores",
     "desc": "",
-    "en": "Full Name"
+    "en": "María Flores"
    },
    "s12_14": {
     "tipo": "texto",
-    "etiqueta": "Texto: Comunidad · Rol",
-    "defecto": "Comunidad · Rol",
+    "etiqueta": "Texto: Central Paikoneka, San Javier · Segunda …",
+    "defecto": "Central Paikoneka, San Javier · Segunda Cacique de la OICH",
     "desc": "",
-    "en": "Community · Role"
+    "en": "Paikoneka Central, San Javier · Second Cacique of the OICH"
    },
    "s12_15": {
     "tipo": "texto",
-    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
-    "defecto": "Testimonio de hasta dos líneas.",
+    "etiqueta": "Cita: El futuro son nuestros nietos y nuestros…",
+    "defecto": "El futuro son nuestros nietos y nuestros hijos.",
     "desc": "",
-    "en": "Testimonial of up to two lines."
+    "en": "The future is our grandchildren and our children."
    },
    "s12_16": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
-    "defecto": "",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "tipo": "video",
+    "etiqueta": "Video: historia de María Flores",
+    "defecto": "assets/testimonios/maria-flores.mp4",
+    "desc": "Se abre con «Ver historia»."
    },
    "s12_17": {
     "tipo": "texto",
@@ -1432,36 +1430,35 @@
    "s12_18": {
     "tipo": "imagen",
     "etiqueta": "Retrato",
-    "defecto": "",
+    "defecto": "assets/testimonios/jose-maria-guasase.webp",
     "desc": "Vacío = se muestra la silueta."
    },
    "s12_19": {
     "tipo": "texto",
-    "etiqueta": "Destacado: Nombre Apellido",
-    "defecto": "Nombre Apellido",
+    "etiqueta": "Destacado: José María Guasase",
+    "defecto": "José María Guasase",
     "desc": "",
-    "en": "Full Name"
+    "en": "José María Guasase"
    },
    "s12_20": {
     "tipo": "texto",
-    "etiqueta": "Texto: Comunidad · Rol",
-    "defecto": "Comunidad · Rol",
+    "etiqueta": "Texto: Santa Anita, Lomerío · Cacique de Género…",
+    "defecto": "Santa Anita, Lomerío · Cacique de Género y Salud",
     "desc": "",
-    "en": "Community · Role"
+    "en": "Santa Anita, Lomerío · Cacique for Gender and Health"
    },
    "s12_21": {
     "tipo": "texto",
-    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
-    "defecto": "Testimonio de hasta dos líneas.",
+    "etiqueta": "Cita: Salir al campo, recabar la información.",
+    "defecto": "Salir al campo, recabar la información.",
     "desc": "",
-    "en": "Testimonial of up to two lines."
+    "en": "Going out to the field, gathering the information."
    },
    "s12_22": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
-    "defecto": "",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "tipo": "video",
+    "etiqueta": "Video: historia de José María Guasase",
+    "defecto": "assets/testimonios/jose-maria-guasase.mp4",
+    "desc": "Se abre con «Ver historia»."
    },
    "s12_23": {
     "tipo": "texto",
@@ -1473,79 +1470,37 @@
    "s12_24": {
     "tipo": "imagen",
     "etiqueta": "Retrato",
-    "defecto": "",
+    "defecto": "assets/testimonios/seferino-paz.webp",
     "desc": "Vacío = se muestra la silueta."
    },
    "s12_25": {
     "tipo": "texto",
-    "etiqueta": "Destacado: Nombre Apellido",
-    "defecto": "Nombre Apellido",
+    "etiqueta": "Destacado: Seferino Paz",
+    "defecto": "Seferino Paz",
     "desc": "",
-    "en": "Full Name"
+    "en": "Seferino Paz"
    },
    "s12_26": {
     "tipo": "texto",
-    "etiqueta": "Texto: Comunidad · Rol",
-    "defecto": "Comunidad · Rol",
+    "etiqueta": "Texto: Palestina · Comunario",
+    "defecto": "Palestina · Comunario",
     "desc": "",
-    "en": "Community · Role"
+    "en": "Palestina · Community member"
    },
    "s12_27": {
     "tipo": "texto",
-    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
-    "defecto": "Testimonio de hasta dos líneas.",
+    "etiqueta": "Cita: Perdimos la madera, perdimos los animali…",
+    "defecto": "Perdimos la madera, perdimos los animalitos.",
     "desc": "",
-    "en": "Testimonial of up to two lines."
+    "en": "We lost the timber, we lost the animals."
    },
    "s12_28": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
-    "defecto": "",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "tipo": "video",
+    "etiqueta": "Video: historia de Seferino Paz",
+    "defecto": "assets/testimonios/seferino-paz.mp4",
+    "desc": "Se abre con «Ver historia»."
    },
    "s12_29": {
-    "tipo": "texto",
-    "etiqueta": "Botón o enlace: Ver historia",
-    "defecto": "Ver historia",
-    "desc": "",
-    "en": "View story"
-   },
-   "s12_30": {
-    "tipo": "imagen",
-    "etiqueta": "Retrato",
-    "defecto": "",
-    "desc": "Vacío = se muestra la silueta."
-   },
-   "s12_31": {
-    "tipo": "texto",
-    "etiqueta": "Destacado: Nombre Apellido",
-    "defecto": "Nombre Apellido",
-    "desc": "",
-    "en": "Full Name"
-   },
-   "s12_32": {
-    "tipo": "texto",
-    "etiqueta": "Texto: Comunidad · Rol",
-    "defecto": "Comunidad · Rol",
-    "desc": "",
-    "en": "Community · Role"
-   },
-   "s12_33": {
-    "tipo": "texto",
-    "etiqueta": "Cita: Testimonio de hasta dos líneas.",
-    "defecto": "Testimonio de hasta dos líneas.",
-    "desc": "",
-    "en": "Testimonial of up to two lines."
-   },
-   "s12_34": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «Falta retrato, testimonio y consentimie…»",
-    "defecto": "",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
-   },
-   "s12_35": {
     "tipo": "texto",
     "etiqueta": "Botón o enlace: Ver historia",
     "defecto": "Ver historia",
