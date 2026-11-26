@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Resumen ejecutivo · Green Carbon WordPress v1.3.2</title>
+<style>
+@page{size:A4;margin:0}
+:root{--noche:#0a1712;--verde:#2f6b47;--liquen:#b8d48f;--tinta:#12241b;--linea:#dfe5df;--papel:#fbfaf6;--aviso:#b4570f;--sol:#f2b45a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter Tight',Inter,'Helvetica Neue',Arial,sans-serif;color:var(--tinta);background:var(--papel);font-size:10pt;line-height:1.38}
+.hoja{width:210mm;height:297mm;overflow:hidden;padding:0}
+header{background:var(--noche);color:#fff;padding:10mm 16mm 8mm}
+header small{color:var(--liquen);letter-spacing:.12em;text-transform:uppercase;font-size:8.5pt;font-weight:600}
+header h1{font-size:22pt;line-height:1.15;margin:3mm 0 2mm;font-weight:700}
+header p{color:#cfd8d2;font-size:10pt}
+main{padding:6mm 16mm 0}
+.estado{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm;margin-bottom:5mm}
+.k{border:1px solid var(--linea);border-radius:3mm;padding:4mm;background:#fff}
+.k b{display:block;font-size:17pt;color:var(--verde);line-height:1.1}
+.k span{font-size:8.5pt;color:#4b5b52}
+h2{font-size:12pt;color:var(--verde);border-bottom:2px solid var(--liquen);padding-bottom:1.5mm;margin:0 0 3mm}
+section{margin-bottom:4.5mm}
+ul{list-style:none}
+li{padding:.8mm 0 1.2mm 5mm;position:relative}
+li::before{content:"";position:absolute;left:0;top:2.9mm;width:2mm;height:2mm;border-radius:50%;background:var(--verde)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+table{width:100%;border-collapse:collapse;font-size:9.5pt}
+th{text-align:left;font-size:8pt;text-transform:uppercase;letter-spacing:.06em;color:#4b5b52;padding:1.5mm 2mm;border-bottom:1px solid var(--linea)}
+td{padding:1.4mm 2mm;border-bottom:1px solid var(--linea);vertical-align:top}
+.t{display:inline-block;font-size:7.5pt;font-weight:700;padding:.5mm 2mm;border-radius:2mm;white-space:nowrap}
+.ob{background:#fbe6d6;color:var(--aviso)}.cl{background:#eef4e3;color:var(--verde)}.de{background:#e7ecf3;color:#2c4a6b}
+.links{background:#fff;border-left:3mm solid var(--liquen);padding:3mm 4mm;font-size:9.5pt}
+.links a{color:var(--verde);text-decoration:none;font-weight:600}
+.riesgo{background:#fff6ea;border:1px solid var(--sol);border-radius:3mm;padding:3mm 4mm;font-size:9.5pt}
+footer{padding:0 16mm;font-size:8pt;color:#6b7a71}
+</style></head><body><div class="hoja">
+<header>
+  <small>Green Carbon Bolivia · Sitio WordPress</small>
+  <h1>Resumen ejecutivo · versión 1.3.2</h1>
+  <p>Estado al 26 de noviembre de 2026</p>
+</header>
+<main>
+  <div class="estado">
+    <div class="k"><b>Lista</b><span>para revisión del cliente</span></div>
+    <div class="k"><b>5</b><span>tareas obligatorias antes de publicar</span></div>
+    <div class="k"><b>7</b><span>contenidos que entrega el cliente</span></div>
+    <div class="k"><b>4</b><span>tareas de desarrollo</span></div>
+  </div>
+
+  <section>
+    <h2>Qué se entregó</h2>
+    <ul>
+      <li><b>Sitio actualizado</b> sobre la versión publicada, con los datos del cliente: cifras de impacto, jaguar, primera noticia y Aviso de Privacidad.</li>
+      <li><b>Nuevas funciones:</b> mapa enlazado a Global Nature Watch, panel de incendios (demostración), formulario de contacto con filtro anti-spam y videos de testimonios.</li>
+      <li><b>Mejor posicionamiento y velocidad:</b> SEO completo y carga más liviana.</li>
+      <li><b>Probado</b> en una instalación limpia, sin errores, en español, inglés y privacidad.</li>
+      <li><b>Paquete para desarrollo</b> publicado: instalación lista (Docker), código, guía técnica y lista de pendientes.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Qué falta para salir a producción</h2>
+    <table>
+      <tr><th style="width:22mm">Responsable</th><th>Tarea</th></tr>
+      <tr><td><span class="t ob">Obligatorio</span></td><td>Dominio real con HTTPS, contraseñas propias y correo del administrador.</td></tr>
+      <tr><td><span class="t ob">Obligatorio</span></td><td>Configurar el envío de correo del servidor y probar el formulario de contacto.</td></tr>
+      <tr><td><span class="t ob">Obligatorio</span></td><td>Aprobar la traducción al inglés (o desactivar el selector ES | EN).</td></tr>
+      <tr><td><span class="t ob">Obligatorio</span></td><td>Validar cifras pendientes: cobertura forestal por territorio y prevención/respuesta.</td></tr>
+      <tr><td><span class="t ob">Obligatorio</span></td><td>Habilitar los buscadores (Google) al aprobar el sitio.</td></tr>
+      <tr><td><span class="t cl">Cliente</span></td><td>Foto de Lomerío · foto del jaguar con permiso · consentimiento firmado de los 4 testimonios.</td></tr>
+      <tr><td><span class="t cl">Cliente</span></td><td>Definir el Canal de Integridad, el flujo de «Reportar una alerta» y el enlace a los datos de monitoreo.</td></tr>
+      <tr><td><span class="t cl">Cliente</span></td><td>Más adelante: dashboard real de incendios para reemplazar la demostración.</td></tr>
+      <tr><td><span class="t de">Desarrollo</span></td><td>Respaldos automáticos · formulario de alertas · botón «Siguiente especie» · sección «Del bosque a los datos» (marzo 2027).</td></tr>
+    </table>
+  </section>
+
+  <div class="dos">
+    <section>
+      <h2>Enlaces</h2>
+      <div class="links">
+        Revisión: <a href="https://pipo2021.github.io/greencarbon-wordpress/">pipo2021.github.io/greencarbon-wordpress</a><br>
+        Archivos para desarrollo: <a href="https://github.com/pipo2021/greencarbon-wordpress/releases/tag/v1.3.2">github.com/pipo2021/greencarbon-wordpress/releases/tag/v1.3.2</a>
+      </div>
+    </section>
+    <section>
+      <h2>A tener en cuenta</h2>
+      <div class="riesgo">
+        El formulario de la revisión no envía mensajes: es una copia de muestra.<br>
+        Al actualizar el sitio publicado, algunos datos viejos guardados en el panel pueden tapar los nuevos y hay que revisarlos.
+      </div>
+    </section>
+  </div>
+</main>
+<footer>Detalle técnico completo: Guía Green Carbon WordPress y Pendientes Green Carbon (PDF, incluidos en el paquete de desarrollo).</footer>
+</div></body></html>
