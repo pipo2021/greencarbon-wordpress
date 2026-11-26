@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing tag to release (e.g. v1.3.2)
+        description: Tag to release (e.g. v1.3.2); created on the selected branch if missing
         required: true
 permissions:
   contents: write
@@ -19,8 +19,6 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.tag || github.ref }}
       - name: Build Docker image
         run: |
           V="${TAG#v}"
@@ -34,6 +32,6 @@ jobs:
           NOTES="docs/releases/$TAG.md"
           test -f "$NOTES"
           tail -n +3 "$NOTES" > notes.md
-          gh release create "$TAG" --title "$(head -1 "$NOTES")" --notes-file notes.md \
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "$(head -1 "$NOTES")" --notes-file notes.md \
             "greencarbon-wordpress-$V-amd64.tar.gz" "greencarbon-wordpress-$V.zip" \
             docs/Guia-Green-Carbon-WordPress.pdf docs/Pendientes-Green-Carbon.pdf
