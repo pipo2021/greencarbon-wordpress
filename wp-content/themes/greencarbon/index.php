@@ -7,8 +7,6 @@
 <title><?php gc_t("gen_titulo"); ?></title>
 <meta name="description" content="<?php gc_a("gen_descripcion"); ?>">
 <?php gc_hreflang(); ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@400;500&display=swap">
 <?php wp_head(); ?>
 </head>
 <body>
@@ -43,13 +41,13 @@
 </svg>
 
 <div id="loader" role="status" aria-live="polite">
-  <img src="<?php gc_u("cab_01"); ?>" alt="<?php gc_a("cab_02"); ?>" class="loader-logo">
+  <img src="<?php gc_u("cab_01"); ?>"<?php gc_medidas("cab_01", 503, 100); ?> alt="<?php gc_a("cab_02"); ?>" class="loader-logo" fetchpriority="high">
   <div class="barra"><i id="loader-barra"></i></div>
   <span id="loader-txt"><?php gc_t("js_cargando"); ?> · 0%</span>
 </div>
 
 <header class="cab" id="cab">
-  <a href="#top" class="marca" aria-label="<?php gc_a("cab_03"); ?>"><img src="<?php gc_u("cab_01"); ?>" alt="<?php gc_a("cab_04"); ?>"><span class="marca-pais"><?php gc_t("cab_05"); ?></span></a>
+  <a href="#top" class="marca" aria-label="<?php gc_a("cab_03"); ?>"><img src="<?php gc_u("cab_01"); ?>"<?php gc_medidas("cab_01", 503, 100); ?> alt="<?php gc_a("cab_04"); ?>"><span class="marca-pais"><?php gc_t("cab_05"); ?></span></a>
   <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav"><?php gc_t("js_menu"); ?></button>
   <ul class="nav" id="nav">
     <li><a href="#quienes"><?php gc_t("cab_06"); ?></a></li>
@@ -101,7 +99,7 @@
   <!-- 2 · Quiénes somos -->
   <section id="quienes" data-cuadro="120">
     <div class="cont mitad reveal">
-      <figure class="foto-vert item"><img src="<?php gc_u("s02_01"); ?>" alt="<?php gc_a("s02_02"); ?>" loading="lazy">
+      <figure class="foto-vert item"><img src="<?php gc_u("s02_01"); ?>"<?php gc_medidas("s02_01", 810, 1080); ?> alt="<?php gc_a("s02_02"); ?>" loading="lazy" decoding="async">
         <figcaption><span class="meta"><?php gc_t("s02_03"); ?></span><b><?php gc_t("s02_04"); ?></b></figcaption></figure>
       <div class="texto-aire">
         <div class="meta-fila"><span><?php gc_t("s02_05"); ?></span><span><?php gc_t("s02_06"); ?></span></div>
@@ -133,10 +131,10 @@
 
   <!-- 4 · Separador empresa → proyecto -->
   <section class="separador" data-cuadro="330">
-    <img src="<?php gc_u("s04_01"); ?>"<?php gc_srcset("s04_01", "assets/fotos/aerea-territorio-chica.webp 1200w, assets/fotos/aerea-territorio.webp 2400w"); ?> sizes="100vw" alt="<?php gc_a("s04_02"); ?>" loading="lazy" id="sep-img">
+    <img src="<?php gc_u("s04_01"); ?>"<?php gc_medidas("s04_01", 2400, 1350); ?><?php gc_srcset("s04_01", "assets/fotos/aerea-territorio-chica.webp 1200w, assets/fotos/aerea-territorio.webp 2400w"); ?> sizes="100vw" alt="<?php gc_a("s04_02"); ?>" loading="lazy" decoding="async" id="sep-img">
     <div class="cont reveal">
       <h2 class="item"><?php gc_t("s04_03"); ?></h2>
-      <p class="item"><?php gc_aviso("s04_04", "ssot", "Superficie exacta a validar · SSOT", "Exact area to be validated · SSOT"); ?></p>
+      <p class="item"><?php gc_t("s04_04"); ?></p>
       <div class="acciones item" style="justify-content:center"><a href="#proyecto" class="btn sec"><?php gc_t("s04_05"); ?> <svg class="i"><use href="#i-abajo"/></svg></a></div>
     </div>
   </section>
@@ -148,8 +146,8 @@
       <h2><?php gc_t("s05_02"); ?></h2>
       <div class="indicadores">
         <div class="indicador item"><div class="ind-cab"><span><?php gc_t("s05_03"); ?></span><svg class="i"><use href="#i-pin"/></svg></div><b><?php gc_t("s05_04"); ?></b><span><?php gc_t("s05_05"); ?></span></div>
-        <div class="indicador item"><div class="ind-cab"><span><?php gc_t("s05_06"); ?></span><?php gc_aviso("s05_07", "ssot", "SSOT", "SSOT"); ?></div><b class="dato-ssot"><?php gc_t("s05_08"); ?></b><span><?php gc_t("s05_09"); ?></span></div>
-        <div class="indicador item"><div class="ind-cab"><span><?php gc_t("s05_10"); ?></span><?php gc_aviso("s05_11", "ssot", "SSOT", "SSOT"); ?></div><b class="dato-ssot"><?php gc_t("s05_12"); ?></b><span><?php gc_t("s05_13"); ?></span></div>
+        <div class="indicador item"><div class="ind-cab"><span><?php gc_t("s05_06"); ?></span><svg class="i"><use href="#i-capas"/></svg></div><b><?php gc_t("s05_08"); ?></b><span><?php gc_t("s05_09"); ?></span></div>
+        <div class="indicador item"><div class="ind-cab"><span><?php gc_t("s05_10"); ?></span><svg class="i"><use href="#i-personas"/></svg></div><b><?php gc_t("s05_12"); ?></b><span><?php gc_t("s05_13"); ?></span></div>
         <div class="indicador item"><div class="ind-cab"><span><?php gc_t("s05_14"); ?></span><svg class="i"><use href="#i-doc"/></svg></div><b><?php gc_t("s05_15"); ?></b><span><?php gc_t("s05_16"); ?></span></div>
         <div class="indicador item"><div class="ind-cab"><span><?php gc_t("s05_17"); ?></span><svg class="i"><use href="#i-capas"/></svg></div><b><?php gc_t("s05_18"); ?></b><span><?php gc_t("s05_19"); ?></span></div>
       </div>
@@ -166,7 +164,7 @@
       <div class="mapa-wrap item">
         <div class="mapa" id="mapa-territorio">
           <div class="migas" aria-label="<?php gc_a("s06_04"); ?>"><span><?php gc_t("s06_05"); ?></span><span><?php gc_t("s06_06"); ?></span><span id="migas-territorio"><?php gc_t("s06_07"); ?></span></div>
-          <?php gc_mapa_img("s06_08", "s06_09"); ?>
+          <?php gc_mapa_img("s06_08", "s06_09"); ?><div class="mapa-vivo" id="mapa-vivo" role="img" aria-label="<?php gc_a("s06_09"); ?>"></div>
           <div class="mapa-vacio">
             <svg class="i"><use href="#i-capas"/></svg>
             <b><?php gc_t("s06_10"); ?></b>
@@ -174,6 +172,7 @@
             <?php gc_aviso("s06_12", "pend", "Falta imagen del mapa", "Map image missing"); ?>
           </div>
           <span class="mapa-fuente"><?php gc_t("s06_13"); ?></span>
+          <a class="btn pri mapa-gnw" href="<?php gc_u("s06_gnw"); ?>" data-lomerio="<?php gc_u("s06_gnw_l"); ?>" target="_blank" rel="noopener"><?php gc_t("s06_gnw_txt"); ?> <svg class="i"><use href="#i-ext"/></svg></a>
         </div>
         <div class="mapa-panel">
           <div class="tabs-t" role="tablist" aria-label="<?php gc_a("s06_14"); ?>">
@@ -182,10 +181,10 @@
           </div>
           <dl class="ficha">
             <div><dt><?php gc_t("s06_17"); ?></dt><dd id="t-nombre"><?php gc_t("s06_18"); ?></dd></div>
-            <div><dt><?php gc_t("s06_19"); ?></dt><dd><?php gc_aviso("s06_20", "ssot", "SSOT", "SSOT"); ?></dd></div>
-            <div><dt><?php gc_t("s06_21"); ?></dt><dd><?php gc_aviso("s06_22", "ssot", "SSOT", "SSOT"); ?></dd></div>
-            <div><dt><?php gc_t("s06_23"); ?></dt><dd><?php gc_aviso("s06_24", "ssot", "SSOT", "SSOT"); ?></dd></div>
-            <div><dt><?php gc_t("s06_25"); ?></dt><dd><?php gc_aviso("s06_26", "ssot", "SSOT", "SSOT"); ?></dd></div>
+            <div><dt><?php gc_t("s06_19"); ?></dt><dd><span data-t="Monte Verde"><?php gc_aviso("s06_20", "ssot", "SSOT", "SSOT"); ?></span><span data-t="Lomerío" hidden><?php gc_aviso("s06_20_l", "ssot", "SSOT", "SSOT"); ?></span></dd></div>
+            <div><dt><?php gc_t("s06_21"); ?></dt><dd><span data-t="Monte Verde"><?php gc_aviso("s06_22", "ssot", "SSOT", "SSOT"); ?></span><span data-t="Lomerío" hidden><?php gc_aviso("s06_22_l", "ssot", "SSOT", "SSOT"); ?></span></dd></div>
+            <div><dt><?php gc_t("s06_23"); ?></dt><dd><span data-t="Monte Verde"><?php gc_aviso("s06_24", "ssot", "SSOT", "SSOT"); ?></span><span data-t="Lomerío" hidden><?php gc_aviso("s06_24_l", "ssot", "SSOT", "SSOT"); ?></span></dd></div>
+            <div><dt><?php gc_t("s06_25"); ?></dt><dd><span data-t="Monte Verde"><?php gc_aviso("s06_26", "ssot", "SSOT", "SSOT"); ?></span><span data-t="Lomerío" hidden><?php gc_aviso("s06_26_l", "ssot", "SSOT", "SSOT"); ?></span></dd></div>
           </dl>
           <a href="#territorio" class="btn sec" style="justify-content:center"><?php gc_t("s06_27"); ?> <svg class="i"><use href="#i-flecha"/></svg></a>
         </div>
@@ -203,9 +202,9 @@
   <section class="calido" data-cuadro="640">
     <div class="cont reveal">
       <div class="tres-fotos">
-        <figure class="item"><div class="marco"><img src="<?php gc_u("s07_04"); ?>" alt="<?php gc_a("s07_05"); ?>" loading="lazy"></div><figcaption><?php gc_t("s07_06"); ?></figcaption></figure>
-        <figure class="item"><div class="marco"><img src="<?php gc_u("s07_07"); ?>" alt="<?php gc_a("s07_08"); ?>" loading="lazy"><?php gc_aviso("s07_09", "pend", "Falta foto de Lomerío", "Missing photo of Lomerío"); ?></div><figcaption><?php gc_t("s07_10"); ?></figcaption></figure>
-        <figure class="item"><div class="marco"><img src="<?php gc_u("s07_11"); ?>" alt="<?php gc_a("s07_12"); ?>" loading="lazy"></div><figcaption><?php gc_t("s07_13"); ?></figcaption></figure>
+        <figure class="item"><div class="marco"><img src="<?php gc_u("s07_04"); ?>"<?php gc_medidas("s07_04", 1600, 900); ?> alt="<?php gc_a("s07_05"); ?>" loading="lazy" decoding="async"></div><figcaption><?php gc_t("s07_06"); ?></figcaption></figure>
+        <figure class="item"><div class="marco"><img src="<?php gc_u("s07_07"); ?>"<?php gc_medidas("s07_07", 1600, 1200); ?> alt="<?php gc_a("s07_08"); ?>" loading="lazy" decoding="async"><?php gc_aviso("s07_09", "pend", "Falta foto de Lomerío", "Missing photo of Lomerío"); ?></div><figcaption><?php gc_t("s07_10"); ?></figcaption></figure>
+        <figure class="item"><div class="marco"><img src="<?php gc_u("s07_11"); ?>"<?php gc_medidas("s07_11", 1600, 900); ?> alt="<?php gc_a("s07_12"); ?>" loading="lazy" decoding="async"></div><figcaption><?php gc_t("s07_13"); ?></figcaption></figure>
       </div>
       <div class="acciones"><a href="#gobernanza" class="btn pri"><?php gc_t("s07_14"); ?> <svg class="i"><use href="#i-flecha"/></svg></a></div>
     </div>
@@ -255,9 +254,8 @@
       <h2><?php gc_t("s10_02"); ?></h2>
       <p class="lead" style="color:var(--mist-2)"><?php gc_t("s10_03"); ?></p>
       <div class="mapa centro-vista" id="mapa-monitoreo">
-        <figure class="vista" id="vista-monitoreo">
-          <img src="<?php gc_u("s10_04"); ?>" alt="<?php gc_a("s10_05"); ?>" loading="lazy">
-        </figure>
+        <iframe class="vista" id="vista-monitoreo" src="<?php echo esc_url( get_theme_file_uri( 'panel.html' ) ); ?>" title="<?php gc_a("s10_05"); ?>" loading="lazy"></iframe>
+        <a class="btn pri panel-abrir" href="<?php echo esc_url( get_theme_file_uri( 'panel.html' ) ); ?>" target="_blank" rel="noopener"><?php gc_t("s10_panel"); ?> <svg class="i"><use href="#i-ext"/></svg></a>
       </div>
       <p class="muted nota-centro"><?php gc_t("s10_06"); ?></p>
     </div>
@@ -274,7 +272,7 @@
           <p class="nota"><?php gc_t("s11_03"); ?></p>
           <?php gc_aviso("s11_04", "pend", "Se activa al definir privacidad y flujo interno", "Activates once privacy and internal workflow are defined"); ?>
         </div>
-        <a class="btn" role="link" aria-disabled="true"><?php gc_t("s11_05"); ?></a>
+        <span class="btn" aria-disabled="true"><?php gc_t("s11_05"); ?></span>
       </div>
     </div>
   </section>
@@ -286,10 +284,10 @@
       <h2 class="item"><?php gc_t("s12_02"); ?></h2>
       <div class="carrusel-nav item"><button type="button" data-mover="-1" aria-label="<?php gc_a("s12_03"); ?>"><svg class="i"><use href="#i-flecha"/></svg></button><button type="button" data-mover="1" aria-label="<?php gc_a("s12_04"); ?>"><svg class="i"><use href="#i-flecha"/></svg></button></div>
       <div class="carrusel" id="carrusel" tabindex="0" aria-label="<?php gc_a("s12_05"); ?>">
-        <article class="voz"><?php gc_retrato("s12_06"); ?><div class="voz-txt"><b><?php gc_t("s12_07"); ?></b><span><?php gc_t("s12_08"); ?></span><q><?php gc_t("s12_09"); ?></q><a class="btn sec" href="<?php gc_u("s12_10"); ?>" target="_blank" rel="noopener"><svg class="i"><use href="#i-play"/></svg><?php gc_t("s12_11"); ?></a></div></article>
-        <article class="voz"><?php gc_retrato("s12_12"); ?><div class="voz-txt"><b><?php gc_t("s12_13"); ?></b><span><?php gc_t("s12_14"); ?></span><q><?php gc_t("s12_15"); ?></q><a class="btn sec" href="<?php gc_u("s12_16"); ?>" target="_blank" rel="noopener"><svg class="i"><use href="#i-play"/></svg><?php gc_t("s12_17"); ?></a></div></article>
-        <article class="voz"><?php gc_retrato("s12_18"); ?><div class="voz-txt"><b><?php gc_t("s12_19"); ?></b><span><?php gc_t("s12_20"); ?></span><q><?php gc_t("s12_21"); ?></q><a class="btn sec" href="<?php gc_u("s12_22"); ?>" target="_blank" rel="noopener"><svg class="i"><use href="#i-play"/></svg><?php gc_t("s12_23"); ?></a></div></article>
-        <article class="voz"><?php gc_retrato("s12_24"); ?><div class="voz-txt"><b><?php gc_t("s12_25"); ?></b><span><?php gc_t("s12_26"); ?></span><q><?php gc_t("s12_27"); ?></q><a class="btn sec" href="<?php gc_u("s12_28"); ?>" target="_blank" rel="noopener"><svg class="i"><use href="#i-play"/></svg><?php gc_t("s12_29"); ?></a></div></article>
+        <article class="voz"><?php gc_retrato("s12_06"); ?><div class="voz-txt"><b><?php gc_t("s12_07"); ?></b><span><?php gc_t("s12_08"); ?></span><q><?php gc_t("s12_09"); ?></q><a class="btn sec voz-video" href="<?php gc_u("s12_10"); ?>" data-titulo="<?php gc_a("s12_07"); ?>" target="_blank" rel="noopener"><svg class="i"><use href="#i-play"/></svg><?php gc_t("s12_11"); ?></a></div></article>
+        <article class="voz"><?php gc_retrato("s12_12"); ?><div class="voz-txt"><b><?php gc_t("s12_13"); ?></b><span><?php gc_t("s12_14"); ?></span><q><?php gc_t("s12_15"); ?></q><a class="btn sec voz-video" href="<?php gc_u("s12_16"); ?>" data-titulo="<?php gc_a("s12_13"); ?>" target="_blank" rel="noopener"><svg class="i"><use href="#i-play"/></svg><?php gc_t("s12_17"); ?></a></div></article>
+        <article class="voz"><?php gc_retrato("s12_18"); ?><div class="voz-txt"><b><?php gc_t("s12_19"); ?></b><span><?php gc_t("s12_20"); ?></span><q><?php gc_t("s12_21"); ?></q><a class="btn sec voz-video" href="<?php gc_u("s12_22"); ?>" data-titulo="<?php gc_a("s12_19"); ?>" target="_blank" rel="noopener"><svg class="i"><use href="#i-play"/></svg><?php gc_t("s12_23"); ?></a></div></article>
+        <article class="voz"><?php gc_retrato("s12_24"); ?><div class="voz-txt"><b><?php gc_t("s12_25"); ?></b><span><?php gc_t("s12_26"); ?></span><q><?php gc_t("s12_27"); ?></q><a class="btn sec voz-video" href="<?php gc_u("s12_28"); ?>" data-titulo="<?php gc_a("s12_25"); ?>" target="_blank" rel="noopener"><svg class="i"><use href="#i-play"/></svg><?php gc_t("s12_29"); ?></a></div></article>
       </div>
     </div>
   </section>
@@ -321,7 +319,7 @@
       <em class="item"><?php gc_t("s14_04"); ?></em>
       <p class="item" style="color:var(--ink-2)"><?php gc_t("s14_05"); ?></p>
       <p class="item"><?php gc_aviso("s14_06", "pend", "Falta especie con evidencia territorial o fuente válida", "Missing species with territorial evidence or valid source"); ?></p>
-      <a class="btn sec item" aria-disabled="true"><?php gc_t("s14_07"); ?> <svg class="i"><use href="#i-flecha"/></svg></a>
+      <span class="btn sec item" aria-disabled="true"><?php gc_t("s14_07"); ?> <svg class="i"><use href="#i-flecha"/></svg></span>
     </div>
   </section>
 
@@ -338,7 +336,7 @@
         <li class="item"><?php gc_t("s15_08"); ?></li>
       </ol>
       <div class="clima-grid">
-        <figure class="item"><img src="<?php gc_u("s15_09"); ?>" alt="<?php gc_a("s15_10"); ?>" loading="lazy"></figure>
+        <figure class="item"><img src="<?php gc_u("s15_09"); ?>"<?php gc_medidas("s15_09", 1600, 1200); ?> alt="<?php gc_a("s15_10"); ?>" loading="lazy" decoding="async"></figure>
         <div class="ficha-tec item">
           <p class="eyebrow"><?php gc_t("s15_11"); ?></p>
           <dl class="ficha">
@@ -365,10 +363,10 @@
         <button type="button" aria-pressed="false" data-cat="monitoreo"><?php gc_t("s17_08"); ?></button>
       </div>
       <div class="editorial">
-        <div class="pieza grande item" data-cat="comunidades"><img src="<?php gc_u("s17_09"); ?>" alt="<?php gc_a("s17_10"); ?>" loading="lazy"><div class="pie"><span><?php gc_t("s17_11"); ?></span><b><?php gc_t("s17_12"); ?></b></div></div>
+        <div class="pieza grande item" data-cat="comunidades"><img src="<?php gc_u("s17_09"); ?>"<?php gc_medidas("s17_09", 900, 543); ?> alt="<?php gc_a("s17_10"); ?>" loading="lazy" decoding="async"><div class="pie"><span><?php gc_t("s17_11"); ?></span><b><?php gc_t("s17_12"); ?></b></div></div>
         <div class="pieza item" data-cat="monitoreo"><video src="<?php gc_u("s17_13"); ?>" poster="<?php gc_u("s17_14"); ?>" muted loop playsinline preload="none" aria-label="<?php gc_a("s17_15"); ?>"></video><span class="play"><svg class="i"><use href="#i-play"/></svg></span><div class="pie"><span><?php gc_t("s17_16"); ?></span><b><?php gc_t("s17_17"); ?></b></div></div>
-        <div class="pieza item" data-cat="comunidades"><img src="<?php gc_u("s17_18"); ?>" alt="<?php gc_a("s17_19"); ?>" loading="lazy"><div class="pie"><span><?php gc_t("s17_20"); ?></span><b><?php gc_t("s17_21"); ?></b></div></div>
-        <div class="pieza item" data-cat="territorio bosque"><img src="<?php gc_u("s17_22"); ?>" alt="<?php gc_a("s17_23"); ?>" loading="lazy"><div class="pie"><span><?php gc_t("s17_24"); ?></span><b><?php gc_t("s17_25"); ?></b></div></div>
+        <div class="pieza item" data-cat="comunidades"><img src="<?php gc_u("s17_18"); ?>"<?php gc_medidas("s17_18", 900, 541); ?> alt="<?php gc_a("s17_19"); ?>" loading="lazy" decoding="async"><div class="pie"><span><?php gc_t("s17_20"); ?></span><b><?php gc_t("s17_21"); ?></b></div></div>
+        <div class="pieza item" data-cat="territorio bosque"><img src="<?php gc_u("s17_22"); ?>"<?php gc_medidas("s17_22", 900, 701); ?> alt="<?php gc_a("s17_23"); ?>" loading="lazy" decoding="async"><div class="pie"><span><?php gc_t("s17_24"); ?></span><b><?php gc_t("s17_25"); ?></b></div></div>
         <div class="pieza noticia item" data-cat="territorio comunidades bosque monitoreo"><?php gc_aviso("s17_26", "pend", "Falta noticia · responsable editorial y frecuencia", "Missing news item · editorial owner and frequency"); ?><div class="pie"><span><?php gc_t("s17_27"); ?></span><b><?php gc_t("s17_28"); ?></b></div></div>
       </div>
     </div>
@@ -382,12 +380,13 @@
           <p class="eyebrow"><?php gc_t("s18_01"); ?></p>
           <h2><em><?php gc_t("s18_02"); ?></em></h2>
           <ul class="datos-contacto">
-            <li><svg class="i"><use href="#i-ubicacion"/></svg><span><?php gc_t("s18_03"); ?></span><?php gc_aviso("s18_04", "pend", "Falta", "Missing"); ?></li>
-            <li><svg class="i"><use href="#i-correo"/></svg><span><?php gc_t("s18_05"); ?></span><?php gc_aviso("s18_06", "pend", "Falta", "Missing"); ?></li>
-            <li><svg class="i"><use href="#i-tel"/></svg><span><?php gc_t("s18_07"); ?></span><?php gc_aviso("s18_08", "pend", "Falta", "Missing"); ?></li>
+            <li><svg class="i"><use href="#i-ubicacion"/></svg><span><?php gc_t("s18_03"); ?></span><span class="dato"><?php gc_aviso("s18_04", "pend", "Falta", "Missing"); ?></span></li>
+            <li><svg class="i"><use href="#i-correo"/></svg><span><?php gc_t("s18_05"); ?></span><span class="dato"><?php gc_aviso("s18_06", "pend", "Falta", "Missing"); ?></span></li>
+            <li><svg class="i"><use href="#i-tel"/></svg><span><?php gc_t("s18_07"); ?></span><span class="dato"><?php gc_aviso("s18_08", "pend", "Falta", "Missing"); ?></span></li>
           </ul>
         </div>
-        <form id="contacto-form" class="form item" action="<?php gc_u("s18_09"); ?>" method="POST" novalidate>
+        <form id="contacto-form" class="form item" action="<?php echo esc_url( gc_valor( 's18_09' ) ?: rest_url( 'gc/v1/contacto' ) ); ?>" method="POST" novalidate>
+          <div class="trampa" aria-hidden="true"><label>Web <input name="web" tabindex="-1" autocomplete="off"></label></div>
           <div class="campo"><label for="f-nombre"><?php gc_t("s18_10"); ?></label><input id="f-nombre" name="nombre" required autocomplete="name"></div>
           <div class="campo"><label for="f-org"><?php gc_t("s18_11"); ?></label><input id="f-org" name="organizacion" autocomplete="organization"></div>
           <div class="campo"><label for="f-cargo"><?php gc_t("s18_12"); ?></label><input id="f-cargo" name="cargo" autocomplete="organization-title"></div>
@@ -397,8 +396,7 @@
             <select id="f-motivo" name="motivo"><option value=""><?php gc_t("s18_16"); ?></option><option><?php gc_t("s18_17"); ?></option><option><?php gc_t("s18_18"); ?></option><option><?php gc_t("s18_19"); ?></option><option><?php gc_t("s18_20"); ?></option></select>
           </div>
           <div class="campo ancho"><label for="f-msg"><?php gc_t("s18_21"); ?></label><textarea id="f-msg" name="mensaje" rows="5" required></textarea></div>
-          <div class="campo ancho"><label for="f-adj"><?php gc_t("s18_22"); ?> <?php gc_aviso("s18_23", "pend", "Requiere servicio con adjuntos", "Requires a service with attachments"); ?></label><input id="f-adj" type="file" disabled></div>
-          <label class="consent"><input type="checkbox" id="f-consent" name="consentimiento" value="sí" required><span><?php gc_t("s18_24"); ?> <?php gc_aviso("s18_25", "pend", "Falta texto de privacidad", "Missing privacy text"); ?></span></label>
+          <label class="consent"><input type="checkbox" id="f-consent" name="consentimiento" value="sí" required><span><?php gc_t("s18_24"); ?></span></label>
           <button type="submit" class="btn pri"><?php gc_t("s18_26"); ?> <svg class="i"><use href="#i-flecha"/></svg></button>
           <p class="form-estado" id="form-estado" role="status" aria-live="polite"></p>
         </form>
@@ -437,7 +435,7 @@
         </ul>
       </div>
     </div>
-    <p class="pie-gigante" aria-hidden="true"><?php gc_t("pie_24"); ?></p>
+    <p class="pie-gigante" aria-hidden="true" data-texto="<?php gc_a("pie_24"); ?>"></p>
     <div class="pie-abajo"><?php gc_t("pie_25"); ?></div>
   </div>
 </footer>

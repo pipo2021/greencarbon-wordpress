@@ -9,6 +9,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+const GC_RECORRIDO_V = '7'; // sube al cambiar pack/v: invalida la caché del recorrido
+
 const GC_INLINE = array(
 	'em'     => array(),
 	'strong' => array(),
@@ -93,6 +95,7 @@ function gc_hreflang() {
 	foreach ( array( 'es', 'en' ) as $l ) {
 		printf( '<link rel="alternate" hreflang="%s" href="%s">' . "\n", $l, esc_url( gc_url_idioma( $l ) ) );
 	}
+	printf( '<link rel="alternate" hreflang="x-default" href="%s">' . "\n", esc_url( gc_url_idioma( 'es' ) ) );
 }
 
 function gc_t( $k ) {
@@ -149,10 +152,19 @@ function gc_mapa_img( $k, $k_alt ) {
 	}
 }
 
+/** Ancho y alto solo mientras la imagen sea la predeterminada (evita saltos de diseño). */
+function gc_medidas( $k, $w, $h ) {
+	if ( gc_valor( $k ) === gc_defecto( $k ) ) {
+		printf( ' width="%d" height="%d"', $w, $h );
+	}
+}
+
 function gc_retrato( $k ) {
 	$v = gc_valor( $k );
+	ob_start();
+	gc_medidas( $k, 640, 800 );
 	echo '<div class="retrato">' . ( $v
-		? '<img src="' . esc_url( $v ) . '" alt="" loading="lazy">'
+		? '<img src="' . esc_url( $v ) . '"' . ob_get_clean() . ' alt="" loading="lazy" decoding="async">'
 		: '<svg class="i"><use href="#i-retrato"/></svg>' ) . '</div>';
 }
 
@@ -161,6 +173,19 @@ function gc_oculto( $k ) {
 		echo ' hidden';
 	}
 }
+
+// ?privacidad muestra el Aviso de Privacidad que enlaza la casilla de consentimiento del formulario.
+add_action(
+	'template_redirect',
+	function () {
+		if ( ! isset( $_GET['privacidad'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			return;
+		}
+		add_action( 'wp_enqueue_scripts', fn() => wp_dequeue_script( 'greencarbon' ), 20 ); // main.js espera la portada
+		include __DIR__ . '/privacidad.php';
+		exit;
+	}
+);
 
 add_filter( 'show_admin_bar', '__return_false' ); // la barra tapa la cabecera fija del diseño
 
@@ -196,6 +221,7 @@ add_action(
 		wp_enqueue_script( 'greencarbon', get_theme_file_uri( 'js/main.js' ), array(), $v, true );
 		$gc = array(
 			'tema'    => untrailingslashit( get_template_directory_uri() ),
+			'v'       => GC_RECORRIDO_V,
 			'enlaces' => array(
 				'mapas'     => gc_valor( 'enlace_mapas' ),
 				'incendios' => gc_valor( 'enlace_incendios' ),
@@ -297,3 +323,153 @@ function gc_limpiar_opacidad( $v ) {
 function gc_limpiar_texto( $v ) {
 	return wp_kses( $v, GC_INLINE );
 }
+
+// Precargas, canónica, Open Graph, Twitter y JSON-LD (antes que los estilos del núcleo).
+add_action(
+	'wp_head',
+	function () {
+		$t   = fn( $f ) => esc_url( get_theme_file_uri( $f ) );
+		$en  = 'en' === gc_lang();
+		$url = gc_url_idioma( gc_lang() );
+		$tit = wp_strip_all_tags( gc_valor( 'gen_titulo' ) );
+		$des = wp_strip_all_tags( gc_valor( 'gen_descripcion' ) );
+		$img = get_theme_file_uri( 'assets/compartir.jpg' );
+		foreach ( array( 'inter-tight-latin', 'inter-latin' ) as $f ) {
+			echo '<link rel="preload" href="' . $t( "fonts/$f.woff2" ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+		}
+		echo '<link rel="preload" href="' . $t( 'assets/logo-white.webp' ) . '" as="image" fetchpriority="high">' . "\n";
+		echo '<link rel="preload" href="' . $t( 'pack/v/manifest.json' ) . '?v=' . GC_RECORRIDO_V . '" as="fetch" crossorigin media="(max-aspect-ratio: 1/1)">' . "\n";
+		echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
+		echo '<meta name="theme-color" content="#0a1712">' . "\n";
+		$meta = array(
+			'og:type'             => 'website',
+			'og:site_name'        => 'Green Carbon Bolivia',
+			'og:title'            => $tit,
+			'og:description'      => $des,
+			'og:url'              => $url,
+			'og:locale'           => $en ? 'en_US' : 'es_LA',
+			'og:locale:alternate' => $en ? 'es_LA' : 'en_US',
+			'og:image'            => $img,
+			'og:image:width'      => '1200',
+			'og:image:height'     => '630',
+			'og:image:alt'        => wp_strip_all_tags( gc_valor( 's04_02' ) ),
+		);
+		foreach ( $meta as $p => $c ) {
+			echo '<meta property="' . $p . '" content="' . esc_attr( $c ) . '">' . "\n";
+		}
+		foreach ( array( 'card' => 'summary_large_image', 'title' => $tit, 'description' => $des, 'image' => $img ) as $n => $c ) {
+			echo '<meta name="twitter:' . $n . '" content="' . esc_attr( $c ) . '">' . "\n";
+		}
+		$home   = gc_url_idioma( 'es' );
+		$correo = 'info@greencarbonbolivia.com';
+		$ld     = array(
+			'@context' => 'https://schema.org',
+			'@graph'   => array(
+				array(
+					'@type'        => 'Organization',
+					'@id'          => $home . '#organizacion',
+					'name'         => 'Green Carbon Bolivia',
+					'url'          => $home,
+					'description'  => $des,
+					'logo'         => get_theme_file_uri( 'apple-touch-icon.png' ),
+					'sameAs'       => array_values( array_filter( array( gc_valor( 'pie_18' ), gc_valor( 'pie_20' ), gc_valor( 'pie_22' ) ) ) ),
+					'email'        => $correo,
+					'address'      => array(
+						'@type'           => 'PostalAddress',
+						'streetAddress'   => 'Edificio Manzana 40, piso 17, oficina 1710',
+						'addressLocality' => 'Santa Cruz de la Sierra',
+						'addressCountry'  => 'BO',
+					),
+					'contactPoint' => array(
+						array(
+							'@type'             => 'ContactPoint',
+							'contactType'       => 'customer support',
+							'telephone'         => '+591-75005342',
+							'email'             => $correo,
+							'areaServed'        => 'BO',
+							'availableLanguage' => array( 'es', 'en' ),
+						),
+					),
+				),
+				array(
+					'@type'      => 'WebSite',
+					'@id'        => $home . '#sitio',
+					'url'        => $home,
+					'name'       => 'Green Carbon Bolivia',
+					'inLanguage' => array( 'es', 'en' ),
+					'publisher'  => array( '@id' => $home . '#organizacion' ),
+				),
+				array(
+					'@type'              => 'WebPage',
+					'@id'                => $url . '#pagina',
+					'url'                => $url,
+					'name'               => $tit,
+					'description'        => $des,
+					'inLanguage'         => $en ? 'en' : 'es',
+					'isPartOf'           => array( '@id' => $home . '#sitio' ),
+					'about'              => array( '@id' => $home . '#organizacion' ),
+					'primaryImageOfPage' => array(
+						'@type' => 'ImageObject',
+						'url'   => $img,
+					),
+				),
+			),
+		);
+		echo '<script type="application/ld+json">' . wp_json_encode( $ld, JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+		echo '<link rel="icon" href="' . $t( 'favicon.ico' ) . '" sizes="32x32">' . "\n";
+		echo '<link rel="apple-touch-icon" href="' . $t( 'apple-touch-icon.png' ) . '">' . "\n";
+	},
+	2
+);
+
+/** Valida el envío del formulario. Devuelve los datos limpios o null. */
+function gc_contacto_datos( array $p ) {
+	if ( ! empty( $p['web'] ) ) {
+		return array(); // trampa para bots: se responde ok sin enviar
+	}
+	$d = array(
+		'nombre'  => sanitize_text_field( $p['nombre'] ?? '' ),
+		'correo'  => sanitize_email( $p['correo'] ?? '' ),
+		'mensaje' => sanitize_textarea_field( $p['mensaje'] ?? '' ),
+	);
+	if ( '' === $d['nombre'] || ! is_email( $d['correo'] ) || '' === $d['mensaje'] || empty( $p['consentimiento'] ) ) {
+		return null;
+	}
+	foreach ( $p as $k => $v ) {
+		if ( is_scalar( $v ) && ! isset( $d[ $k ] ) && ! in_array( $k, array( 'web', 'consentimiento' ), true ) ) {
+			$d[ sanitize_key( $k ) ] = sanitize_text_field( (string) $v );
+		}
+	}
+	return $d;
+}
+
+// Sin servicio externo (s18_09 vacío), el formulario envía aquí y WordPress manda el correo.
+add_action(
+	'rest_api_init',
+	function () {
+		register_rest_route(
+			'gc/v1',
+			'/contacto',
+			array(
+				'methods'             => 'POST',
+				'permission_callback' => '__return_true',
+				'callback'            => function ( WP_REST_Request $req ) {
+					$d = gc_contacto_datos( (array) ( $req->get_json_params() ?: $req->get_body_params() ) );
+					if ( null === $d ) {
+						return new WP_REST_Response( array( 'ok' => false ), 400 );
+					}
+					if ( ! $d ) {
+						return new WP_REST_Response( array( 'ok' => true ), 200 );
+					}
+					$para = sanitize_email( wp_strip_all_tags( gc_valor_es( 's18_06' ) ) ) ?: get_option( 'admin_email' );
+					$txt  = '';
+					foreach ( $d as $k => $v ) {
+						$txt .= ucfirst( $k ) . ': ' . $v . "\n";
+					}
+					$ok = wp_mail( $para, 'Contacto web: ' . $d['nombre'], $txt, array( 'Reply-To: ' . $d['nombre'] . ' <' . $d['correo'] . '>' ) );
+					return new WP_REST_Response( array( 'ok' => $ok ), $ok ? 200 : 500 );
+				},
+			)
+		);
+	}
+);
