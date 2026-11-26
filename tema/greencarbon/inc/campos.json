@@ -20,7 +20,7 @@
    "enlace_mapas": {
     "tipo": "url",
     "etiqueta": "Enlace de los mapas interactivos",
-    "defecto": "",
+    "defecto": "https://globalnaturewatch.org/map/aoi/6adf4aa18fb9070015b598a8/?mainMap=eyJzaG93QmFzZW1hcHMiOnRydWUsInNob3dBbmFseXNpcyI6dHJ1ZX0%3D&map=eyJjZW50ZXIiOnsibGF0IjotMTUuNTc4MDgzMDI3MDk2Nzg2LCJsbmciOi02Mi4wODQ0OTM2MDQ0NzEyNX0sInpvb20iOjguNTY1MDk2MzYzNDYzMzk3LCJjYW5Cb3VuZCI6ZmFsc2V9",
     "desc": "Opcional, para más adelante: si se completa, reemplaza la imagen estática del mapa por un iframe. El sitio enlazado tiene que permitir ser embebido."
    },
    "enlace_incendios": {
@@ -517,9 +517,9 @@
    "s04_04": {
     "tipo": "texto",
     "etiqueta": "Aviso «Superficie exacta a validar · SSOT»",
-    "defecto": "",
+    "defecto": "1.133.035 ha en los territorios indígenas de Monte Verde y Lomerío.",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "1,133,035 ha in the Indigenous territories of Monte Verde and Lomerío."
    },
    "s04_05": {
     "tipo": "texto",
@@ -579,9 +579,9 @@
    "s05_07": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT»",
-    "defecto": "",
+    "defecto": "PDMR 2026",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "PDMR 2026"
    },
    "s05_08": {
     "tipo": "texto",
@@ -607,9 +607,9 @@
    "s05_11": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT»",
-    "defecto": "",
+    "defecto": "PDMR 2026",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "PDMR 2026"
    },
    "s05_12": {
     "tipo": "texto",
@@ -808,16 +808,23 @@
    "s06_19": {
     "tipo": "texto",
     "etiqueta": "Rótulo: Superficie",
-    "defecto": "Superficie",
+    "defecto": "Superficie titulada",
     "desc": "",
-    "en": "Area"
+    "en": "Titled area"
    },
    "s06_20": {
     "tipo": "texto",
-    "etiqueta": "Aviso «SSOT»",
-    "defecto": "",
+    "etiqueta": "Aviso «SSOT» · Monte Verde",
+    "defecto": "Aprox. 947.441 ha",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "Approx. 947,441 ha"
+   },
+   "s06_20_l": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT» · Lomerío",
+    "defecto": "Aprox. 259.189 ha",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
+    "en": "Approx. 259,189 ha"
    },
    "s06_21": {
     "tipo": "texto",
@@ -828,10 +835,17 @@
    },
    "s06_22": {
     "tipo": "texto",
-    "etiqueta": "Aviso «SSOT»",
-    "defecto": "",
+    "etiqueta": "Aviso «SSOT» · Monte Verde",
+    "defecto": "53",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "53"
+   },
+   "s06_22_l": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT» · Lomerío",
+    "defecto": "29",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
+    "en": "29"
    },
    "s06_23": {
     "tipo": "texto",
@@ -842,7 +856,14 @@
    },
    "s06_24": {
     "tipo": "texto",
-    "etiqueta": "Aviso «SSOT»",
+    "etiqueta": "Aviso «SSOT» · Monte Verde",
+    "defecto": "",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
+    "en": ""
+   },
+   "s06_24_l": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT» · Lomerío",
     "defecto": "",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
@@ -856,10 +877,17 @@
    },
    "s06_26": {
     "tipo": "texto",
-    "etiqueta": "Aviso «SSOT»",
-    "defecto": "",
+    "etiqueta": "Aviso «SSOT» · Monte Verde",
+    "defecto": "Central Indígena de Comunidades de Concepción (CICC), Central Indígena Paikoneka de San Javier (CIP-SJ) y Central Indígena de Comunidades Originarias de Lomerío (CICOL)",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "Central Indígena de Comunidades de Concepción (CICC), Central Indígena Paikoneka de San Javier (CIP-SJ) and Central Indígena de Comunidades Originarias de Lomerío (CICOL)"
+   },
+   "s06_26_l": {
+    "tipo": "texto",
+    "etiqueta": "Aviso «SSOT» · Lomerío",
+    "defecto": "Central Indígena de Comunidades Originarias de Lomerío (CICOL)",
+    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
+    "en": "Central Indígena de Comunidades Originarias de Lomerío (CICOL)"
    },
    "s06_27": {
     "tipo": "texto",
@@ -1565,9 +1593,9 @@
    "s13_08": {
     "tipo": "texto",
     "etiqueta": "Texto: XX",
-    "defecto": "XX",
+    "defecto": "102.612",
     "desc": "",
-    "en": "XX"
+    "en": "102,612"
    },
    "s13_09": {
     "tipo": "texto",
@@ -1579,72 +1607,72 @@
    "s13_10": {
     "tipo": "texto",
     "etiqueta": "Párrafo: Período: a definir ·",
-    "defecto": "Período: a definir ·",
+    "defecto": "Período: 1 ene 2018 – 30 sep 2022 ·",
     "desc": "",
-    "en": "Period: to be defined ·"
+    "en": "Period: 1 Jan 2018 – 30 Sep 2022 ·"
    },
    "s13_11": {
     "tipo": "texto",
     "etiqueta": "Aviso «Solo cifras respaldadas · SSOT»",
-    "defecto": "",
+    "defecto": "Fuente: PDMR",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "Source: PDMR"
    },
    "s13_12": {
     "tipo": "texto",
     "etiqueta": "Texto: XX",
-    "defecto": "XX",
+    "defecto": "1.170",
     "desc": "",
-    "en": "XX"
+    "en": "1,170"
    },
    "s13_13": {
     "tipo": "texto",
     "etiqueta": "Texto chico: personas capacitadas",
-    "defecto": "personas capacitadas",
+    "defecto": "participaciones en capacitaciones",
     "desc": "",
-    "en": "trained people"
+    "en": "training participations"
    },
    "s13_14": {
     "tipo": "texto",
     "etiqueta": "Párrafo: Período: a definir ·",
-    "defecto": "Período: a definir ·",
+    "defecto": "Período: 1 ene 2018 – 30 sep 2022 ·",
     "desc": "",
-    "en": "Period: to be defined ·"
+    "en": "Period: 1 Jan 2018 – 30 Sep 2022 ·"
    },
    "s13_15": {
     "tipo": "texto",
     "etiqueta": "Aviso «Solo cifras respaldadas · SSOT»",
-    "defecto": "",
+    "defecto": "Fuente: PDMR",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "Source: PDMR"
    },
    "s13_16": {
     "tipo": "texto",
     "etiqueta": "Texto: XX",
-    "defecto": "XX",
+    "defecto": "16",
     "desc": "",
-    "en": "XX"
+    "en": "16"
    },
    "s13_17": {
     "tipo": "texto",
     "etiqueta": "Texto chico: acciones de monitoreo",
-    "defecto": "acciones de monitoreo",
+    "defecto": "monitores comunitarios",
     "desc": "",
-    "en": "monitoring actions"
+    "en": "community monitors"
    },
    "s13_18": {
     "tipo": "texto",
     "etiqueta": "Párrafo: Período: a definir ·",
-    "defecto": "Período: a definir ·",
+    "defecto": "Período: 1 ene 2018 – 30 sep 2022 ·",
     "desc": "",
-    "en": "Period: to be defined ·"
+    "en": "Period: 1 Jan 2018 – 30 Sep 2022 ·"
    },
    "s13_19": {
     "tipo": "texto",
     "etiqueta": "Aviso «Solo cifras respaldadas · SSOT»",
-    "defecto": "",
+    "defecto": "Fuente: PDMR",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "Source: PDMR"
    },
    "s13_20": {
     "tipo": "texto",
@@ -1696,30 +1724,30 @@
    "s14_03": {
     "tipo": "texto",
     "etiqueta": "Título: Nombre común",
-    "defecto": "Nombre común",
+    "defecto": "Jaguar",
     "desc": "",
-    "en": "Common name"
+    "en": "Jaguar"
    },
    "s14_04": {
     "tipo": "texto",
     "etiqueta": "Resaltado: Nombre científico",
-    "defecto": "Nombre científico",
+    "defecto": "Panthera onca",
     "desc": "",
-    "en": "Scientific name"
+    "en": "Panthera onca"
    },
    "s14_05": {
     "tipo": "texto",
     "etiqueta": "Párrafo: Descripción breve de la especie.",
-    "defecto": "Descripción breve de la especie.",
+    "defecto": "Felino silvestre nativo de la Chiquitanía, registrado en el inventario de fauna del Plan de Vida de Lomerío y citado en el PDMR.",
     "desc": "",
-    "en": "Brief description of the species."
+    "en": "Wild feline native to the Chiquitanía, recorded in the fauna inventory of the Lomerío Life Plan and cited in the PDMR."
    },
    "s14_06": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta especie con evidencia territorial…»",
-    "defecto": "",
+    "defecto": "Fuente: PDMR, pp. 55–56",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "Source: PDMR, pp. 55–56"
    },
    "s14_07": {
     "tipo": "texto",
@@ -2044,9 +2072,9 @@
    "s17_26": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta noticia · responsable editorial y…»",
-    "defecto": "",
+    "defecto": "En coordinación con representantes de Monte Verde y Lomerío, los monitores comunitarios realizan patrullajes y recorridos de campo para identificar indicios de incendios, desmontes y otras amenazas al bosque. El trabajo combina observación en terreno, drones y mapas digitales para orientar los recorridos y documentar los hallazgos.",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "In coordination with representatives of Monte Verde and Lomerío, community monitors carry out patrols and field visits to detect signs of fires, clearing and other threats to the forest. The work combines on-the-ground observation, drones and digital maps to guide the patrols and document findings."
    },
    "s17_27": {
     "tipo": "texto",
@@ -2058,9 +2086,9 @@
    "s17_28": {
     "tipo": "texto",
     "etiqueta": "Destacado: Titular de la nota",
-    "defecto": "Titular de la nota",
+    "defecto": "Monitoreo comunitario para proteger los bosques de Monte Verde y Lomerío",
     "desc": "",
-    "en": "News headline"
+    "en": "Community monitoring to protect the forests of Monte Verde and Lomerío"
    }
   }
  },
@@ -2092,9 +2120,9 @@
    "s18_04": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta»",
-    "defecto": "",
+    "defecto": "Oficina central: Edificio Manzana 40, piso 17, oficina 1710, Santa Cruz de la Sierra<br>Oficina administrativa: Calle Gualberto Villarroel N.º 300, Santa Cruz de la Sierra<br>Oficina operativa: Zona 4, calle Guarayo s/n, Concepción",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "Head office: Edificio Manzana 40, 17th floor, office 1710, Santa Cruz de la Sierra<br>Administrative office: Calle Gualberto Villarroel No. 300, Santa Cruz de la Sierra<br>Field office: Zona 4, calle Guarayo s/n, Concepción"
    },
    "s18_05": {
     "tipo": "texto",
@@ -2106,7 +2134,7 @@
    "s18_06": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta»",
-    "defecto": "",
+    "defecto": "<a href=\"mailto:info@greencarbonbolivia.com\">info@greencarbonbolivia.com</a>",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },
@@ -2120,9 +2148,9 @@
    "s18_08": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta»",
-    "defecto": "",
+    "defecto": "<a href=\"tel:+59175005342\">+591 75005342</a> (administrativa)<br><a href=\"tel:+59162223306\">+591 62223306</a> (operativa, Concepción)",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "<a href=\"tel:+59175005342\">+591 75005342</a> (administrative)<br><a href=\"tel:+59162223306\">+591 62223306</a> (field office, Concepción)"
    },
    "s18_09": {
     "tipo": "url",
@@ -2214,33 +2242,12 @@
     "desc": "",
     "en": "Message *"
    },
-   "s18_22": {
-    "tipo": "texto",
-    "etiqueta": "Etiqueta del formulario: Adjunto opcional",
-    "defecto": "Adjunto opcional",
-    "desc": "",
-    "en": "Optional attachment"
-   },
-   "s18_23": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «Requiere servicio con adjuntos»",
-    "defecto": "",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
-   },
    "s18_24": {
     "tipo": "parrafo",
     "etiqueta": "Texto: Acepto que Green Carbon Bolivia use estos datos…",
-    "defecto": "Acepto que Green Carbon Bolivia use estos datos para responder mi consulta.",
+    "defecto": "He leído el <a href=\"?privacidad\" target=\"_blank\">Aviso de Privacidad</a> y doy mi consentimiento expreso para que Green Carbon Bolivia S.R.L. trate los datos personales que envío a fin de atender y dar seguimiento a mi consulta, conforme a las condiciones de dicho Aviso.",
     "desc": "",
-    "en": "I agree that Green Carbon Bolivia may use this data to respond to my inquiry."
-   },
-   "s18_25": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «Falta texto de privacidad»",
-    "defecto": "",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "I have read the <a href=\"?privacidad\" target=\"_blank\">Privacy Notice</a> (in Spanish) and expressly consent to Green Carbon Bolivia S.R.L. processing the personal data I submit in order to handle and follow up on my inquiry, under the terms of that Notice."
    },
    "s18_26": {
     "tipo": "texto",
@@ -2293,7 +2300,7 @@
    "pie_03": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta»",
-    "defecto": "",
+    "defecto": "Edificio Manzana 40, piso 17, of. 1710, Santa Cruz de la Sierra",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },
@@ -2307,7 +2314,7 @@
    "pie_05": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta»",
-    "defecto": "",
+    "defecto": "<a href=\"mailto:info@greencarbonbolivia.com\">info@greencarbonbolivia.com</a>",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },
@@ -2321,7 +2328,7 @@
    "pie_07": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta»",
-    "defecto": "",
+    "defecto": "<a href=\"tel:+59175005342\">+591 75005342</a>",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
     "en": ""
    },

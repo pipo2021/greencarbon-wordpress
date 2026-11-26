@@ -20,11 +20,11 @@ La primera vez, antes de arrancar Apache, el contenedor instala WordPress en esp
 
 `GC_URL` se guarda en la base en la primera instalación. Para cambiar de dominio después: `docker compose exec wordpress wp --allow-root search-replace 'http://viejo' 'https://nuevo'`.
 
-Con la imagen ya construida (`greencarbon-wordpress-1.2.3-amd64.tar.gz`, para servidores x86) no hace falta reconstruir:
+Con la imagen ya construida (`greencarbon-wordpress-1.2.4-amd64.tar.gz`, para servidores x86) no hace falta reconstruir:
 
 ```bash
-docker load -i greencarbon-wordpress-1.2.3-amd64.tar.gz
-docker tag greencarbon-wordpress:1.2.3-amd64 greencarbon-wordpress:1.2.3
+docker load -i greencarbon-wordpress-1.2.4-amd64.tar.gz
+docker tag greencarbon-wordpress:1.2.4-amd64 greencarbon-wordpress:1.2.4
 docker compose up -d --no-build
 ```
 
@@ -78,4 +78,8 @@ Dockerfile, docker-compose.yml
 
 ## Pendientes del cliente (se cargan desde el panel cuando lleguen)
 
-Enlaces de mapas y de monitoreo de incendios (el dashboard actual vive en claude.ai, que no deja embeberse), foto de Lomerío, especie de biodiversidad, cifras de impacto, dirección, correo y teléfono, destino del Canal de Integridad, texto de privacidad y confirmar si los datos del centro de monitoreo son en vivo. La traducción al inglés no está incluida: el sitio es solo en español.
+Ya cargados por defecto en 1.2.4 (respuestas del cliente, fuente PDMR): contacto, cifras, ficha por territorio, impacto (salvo prevención/respuesta), jaguar, primera noticia, mapa de Global Nature Watch, texto de consentimiento y Aviso de Privacidad (`?privacidad`, solo en español). Se quitó el adjunto del formulario.
+
+Siguen pendientes: foto de Lomerío, foto del jaguar con autoría y permiso, cobertura forestal por territorio, cifra de prevención/respuesta, enlace a datos de monitoreo, dirección propia del dashboard de incendios, destino del Canal de Integridad y flujo de «Reportar una alerta». El sitio tiene versión en inglés (`?lang=en`); cada texto nuevo lleva su campo EN.
+
+Ojo: si el panel ya tiene guardado un campo, ese valor manda sobre el predeterminado nuevo; para ver el dato de 1.2.4 hay que vaciar el campo en el Personalizador.

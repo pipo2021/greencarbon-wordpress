@@ -67,6 +67,7 @@
     document.querySelectorAll('[data-territorio]').forEach(o => o.setAttribute('aria-selected', String(o === b)));
     document.getElementById('t-nombre').textContent = 'TIOC ' + b.dataset.territorio;
     document.getElementById('migas-territorio').textContent = b.dataset.territorio;
+    document.querySelectorAll('[data-t]').forEach(d => { d.hidden = d.dataset.t !== b.dataset.territorio; });
   }));
 
   // Voces: flechas del carrusel.

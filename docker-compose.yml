@@ -16,7 +16,7 @@ services:
 
   wordpress:
     build: .
-    image: greencarbon-wordpress:1.2.3
+    image: greencarbon-wordpress:1.2.4
     restart: unless-stopped
     depends_on:
       db:

@@ -182,10 +182,10 @@
           </div>
           <dl class="ficha">
             <div><dt><?php gc_t("s06_17"); ?></dt><dd id="t-nombre"><?php gc_t("s06_18"); ?></dd></div>
-            <div><dt><?php gc_t("s06_19"); ?></dt><dd><?php gc_aviso("s06_20", "ssot", "SSOT", "SSOT"); ?></dd></div>
-            <div><dt><?php gc_t("s06_21"); ?></dt><dd><?php gc_aviso("s06_22", "ssot", "SSOT", "SSOT"); ?></dd></div>
-            <div><dt><?php gc_t("s06_23"); ?></dt><dd><?php gc_aviso("s06_24", "ssot", "SSOT", "SSOT"); ?></dd></div>
-            <div><dt><?php gc_t("s06_25"); ?></dt><dd><?php gc_aviso("s06_26", "ssot", "SSOT", "SSOT"); ?></dd></div>
+            <div><dt><?php gc_t("s06_19"); ?></dt><dd><span data-t="Monte Verde"><?php gc_aviso("s06_20", "ssot", "SSOT", "SSOT"); ?></span><span data-t="Lomerío" hidden><?php gc_aviso("s06_20_l", "ssot", "SSOT", "SSOT"); ?></span></dd></div>
+            <div><dt><?php gc_t("s06_21"); ?></dt><dd><span data-t="Monte Verde"><?php gc_aviso("s06_22", "ssot", "SSOT", "SSOT"); ?></span><span data-t="Lomerío" hidden><?php gc_aviso("s06_22_l", "ssot", "SSOT", "SSOT"); ?></span></dd></div>
+            <div><dt><?php gc_t("s06_23"); ?></dt><dd><span data-t="Monte Verde"><?php gc_aviso("s06_24", "ssot", "SSOT", "SSOT"); ?></span><span data-t="Lomerío" hidden><?php gc_aviso("s06_24_l", "ssot", "SSOT", "SSOT"); ?></span></dd></div>
+            <div><dt><?php gc_t("s06_25"); ?></dt><dd><span data-t="Monte Verde"><?php gc_aviso("s06_26", "ssot", "SSOT", "SSOT"); ?></span><span data-t="Lomerío" hidden><?php gc_aviso("s06_26_l", "ssot", "SSOT", "SSOT"); ?></span></dd></div>
           </dl>
           <a href="#territorio" class="btn sec" style="justify-content:center"><?php gc_t("s06_27"); ?> <svg class="i"><use href="#i-flecha"/></svg></a>
         </div>
@@ -382,9 +382,9 @@
           <p class="eyebrow"><?php gc_t("s18_01"); ?></p>
           <h2><em><?php gc_t("s18_02"); ?></em></h2>
           <ul class="datos-contacto">
-            <li><svg class="i"><use href="#i-ubicacion"/></svg><span><?php gc_t("s18_03"); ?></span><?php gc_aviso("s18_04", "pend", "Falta", "Missing"); ?></li>
-            <li><svg class="i"><use href="#i-correo"/></svg><span><?php gc_t("s18_05"); ?></span><?php gc_aviso("s18_06", "pend", "Falta", "Missing"); ?></li>
-            <li><svg class="i"><use href="#i-tel"/></svg><span><?php gc_t("s18_07"); ?></span><?php gc_aviso("s18_08", "pend", "Falta", "Missing"); ?></li>
+            <li><svg class="i"><use href="#i-ubicacion"/></svg><span><?php gc_t("s18_03"); ?></span><span><?php gc_aviso("s18_04", "pend", "Falta", "Missing"); ?></span></li>
+            <li><svg class="i"><use href="#i-correo"/></svg><span><?php gc_t("s18_05"); ?></span><span><?php gc_aviso("s18_06", "pend", "Falta", "Missing"); ?></span></li>
+            <li><svg class="i"><use href="#i-tel"/></svg><span><?php gc_t("s18_07"); ?></span><span><?php gc_aviso("s18_08", "pend", "Falta", "Missing"); ?></span></li>
           </ul>
         </div>
         <form id="contacto-form" class="form item" action="<?php gc_u("s18_09"); ?>" method="POST" novalidate>
@@ -397,8 +397,7 @@
             <select id="f-motivo" name="motivo"><option value=""><?php gc_t("s18_16"); ?></option><option><?php gc_t("s18_17"); ?></option><option><?php gc_t("s18_18"); ?></option><option><?php gc_t("s18_19"); ?></option><option><?php gc_t("s18_20"); ?></option></select>
           </div>
           <div class="campo ancho"><label for="f-msg"><?php gc_t("s18_21"); ?></label><textarea id="f-msg" name="mensaje" rows="5" required></textarea></div>
-          <div class="campo ancho"><label for="f-adj"><?php gc_t("s18_22"); ?> <?php gc_aviso("s18_23", "pend", "Requiere servicio con adjuntos", "Requires a service with attachments"); ?></label><input id="f-adj" type="file" disabled></div>
-          <label class="consent"><input type="checkbox" id="f-consent" name="consentimiento" value="sí" required><span><?php gc_t("s18_24"); ?> <?php gc_aviso("s18_25", "pend", "Falta texto de privacidad", "Missing privacy text"); ?></span></label>
+          <label class="consent"><input type="checkbox" id="f-consent" name="consentimiento" value="sí" required><span><?php gc_t("s18_24"); ?></span></label>
           <button type="submit" class="btn pri"><?php gc_t("s18_26"); ?> <svg class="i"><use href="#i-flecha"/></svg></button>
           <p class="form-estado" id="form-estado" role="status" aria-live="polite"></p>
         </form>

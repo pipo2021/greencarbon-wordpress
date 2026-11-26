@@ -162,6 +162,19 @@ function gc_oculto( $k ) {
 	}
 }
 
+// ?privacidad muestra el Aviso de Privacidad que enlaza la casilla de consentimiento del formulario.
+add_action(
+	'template_redirect',
+	function () {
+		if ( ! isset( $_GET['privacidad'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			return;
+		}
+		add_action( 'wp_enqueue_scripts', fn() => wp_dequeue_script( 'greencarbon' ), 20 ); // main.js espera la portada
+		include __DIR__ . '/privacidad.php';
+		exit;
+	}
+);
+
 add_filter( 'show_admin_bar', '__return_false' ); // la barra tapa la cabecera fija del diseño
 
 // El menú se edita como texto en «Cabecera y menú»: el panel de menús de WordPress no aplica (se registra con prioridad 11).
