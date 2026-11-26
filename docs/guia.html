@@ -218,7 +218,7 @@ docker compose up -d --no-build</pre>
     <tr><td>El recorrido en video</td><td>Computadora: <code>video/recorrido-1080p60.mp4</code> (1080p, 60 fps, 75 MB). Celular: cuadros WebP en <code>pack/v</code> (540×960, 48 fps, 102 MB en 8 paquetes de grueso a fino). Respaldo: <code>pack/h</code> (24 fps). Se generan con los scripts de <code>herramientas/video/</code>. Si se reemplazan, hay que subir <code>VERSION</code> en <code>js/main.js</code>: los archivos se llaman igual y el navegador los guarda en caché.</td></tr>
     <tr><td>Anclas <code>data-cuadro</code></td><td>Atan cada sección a un cuadro del video. Están en el HTML fuente.</td></tr>
     <tr><td>Diseño, íconos y orden de secciones</td><td><code>style.css</code> e <code>index.php</code>, generados desde el HTML original.</td></tr>
-    <tr><td>Cantidad de elementos</td><td>Hay 5 testimonios, 4 cifras de impacto, 1 especie y 5 piezas en «Comunidades en acción». Para agregar o quitar elementos hay que tocar el HTML fuente y regenerar.</td></tr>
+    <tr><td>Cantidad de elementos</td><td>Hay 4 testimonios, 4 cifras de impacto, 1 especie y 5 piezas en «Comunidades en acción». Para agregar o quitar elementos hay que tocar el HTML fuente y regenerar.</td></tr>
   </table>
   <div class="nota">No se usan plugins: son menos puntos de falla y menos actualizaciones. El editor de archivos del admin está desactivado (<code>DISALLOW_FILE_EDIT</code>) y la barra de administración se oculta en el frente, porque tapa la cabecera fija.</div>
 
@@ -329,7 +329,7 @@ docker compose exec -T db sh -c 'mariadb -u greencarbon -p"$MARIADB_PASSWORD" gr
     <tr><td>☑</td><td><span class="tag cl">Cliente</span></td><td>Mapa del proyecto: interactivo desde 1.3.x, con enlace a Global Nature Watch por territorio</td><td>6 · Explora el territorio</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Centro de Operaciones de Incendios en vivo (más adelante): hoy se muestra un panel de demostración con datos simulados. Cuando exista el dashboard real, pegar su URL (que permita embeberlo en el dominio)</td><td>General → Enlace de monitoreo de incendios</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Foto de Lomerío (hoy se usa una foto de reunión con aviso)</td><td>7 · Territorio y gobernanza</td></tr>
-    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>5 testimonios: retrato, nombre, comunidad y rol, cita, <b>con consentimiento firmado</b></td><td>12 · Voces del territorio</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>4 testimonios reales cargados con retrato, cita y video. Falta confirmar que cada uno tiene <b>consentimiento firmado</b></td><td>12 · Voces del territorio</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Cifras de impacto: cargadas en 1.2.4 salvo prevención/respuesta</td><td>13 · Impacto</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Especie (jaguar): textos cargados en 1.2.4. Falta la foto con autoría y permiso</td><td>14 · Biodiversidad</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Enlace a los datos de monitoreo del proyecto (para cuando se muestre «Del bosque a los datos»)</td><td>9 · Monitoreo territorial</td></tr>
@@ -344,9 +344,9 @@ docker compose exec -T db sh -c 'mariadb -u greencarbon -p"$MARIADB_PASSWORD" gr
     <tr><th></th><th style="width:22mm">Tipo</th><th>Qué</th></tr>
     <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td><b>Botón «Reportar una alerta»</b>: hoy está deshabilitado. Hace falta un formulario o destino una vez que el cliente defina el flujo.</td></tr>
     <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td><b>Activar «Del bosque a los datos»</b> (aprox. marzo 2027). Además de la casilla del panel, hay que rehacer las anclas <code>data-cuadro</code> de <code>#monitoreo</code> a <code>#impacto</code> en el HTML fuente para que la escena del dron no quede cortada, y regenerar.</td></tr>
-    <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td>Botones «Ver historia» (testimonios) y «Siguiente especie»: hoy deshabilitados, sin destino.</td></tr>
+    <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td>Botón «Siguiente especie»: hoy deshabilitado, sin destino. («Ver historia» de los testimonios ya abre el video.)</td></tr>
     <tr><td>☐</td><td><span class="tag op">Opcional</span></td><td>Volver a generar el video desde los clips originales de Flow, que no están en el repo. Los 60/48 fps actuales son interpolados de las versiones de 30/24, y una escena rápida puede mostrar algún artefacto leve.</td></tr>
-    <tr><td>☐</td><td><span class="tag op">Opcional</span></td><td>Si el cliente quiere más de 5 testimonios, 4 cifras o 1 especie: ampliar en el HTML fuente y regenerar.</td></tr>
+    <tr><td>☐</td><td><span class="tag op">Opcional</span></td><td>Si el cliente quiere más de 4 testimonios, 4 cifras o 1 especie: ampliar en el HTML fuente y regenerar.</td></tr>
   </table>
   <div class="ok">Para ubicar rápido cada pendiente en la página: los avisos <b>naranjas</b> («Falta …») son contenido que falta y los <b>amarillos</b> («SSOT») son datos a validar. Al completar el campo del panel, el aviso desaparece solo.</div>
 </section>

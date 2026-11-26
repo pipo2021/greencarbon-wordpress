@@ -4,7 +4,7 @@
 Uso: python3 exportar_estatico.py <url-del-wordpress> <carpeta-del-tema> <salida>
   ej.: python3 exportar_estatico.py http://localhost:8095 tema/greencarbon /tmp/sitio
 
-Deja <salida>/index.html (ES), <salida>/en/index.html (EN), el tema y los archivos de WordPress que la página
+Deja <salida>/index.html (ES), <salida>/en/index.html (EN), la política de privacidad en privacidad/ (solo ES), el tema y los archivos de WordPress que la página
 pide (CSS/JS del núcleo y fotos subidas). Las rutas quedan relativas, así funciona en cualquier subcarpeta
 (por ejemplo GitHub Pages). No incluye el panel: para editar hace falta el WordPress real.
 """
@@ -25,7 +25,7 @@ def bajar(url):
 
 def relativizar(html, raiz):
     # Primero los enlaces de idioma, después cualquier otra URL del sitio (también las escapadas en JSON).
-    for viejo, nuevo in ((BASE + '/?lang=en', raiz + 'en/'), (BASE + '/"', (raiz or './') + '"'),
+    for viejo, nuevo in (('"?privacidad"', '"' + raiz + 'privacidad/"'), (BASE + '/?lang=en', raiz + 'en/'), (BASE + '/"', (raiz or './') + '"'),
                          (BASE + "/'", (raiz or './') + "'"), (BASE + '/', raiz), (ESC + '\\/', raiz.replace('/', '\\/'))):
         html = html.replace(viejo, nuevo)
     return html
@@ -35,8 +35,11 @@ if OUT.exists():
     shutil.rmtree(OUT)
 OUT.mkdir(parents=True)
 pedidos = set()
-for lang, archivo, raiz in (('es', OUT / 'index.html', ''), ('en', OUT / 'en' / 'index.html', '../')):
-    html = bajar(BASE + ('/?lang=en' if lang == 'en' else '/')).decode('utf-8')
+PAGINAS = (('es', 'index.html', '', '/'), ('en', 'en/index.html', '../', '/?lang=en'),
+           ('es', 'privacidad/index.html', '../', '/?privacidad'))  # la privacidad solo existe en español
+for lang, archivo, raiz, ruta in PAGINAS:
+    archivo = OUT / archivo
+    html = bajar(BASE + ruta).decode('utf-8')
     assert f'<html lang="{lang}"' in html, f'la página {lang} no salió en {lang}'
     # Recursos del propio sitio fuera del tema (CSS/JS de wp-includes, fotos subidas).
     pedidos |= {m.split('?')[0] for m in re.findall(re.escape(BASE) + r'/(wp-(?:includes|content/uploads)/[^"\'\s)>]+)', html.replace('\\/', '/'))}
@@ -51,6 +54,6 @@ for ruta in sorted(pedidos):
     destino.write_bytes(bajar(f'{BASE}/{ruta}'))
 (OUT / '.nojekyll').write_text('')  # GitHub Pages: servir tal cual, sin Jekyll
 
-for f in (OUT / 'index.html', OUT / 'en' / 'index.html'):
+for f in (OUT / p[1] for p in PAGINAS):
     assert BASE not in f.read_text(encoding='utf-8'), f'quedaron URLs absolutas en {f}'
-print(f'Exportado en {OUT}: 2 páginas, {len(pedidos)} recursos de WordPress.')
+print(f'Exportado en {OUT}: {len(PAGINAS)} páginas, {len(pedidos)} recursos de WordPress.')
