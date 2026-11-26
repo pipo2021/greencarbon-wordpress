@@ -7,7 +7,7 @@
 <style>
 :root { --noche: #0a1712; --verde: #2f6b47; --liquen: #b8d48f; --tinta: #12241b; --tinta-2: #4c5f55; --linea: #dfe5df; --papel: #fbfaf6; --aviso: #b4570f; --sol: #f2b45a; }
 @page { size: A4; margin: 20mm 18mm 20mm 18mm;
-  @bottom-left { content: "Green Carbon Bolivia · Guía WordPress v1.2.3"; font: 8pt Inter, sans-serif; color: #7b8a82; }
+  @bottom-left { content: "Green Carbon Bolivia · Guía WordPress v1.2.4"; font: 8pt Inter, sans-serif; color: #7b8a82; }
   @bottom-right { content: counter(page) " / " counter(pages); font: 8pt Inter, sans-serif; color: #7b8a82; } }
 @page :first { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
 * { box-sizing: border-box; }
@@ -72,9 +72,9 @@ figcaption { font-size: 8.5pt; color: var(--tinta-2); margin-top: 1.5mm; }
     <p class="sub">Guía técnica y de uso: acceso al administrador, qué se puede editar, cómo está hecho el tema, instalación del contenedor y lista de lo que falta completar antes de publicar.</p>
   </div>
   <dl>
-    <dt>Versión</dt><dd>1.2.3 · 4 de noviembre de 2026</dd>
+    <dt>Versión</dt><dd>1.2.4 · 26 de noviembre de 2026</dd>
     <dt>Repositorio</dt><dd>github.com/pipo2021/greencarbon-wordpress (público)</dd>
-    <dt>Descargas</dt><dd>Release v1.2.3: código fuente (.zip) + imagen Docker amd64 (.tar.gz)</dd>
+    <dt>Descargas</dt><dd>Release v1.2.4: código fuente (.zip) + imagen Docker amd64 (.tar.gz)</dd>
     <dt>Stack</dt><dd>WordPress 6.8.3 · PHP 8.3 · Apache · MariaDB 11.4 · Docker Compose</dd>
     <dt>Idiomas</dt><dd>Español (principal) e inglés (borrador pendiente de aprobación)</dd>
   </dl>
@@ -106,7 +106,7 @@ figcaption { font-size: 8.5pt; color: var(--tinta-2); margin-top: 1.5mm; }
     <tr><td><code>docker/</code></td><td>Script de arranque e instalación automática (<code>instalar.sh</code>).</td></tr>
     <tr><td><code>tema/greencarbon/</code></td><td>El tema de WordPress listo para usar (≈ 250 MB por el video y los cuadros).</td></tr>
     <tr><td><code>herramientas/</code></td><td>Generador del tema (<code>convertir.py</code>), traducción al inglés (<code>traduccion-en.json</code>) y scripts del video.</td></tr>
-    <tr><td><code>greencarbon-wordpress-1.2.3-amd64.tar.gz</code></td><td>Imagen Docker ya construida para servidores x86 (adjunta al Release, no está en el repo).</td></tr>
+    <tr><td><code>greencarbon-wordpress-1.2.4-amd64.tar.gz</code></td><td>Imagen Docker ya construida para servidores x86 (adjunta al Release, no está en el repo).</td></tr>
   </table>
   <div class="nota"><b>¿No usan Git?</b> No hace falta. En la página del Release (<span class="mono">github.com/pipo2021/greencarbon-wordpress/releases</span>) se descarga «Source code (zip)» y la imagen desde el navegador. El repositorio es público: no hace falta cuenta de GitHub ni invitación.</div>
 </section>
@@ -121,7 +121,7 @@ figcaption { font-size: 8.5pt; color: var(--tinta-2); margin-top: 1.5mm; }
     <li>Internet en la primera instalación (descarga WordPress en español). Sin internet funciona igual, con el admin en inglés.</li>
   </ul>
   <h3>Pasos</h3>
-  <div class="paso"><span class="num">1</span><div><p><b>Descargar y descomprimir</b> el «Source code (zip)» del Release v1.2.3. Queda una carpeta <code>greencarbon-wordpress-1.2.3</code>. Abrir una terminal dentro de esa carpeta.</p></div></div>
+  <div class="paso"><span class="num">1</span><div><p><b>Descargar y descomprimir</b> el «Source code (zip)» del Release v1.2.4. Queda una carpeta <code>greencarbon-wordpress-1.2.4</code>. Abrir una terminal dentro de esa carpeta.</p></div></div>
   <div class="paso"><span class="num">2</span><div><p><b>Crear el archivo de configuración</b> copiando la plantilla:</p>
 <pre>cp .env.ejemplo .env        <span class="c"># en Windows (PowerShell): copy .env.ejemplo .env</span></pre></div></div>
   <div class="paso"><span class="num">3</span><div><p><b>Editar <code>.env</code></b> con cualquier editor de texto y cambiar como mínimo las dos contraseñas:</p>
@@ -143,9 +143,9 @@ figcaption { font-size: 8.5pt; color: var(--tinta-2); margin-top: 1.5mm; }
   <div class="paso"><span class="num">6</span><div><p><b>Abrir</b> el sitio en <code>http://localhost:8080</code> y el administrador en <code>http://localhost:8080/wp-admin</code>.</p></div></div>
 
   <h3>Alternativa: usar la imagen ya construida (servidores x86)</h3>
-  <p>Evita el paso de construcción. Descargar <code>greencarbon-wordpress-1.2.3-amd64.tar.gz</code> del Release y ponerlo en la misma carpeta:</p>
-<pre>docker load -i greencarbon-wordpress-1.2.3-amd64.tar.gz
-docker tag greencarbon-wordpress:1.2.3-amd64 greencarbon-wordpress:1.2.3
+  <p>Evita el paso de construcción. Descargar <code>greencarbon-wordpress-1.2.4-amd64.tar.gz</code> del Release y ponerlo en la misma carpeta:</p>
+<pre>docker load -i greencarbon-wordpress-1.2.4-amd64.tar.gz
+docker tag greencarbon-wordpress:1.2.4-amd64 greencarbon-wordpress:1.2.4
 docker compose up -d --no-build</pre>
   <div class="nota">En Mac con Apple Silicon usar el paso 4 (construye la imagen nativa). La imagen amd64 también funciona ahí, pero emulada y más lenta.</div>
 
@@ -322,27 +322,27 @@ docker compose exec -T db sh -c 'mariadb -u greencarbon -p"$MARIADB_PASSWORD" gr
   <table class="check">
     <tr><th></th><th style="width:22mm">Tipo</th><th>Qué</th><th style="width:48mm">Panel → sección</th></tr>
     <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td><b>Aprobar o corregir la traducción al inglés</b>. Es un borrador automático y revisado, no aprobado. Si no se aprueba a tiempo, desactivar el selector ES | EN</td><td>Cada sección (campos EN) · General → selector</td></tr>
-    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Dirección, correo y teléfono (contacto y pie)</td><td>18 · Contacto · Pie de página</td></tr>
-    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Texto de privacidad del consentimiento del formulario</td><td>18 · Contacto</td></tr>
-    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Validar cifras marcadas SSOT: superficie (1.133.035 ha, «más de un millón de hectáreas»), 82 comunidades</td><td>4 · Separador · 5 · Proyecto</td></tr>
-    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Ficha de cada territorio: superficie, comunidades, cobertura forestal, organización territorial</td><td>6 · Explora el territorio</td></tr>
-    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td><b>Imagen del mapa de las TCO</b> exportada de Global Nature Watch (el enlace público de GNW no dibuja el área sin iniciar sesión, así que la imagen la exporta alguien con la cuenta de Green Carbon en GNW)</td><td>6 · Explora el territorio → Imagen estática del mapa</td></tr>
+    <tr><td>☑</td><td><span class="tag ob">Oblig.</span></td><td>Dirección, correo y teléfono (contacto y pie). Cargado en 1.2.4</td><td>18 · Contacto · Pie de página</td></tr>
+    <tr><td>☑</td><td><span class="tag ob">Oblig.</span></td><td>Texto de consentimiento del formulario y Aviso de Privacidad (página <code>?privacidad</code>, solo en español). Cargado en 1.2.4</td><td>18 · Contacto</td></tr>
+    <tr><td>☐</td><td><span class="tag ob">Oblig.</span></td><td>Cifras del proyecto cargadas en 1.2.4 (fuente PDMR 2026). Falta validar las marcadas SSOT que siguen visibles: cobertura forestal por territorio y cifra de prevención/respuesta</td><td>4 · Separador · 5 · Proyecto</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Ficha de cada territorio (Monte Verde y Lomerío): cargada en 1.2.4 salvo la cobertura forestal</td><td>6 · Explora el territorio</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Enlace del mapa de Global Nature Watch: cargado en 1.2.4. Falta la <b>imagen del mapa de las TCO</b> exportada de Global Nature Watch (el enlace público de GNW no dibuja el área sin iniciar sesión, así que la imagen la exporta alguien con la cuenta de Green Carbon en GNW)</td><td>6 · Explora el territorio → Imagen estática del mapa</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Centro de Operaciones de Incendios en vivo (más adelante): publicar el dashboard fuera de claude.ai, en una URL que permita embeberlo en el dominio, y pegarla en el panel. Mientras tanto se muestra la imagen estática</td><td>General → Enlace de monitoreo de incendios</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Foto de Lomerío (hoy se usa una foto de reunión con aviso)</td><td>7 · Territorio y gobernanza</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>5 testimonios: retrato, nombre, comunidad y rol, cita, <b>con consentimiento firmado</b></td><td>12 · Voces del territorio</td></tr>
-    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>4 cifras de impacto respaldadas y su período (hoy «XX»)</td><td>13 · Impacto</td></tr>
-    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Especie con evidencia territorial: foto, nombre común, nombre científico, descripción</td><td>14 · Biodiversidad</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Cifras de impacto: cargadas en 1.2.4 salvo prevención/respuesta</td><td>13 · Impacto</td></tr>
+    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Especie (jaguar): textos cargados en 1.2.4. Falta la foto con autoría y permiso</td><td>14 · Biodiversidad</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Enlace a los datos de monitoreo del proyecto (para cuando se muestre «Del bosque a los datos»)</td><td>9 · Monitoreo territorial</td></tr>
-    <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Noticia: titular, responsable editorial y frecuencia</td><td>17 · Comunidades en acción</td></tr>
+    <tr><td>☑</td><td><span class="tag cl">Cliente</span></td><td>Primera noticia: cargada en 1.2.4</td><td>17 · Comunidades en acción</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Destino del Canal de Integridad (separado del contacto)</td><td>18 · Contacto</td></tr>
     <tr><td>☐</td><td><span class="tag cl">Cliente</span></td><td>Flujo interno y privacidad para activar «Reportar una alerta»</td><td>11 · Reportar una alerta</td></tr>
   </table>
+  <p>Ojo: si un campo ya tiene un valor guardado en el panel, ese valor manda sobre el predeterminado de 1.2.4. Para ver el dato nuevo, vaciar el campo en el Personalizador y publicar.</p>
 
   <h3>C. Desarrollo pendiente</h3>
   <table class="check">
     <tr><th></th><th style="width:22mm">Tipo</th><th>Qué</th></tr>
     <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td><b>Botón «Reportar una alerta»</b>: hoy está deshabilitado. Hace falta un formulario o destino una vez que el cliente defina el flujo.</td></tr>
-    <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td><b>Adjunto del formulario</b>: deshabilitado. Requiere un servicio de formularios que acepte archivos.</td></tr>
     <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td><b>Activar «Del bosque a los datos»</b> (aprox. marzo 2027). Además de la casilla del panel, hay que rehacer las anclas <code>data-cuadro</code> de <code>#monitoreo</code> a <code>#impacto</code> en el HTML fuente para que la escena del dron no quede cortada, y regenerar.</td></tr>
     <tr><td>☐</td><td><span class="tag dev">Desarr.</span></td><td>Botones «Ver historia» (testimonios) y «Siguiente especie»: hoy deshabilitados, sin destino.</td></tr>
     <tr><td>☐</td><td><span class="tag op">Opcional</span></td><td>Volver a generar el video desde los clips originales de Flow, que no están en el repo. Los 60/48 fps actuales son interpolados de las versiones de 30/24, y una escena rápida puede mostrar algún artefacto leve.</td></tr>
