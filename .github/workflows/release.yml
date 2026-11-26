@@ -1,0 +1,39 @@
+# Builds the Docker image and publishes the GitHub Release for a v* tag.
+# Release notes come from docs/releases/<tag>.md (first line = title).
+name: release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to release (e.g. v1.3.2)
+        required: true
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+      - name: Build Docker image
+        run: |
+          V="${TAG#v}"
+          docker build --platform linux/amd64 -t "greencarbon-wordpress:$V" .
+          docker save "greencarbon-wordpress:$V" | gzip -6 > "greencarbon-wordpress-$V-amd64.tar.gz"
+          git archive --format=zip -o "greencarbon-wordpress-$V.zip" HEAD
+          ls -lh *.tar.gz *.zip
+      - name: Publish release
+        run: |
+          V="${TAG#v}"
+          NOTES="docs/releases/$TAG.md"
+          test -f "$NOTES"
+          tail -n +3 "$NOTES" > notes.md
+          gh release create "$TAG" --title "$(head -1 "$NOTES")" --notes-file notes.md \
+            "greencarbon-wordpress-$V-amd64.tar.gz" "greencarbon-wordpress-$V.zip" \
+            docs/Guia-Green-Carbon-WordPress.pdf docs/Pendientes-Green-Carbon.pdf
