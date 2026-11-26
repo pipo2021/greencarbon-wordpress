@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIRE OPS · Monte Verde & Lomerío — Integrated Fire Management Console</title>
+<style>
+  :root{
+    --ink:#0C1310;          /* canopy ink — page base */
+    --panel:#141E18;        /* understory — panel surface */
+    --panel-2:#1A2620;      /* raised surface */
+    --line:#2A3A31;         /* ledger line */
+    --line-soft:#203028;
+    --chalk:#E9EEE7;        /* primary text */
+    --moss:#8FA898;         /* secondary text */
+    --moss-dim:#5E7367;
+    --ok:#6FBF8F;           /* system live / contained */
+    --sev1:#5B9BD5;         /* watch */
+    --sev2:#E8C547;         /* advisory */
+    --sev3:#EE8438;         /* warning */
+    --sev4:#E8483B;         /* critical */
+    --ember:#FF7A45;
+    --font-display:"Avenir Next Condensed","Arial Narrow","Helvetica Neue Condensed","Segoe UI",Arial,sans-serif;
+    --font-body:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Consolas,"Courier New",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--chalk);
+    font-family:var(--font-body);
+    font-size:14px;
+    line-height:1.45;
+    min-height:100vh;
+  }
+  ::selection{background:#3d5748;color:#fff}
+  button{font-family:inherit;cursor:pointer}
+  :focus-visible{outline:2px solid var(--sev2);outline-offset:2px}
+
+  /* ---------- command bar ---------- */
+  .commandbar{
+    display:flex;align-items:stretch;gap:0;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#101A14 0%,#0C1310 100%);
+    position:sticky;top:0;z-index:50;
+  }
+  .cb-brand{padding:14px 20px;border-right:1px solid var(--line);min-width:280px}
+  .cb-brand h1{
+    font-family:var(--font-display);
+    font-size:24px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;line-height:1;
+  }
+  .cb-brand h1 .flame{color:var(--ember)}
+  .cb-brand .sub{
+    font-family:var(--font-mono);font-size:10.5px;color:var(--moss);
+    letter-spacing:.06em;margin-top:5px;
+  }
+  .cb-cells{display:flex;flex:1;flex-wrap:wrap}
+  .cb-cell{
+    padding:12px 18px;border-right:1px solid var(--line-soft);
+    display:flex;flex-direction:column;justify-content:center;min-width:130px;
+  }
+  .cb-label{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--moss-dim)}
+  .cb-value{font-family:var(--font-mono);font-size:15px;margin-top:3px;letter-spacing:.02em}
+  .cb-value .unit{font-size:10.5px;color:var(--moss)}
+  .cb-live{margin-left:auto;display:flex;align-items:center;padding:0 18px;gap:12px}
+  .live-toggle{
+    display:flex;align-items:center;gap:8px;
+    background:var(--panel);border:1px solid var(--line);color:var(--chalk);
+    padding:8px 14px;border-radius:3px;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .live-toggle .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+  .live-toggle.paused .dot{background:var(--moss-dim);box-shadow:none}
+  @media (prefers-reduced-motion:no-preference){
+    .live-toggle:not(.paused) .dot{animation:blink 1.6s infinite}
+  }
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+
+  .danger-chip{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    padding:8px 14px;border-radius:3px;border:1px solid;
+  }
+
+  /* ---------- kpi strip ---------- */
+  .kpis{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--line);
+  }
+  .kpi{padding:16px 20px;border-right:1px solid var(--line-soft)}
+  .kpi:last-child{border-right:none}
+  .kpi .k-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--moss-dim)}
+  .kpi .k-value{font-family:var(--font-display);font-size:34px;font-weight:700;line-height:1.05;margin-top:4px;letter-spacing:.02em}
+  .kpi .k-note{font-family:var(--font-mono);font-size:10.5px;color:var(--moss);margin-top:3px}
+  .kpi .up{color:var(--sev3)} .kpi .down{color:var(--ok)}
+
+  /* ---------- main ops grid ---------- */
+  .ops{
+    display:grid;
+    grid-template-columns:300px 1fr 348px;
+    min-height:600px;
+  }
+  .col{border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
+  .col:last-child{border-right:none}
+  .col-head{
+    padding:11px 16px;border-bottom:1px solid var(--line);
+    display:flex;align-items:baseline;justify-content:space-between;gap:8px;
+    background:var(--panel);
+  }
+  .col-head h2{
+    font-family:var(--font-display);font-size:14px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;
+  }
+  .col-head .meta{font-family:var(--font-mono);font-size:10px;color:var(--moss)}
+
+  /* feed */
+  .feed{overflow-y:auto;max-height:720px;flex:1}
+  .feed::-webkit-scrollbar{width:8px}
+  .feed::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+  .feed-item{
+    width:100%;text-align:left;background:none;border:none;color:var(--chalk);
+    padding:12px 16px;border-bottom:1px solid var(--line-soft);
+    border-left:3px solid transparent;
+    display:block;transition:background .15s;
+  }
+  .feed-item:hover{background:var(--panel)}
+  .feed-item.selected{background:var(--panel-2);border-left-color:var(--ember)}
+  .feed-item .fi-top{display:flex;justify-content:space-between;align-items:center;gap:6px}
+  .feed-item .fi-id{font-family:var(--font-mono);font-size:12px;letter-spacing:.05em}
+  .feed-item .fi-time{font-family:var(--font-mono);font-size:10px;color:var(--moss)}
+  .feed-item .fi-loc{font-size:12px;color:var(--moss);margin-top:4px}
+  .feed-item .fi-data{font-family:var(--font-mono);font-size:10.5px;color:var(--moss);margin-top:5px;display:flex;gap:10px;flex-wrap:wrap}
+  .feed-item.is-new{animation:flash-in 1.2s ease-out}
+  @keyframes flash-in{0%{background:#3a2a18}100%{background:transparent}}
+  @media (prefers-reduced-motion:reduce){.feed-item.is-new{animation:none}}
+
+  .sev-tag{
+    font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:2px 7px;border-radius:2px;border:1px solid;white-space:nowrap;
+  }
+  .status-tag{
+    font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 7px;border-radius:2px;background:var(--panel-2);color:var(--moss);border:1px solid var(--line);
+    white-space:nowrap;
+  }
+
+  /* map */
+  .mapcol{background:radial-gradient(ellipse at 50% 30%, #101a14 0%, var(--ink) 70%)}
+  .map-toolbar{
+    display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line-soft);
+    align-items:center;
+  }
+  .layer-btn{
+    font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--panel);color:var(--moss);border:1px solid var(--line);
+    padding:5px 10px;border-radius:3px;
+  }
+  .layer-btn.on{color:var(--chalk);border-color:var(--moss-dim);background:var(--panel-2)}
+  .map-toolbar .spacer{flex:1}
+  .map-toolbar .passinfo{font-family:var(--font-mono);font-size:10px;color:var(--moss)}
+  .mapwrap{position:relative;flex:1;min-height:480px;padding:8px}
+  #map{width:100%;height:100%;min-height:470px;display:block}
+
+  .map-legend{
+    position:absolute;bottom:18px;left:22px;
+    background:rgba(12,19,16,.88);border:1px solid var(--line);border-radius:3px;
+    padding:10px 12px;font-family:var(--font-mono);font-size:10px;color:var(--moss);
+    backdrop-filter:blur(2px);
+  }
+  .map-legend .row{display:flex;align-items:center;gap:8px;margin-top:5px}
+  .map-legend .row:first-child{margin-top:0}
+  .map-legend .swatch{width:9px;height:9px;border-radius:50%;flex:none}
+
+  /* svg map elements */
+  .graticule{stroke:#1E2C24;stroke-width:1}
+  .grat-label{fill:#4A5F53;font-family:var(--font-mono);font-size:9px}
+  .tioc{fill:#18271F;stroke:#3B5A48;stroke-width:1.5}
+  .tioc.dim{fill:#131F19}
+  .tioc-label{fill:#7E9B8A;font-family:var(--font-display);font-weight:700;letter-spacing:.18em;font-size:13px;text-transform:uppercase}
+  .tioc-sub{fill:#54695D;font-family:var(--font-mono);font-size:8.5px;letter-spacing:.05em}
+  .belt{fill:none;stroke:#3E5044;stroke-width:1;stroke-dasharray:4 4}
+  .community{fill:#9FB8A8;stroke:#0C1310;stroke-width:1}
+  .community-label{fill:#6E8578;font-family:var(--font-mono);font-size:8.5px}
+  .scar{fill:rgba(120,84,52,.35);stroke:#6b4a2c;stroke-width:.8;stroke-dasharray:2 2}
+  .fire-halo{opacity:.85}
+  @media (prefers-reduced-motion:no-preference){
+    .fire-halo{animation:halo 2.2s ease-out infinite}
+  }
+  @keyframes halo{0%{opacity:.75;transform:scale(.6)}100%{opacity:0;transform:scale(1.9)}}
+  .fire-dot{stroke:#0C1310;stroke-width:1;cursor:pointer}
+  .fire-dot.selected{stroke:#fff;stroke-width:1.6}
+  .sweep{stroke:#7FD8A8;stroke-width:1.4;opacity:0}
+  .sweep-glow{stroke:rgba(127,216,168,.16);stroke-width:26;opacity:0}
+  .windrose text{fill:#7E9B8A;font-family:var(--font-mono);font-size:9px}
+  .windrose path,.windrose line,.windrose circle{stroke:#59705F}
+
+  /* detail column */
+  .detail{overflow-y:auto;max-height:720px;flex:1}
+  .detail::-webkit-scrollbar{width:8px}
+  .detail::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+  .d-empty{padding:40px 24px;color:var(--moss);font-size:13px;text-align:center}
+  .d-block{padding:14px 16px;border-bottom:1px solid var(--line-soft)}
+  .d-block h3{
+    font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--moss-dim);margin-bottom:9px;
+  }
+  .d-title{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .d-title .id{font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:.06em}
+  .d-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+  .d-kv .l{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--moss-dim)}
+  .d-kv .v{font-family:var(--font-mono);font-size:12.5px;margin-top:2px}
+  .d-kv .v small{color:var(--moss);font-size:10px}
+  .sev-rationale{font-size:12px;color:var(--moss);margin-top:8px;line-height:1.5}
+  .sev-rationale b{color:var(--chalk);font-weight:600}
+  .protocol li{font-size:12.5px;margin:6px 0 6px 16px;color:var(--chalk)}
+  .protocol li::marker{color:var(--ember)}
+  .spread{font-size:12.5px;color:var(--chalk);line-height:1.55}
+  .spread .mono{font-family:var(--font-mono);font-size:11.5px;color:var(--moss)}
+
+  .alert-msg{
+    font-family:var(--font-mono);font-size:11.5px;line-height:1.6;
+    background:var(--ink);border:1px solid var(--line);border-radius:3px;
+    padding:12px;white-space:pre-wrap;color:#D9E2D6;
+  }
+  .channels{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .chan{
+    font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;
+    border:1px solid var(--line);background:var(--panel);color:var(--moss);
+    padding:5px 9px;border-radius:3px;
+  }
+  .chan.on{color:var(--chalk);border-color:var(--moss-dim);background:var(--panel-2)}
+  .dispatch-row{display:flex;gap:8px;margin-top:12px}
+  .btn-primary{
+    flex:1;background:var(--ember);border:none;color:#1a0d06;
+    font-family:var(--font-display);font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase;
+    padding:11px 12px;border-radius:3px;
+  }
+  .btn-primary:hover{filter:brightness(1.08)}
+  .btn-primary:disabled{background:#3a4a40;color:#728579;cursor:default}
+  .btn-ghost{
+    background:none;border:1px solid var(--line);color:var(--moss);
+    font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    padding:0 14px;border-radius:3px;
+  }
+  .btn-ghost:hover{color:var(--chalk);border-color:var(--moss-dim)}
+  .ack-line{font-family:var(--font-mono);font-size:10.5px;color:var(--moss);margin-top:9px}
+  .ack-line .ok{color:var(--ok)}
+  .comms-log{list-style:none}
+  .comms-log li{
+    font-family:var(--font-mono);font-size:10.5px;color:var(--moss);
+    padding:5px 0;border-bottom:1px dashed var(--line-soft);display:flex;gap:10px;
+  }
+  .comms-log li .t{color:var(--moss-dim);flex:none}
+
+  /* escalation matrix */
+  .matrix{width:100%;border-collapse:collapse;font-size:11.5px}
+  .matrix th{
+    font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--moss-dim);text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);
+  }
+  .matrix td{padding:8px;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--moss)}
+  .matrix td:first-child{white-space:nowrap}
+  .matrix tr.hl td{background:var(--panel-2);color:var(--chalk)}
+
+  /* ---------- planning section ---------- */
+  .section-head{
+    padding:26px 22px 12px;border-top:1px solid var(--line);
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  }
+  .section-head .meta{font-family:var(--font-mono);font-size:10.5px;color:var(--moss)}
+
+  .forecast-strip{
+    display:grid;grid-template-columns:repeat(7,1fr);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .fc-day{padding:14px 14px 16px;border-right:1px solid var(--line-soft)}
+  .fc-day:last-child{border-right:none}
+  .fc-day.today{background:var(--panel)}
+  .fc-date{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--moss)}
+  .fc-danger{
+    font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    margin-top:6px;
+  }
+  .fc-bar{height:4px;border-radius:2px;background:var(--line-soft);margin-top:7px;overflow:hidden}
+  .fc-bar i{display:block;height:100%}
+  .fc-wx{font-family:var(--font-mono);font-size:10px;color:var(--moss);margin-top:9px;line-height:1.7}
+
+  .plan-grid{
+    display:grid;grid-template-columns:1.2fr 1fr;gap:0;
+    border-bottom:1px solid var(--line);
+  }
+  .plan-cell{padding:18px 22px;border-right:1px solid var(--line-soft)}
+  .plan-cell:last-child{border-right:none}
+  .plan-cell h3{
+    font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .plan-cell .sub{font-family:var(--font-mono);font-size:10px;color:var(--moss-dim);margin-bottom:14px}
+
+  #seasonChart{width:100%;height:190px;display:block}
+  .season-note{font-size:12px;color:var(--moss);margin-top:10px;line-height:1.55}
+  .season-note b{color:var(--chalk)}
+
+  .burncal{width:100%;border-collapse:collapse;font-size:12px}
+  .burncal th{
+    font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--moss-dim);
+    text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);
+  }
+  .burncal td{padding:9px 8px;border-bottom:1px solid var(--line-soft);color:var(--moss)}
+  .burncal td:first-child{color:var(--chalk)}
+  .cal-chip{
+    font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 8px;border-radius:2px;border:1px solid;
+  }
+  .cal-open{color:var(--ok);border-color:var(--ok)}
+  .cal-closed{color:var(--sev4);border-color:var(--sev4)}
+  .cal-review{color:var(--sev2);border-color:var(--sev2)}
+  .suspension{
+    margin-top:12px;padding:10px 12px;border:1px solid var(--sev4);border-radius:3px;
+    background:rgba(232,72,59,.07);font-size:12px;color:var(--chalk);line-height:1.5;
+  }
+  .suspension b{color:var(--sev4);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+
+  .risktable{width:100%;border-collapse:collapse;font-size:12px}
+  .risktable th{
+    font-family:var(--font-mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--moss-dim);
+    text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);
+  }
+  .risktable td{padding:9px 8px;border-bottom:1px solid var(--line-soft);color:var(--moss);font-family:var(--font-mono);font-size:11.5px}
+  .risktable td:first-child{color:var(--chalk);font-family:var(--font-body);font-size:12.5px}
+  .risk-bar{display:flex;align-items:center;gap:8px}
+  .risk-bar .track{width:80px;height:5px;background:var(--line-soft);border-radius:3px;overflow:hidden;flex:none}
+  .risk-bar .track i{display:block;height:100%}
+
+  .readiness{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:4px}
+  .ready-item .r-top{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px}
+  .ready-item .r-top .val{color:var(--chalk)}
+  .ready-item .r-top .lab{color:var(--moss)}
+  .ready-item .track{height:5px;background:var(--line-soft);border-radius:3px;margin-top:6px;overflow:hidden}
+  .ready-item .track i{display:block;height:100%;background:var(--ok)}
+  .ready-item.warn .track i{background:var(--sev2)}
+
+  footer{
+    padding:16px 22px 26px;font-family:var(--font-mono);font-size:10px;color:var(--moss-dim);
+    line-height:1.8;
+  }
+
+  /* toast */
+  #toast{
+    position:fixed;bottom:22px;right:22px;z-index:100;
+    background:var(--panel-2);border:1px solid var(--moss-dim);border-left:3px solid var(--ok);
+    color:var(--chalk);padding:12px 16px;border-radius:3px;
+    font-family:var(--font-mono);font-size:11.5px;max-width:340px;
+    opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;
+  }
+  #toast.show{opacity:1;transform:translateY(0)}
+
+  /* responsive */
+  @media (max-width:1180px){
+    .ops{grid-template-columns:260px 1fr}
+    .col.detailcol{grid-column:1 / -1;border-top:1px solid var(--line);border-right:none}
+    .detail{max-height:none}
+  }
+  @media (max-width:900px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .kpi{border-bottom:1px solid var(--line-soft)}
+    .forecast-strip{grid-template-columns:repeat(4,1fr)}
+    .fc-day{border-bottom:1px solid var(--line-soft)}
+    .plan-grid{grid-template-columns:1fr}
+    .plan-cell{border-right:none;border-bottom:1px solid var(--line-soft)}
+    .cb-brand{min-width:0;flex:1}
+    .cb-cells{display:none}
+  }
+  @media (max-width:760px){
+    .ops{grid-template-columns:1fr}
+    .col{border-right:none;border-bottom:1px solid var(--line)}
+    .feed{max-height:300px}
+    .forecast-strip{grid-template-columns:repeat(2,1fr)}
+  }
+
+  /* ---------- dentro del sitio Green Carbon (iframe de ~1180 px en computadora, ~340 px en celular) ---------- */
+  .cb-cells{flex-wrap:nowrap;overflow:hidden}
+  .cb-cell{flex:none;min-width:0;padding:12px 14px}
+  /* Sin lugar para todas las celdas de la barra: se muestran menos, pero enteras. */
+  @media (max-width:1280px){.cb-brand{min-width:0;flex:none}.cb-cell:nth-child(n+3){display:none}}
+  @media (max-width:1150px){.cb-cell:nth-child(n+2){display:none}}
+  @media (max-width:760px){
+    .commandbar{flex-wrap:wrap;position:static}
+    .cb-brand{flex:1 1 100%;border-right:none}
+    .cb-live{margin-left:0;padding:0 20px 14px;flex-wrap:wrap}
+    /* Celular: nada más ancho que la pantalla */
+    html,body{overflow-x:hidden}
+    .plan-grid>*,.ops>*{min-width:0}
+    .plan-cell{padding:16px 14px;border-right:none;border-bottom:1px solid var(--line-soft)}
+    .plan-cell:last-child{border-bottom:none}
+    .readiness{grid-template-columns:1fr}
+    .risktable th:nth-child(4),.risktable td:nth-child(4),
+    .risktable th:nth-child(5),.risktable td:nth-child(5){display:none}
+    .risktable th,.risktable td,.burncal th,.burncal td,.matrix th,.matrix td{padding-left:5px;padding-right:5px}
+    .risk-bar{gap:6px}
+    .risk-bar .track{width:44px}
+    /* Si una tabla igual no entra, se desplaza ella sola y no el panel entero */
+    .plan-cell table{display:block;overflow-x:auto;max-width:100%}
+  }
+</style>
+</head>
+<body>
+
+<header class="commandbar">
+  <div class="cb-brand">
+    <h1><span class="flame">▲</span> FIRE OPS</h1>
+    <div class="sub">TIOC MONTE VERDE · TIOC LOMERÍO — SANTA CRUZ, BOLIVIA · PA 1,133,035 ha</div>
+  </div>
+  <div class="cb-cells">
+    <div class="cb-cell">
+      <span class="cb-label">Local time (BOT)</span>
+      <span class="cb-value" id="clockLocal">--:--:--</span>
+    </div>
+    <div class="cb-cell">
+      <span class="cb-label">Next satellite pass</span>
+      <span class="cb-value" id="nextPass">—</span>
+    </div>
+    <div class="cb-cell">
+      <span class="cb-label">Pass countdown</span>
+      <span class="cb-value" id="passCountdown">—</span>
+    </div>
+    <div class="cb-cell">
+      <span class="cb-label">Wind · project area</span>
+      <span class="cb-value">SE 14 <span class="unit">km/h</span></span>
+    </div>
+    <div class="cb-cell">
+      <span class="cb-label">Last FIRMS sync</span>
+      <span class="cb-value" id="lastSync">—</span>
+    </div>
+  </div>
+  <div class="cb-live">
+    <span class="danger-chip" id="dangerToday">DANGER: —</span>
+    <button class="live-toggle" id="liveToggle" aria-pressed="true">
+      <span class="dot"></span><span id="liveLabel">Live feed</span>
+    </button>
+  </div>
+</header>
+
+<section class="kpis" aria-label="Key indicators">
+  <div class="kpi">
+    <div class="k-label">Active events</div>
+    <div class="k-value" id="kpiActive">—</div>
+    <div class="k-note" id="kpiActiveNote">—</div>
+  </div>
+  <div class="kpi">
+    <div class="k-label">Detections · season to date</div>
+    <div class="k-value" id="kpiDetections">1,847</div>
+    <div class="k-note"><span class="down">▼ 31%</span> vs 2019–21 reference mean</div>
+  </div>
+  <div class="kpi">
+    <div class="k-label">Area affected · 2026</div>
+    <div class="k-value">3,412 <span style="font-size:16px">ha</span></div>
+    <div class="k-note">0.30% of project area · buffer review pending</div>
+  </div>
+  <div class="kpi">
+    <div class="k-label">Median brigade response</div>
+    <div class="k-value">3.4 <span style="font-size:16px">h</span></div>
+    <div class="k-note">detection → ground verification · target ≤ 6 h</div>
+  </div>
+</section>
+
+<main class="ops">
+
+  <!-- ================= FEED ================= -->
+  <aside class="col">
+    <div class="col-head">
+      <h2>Detection feed</h2>
+      <span class="meta" id="feedMeta">VIIRS · MODIS</span>
+    </div>
+    <div class="feed" id="feed" role="list"></div>
+  </aside>
+
+  <!-- ================= MAP ================= -->
+  <div class="col mapcol">
+    <div class="map-toolbar" role="toolbar" aria-label="Map layers">
+      <button class="layer-btn on" data-layer="hotspots">Hotspots</button>
+      <button class="layer-btn on" data-layer="communities">Communities</button>
+      <button class="layer-btn on" data-layer="scars">Burn scars</button>
+      <button class="layer-btn on" data-layer="belt">Leakage belt</button>
+      <button class="layer-btn" data-layer="labels">Community labels</button>
+      <span class="spacer"></span>
+      <span class="passinfo" id="sweepInfo">Awaiting next overpass…</span>
+    </div>
+    <div class="mapwrap">
+      <svg id="map" viewBox="0 0 700 800" role="img" aria-label="Project area map with fire detections"></svg>
+      <div class="map-legend">
+        <div class="row"><span class="swatch" style="background:var(--sev1)"></span> L1 Watch</div>
+        <div class="row"><span class="swatch" style="background:var(--sev2)"></span> L2 Advisory</div>
+        <div class="row"><span class="swatch" style="background:var(--sev3)"></span> L3 Warning</div>
+        <div class="row"><span class="swatch" style="background:var(--sev4)"></span> L4 Critical</div>
+        <div class="row"><span class="swatch" style="background:#9FB8A8;border-radius:0;width:7px;height:7px"></span> Community</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DETAIL / DISPATCH ================= -->
+  <aside class="col detailcol">
+    <div class="col-head">
+      <h2>Event · Dispatch</h2>
+      <span class="meta" id="detailMeta">select an event</span>
+    </div>
+    <div class="detail" id="detail">
+      <div class="d-empty">Select a detection on the map or in the feed to open verification and dispatch.</div>
+    </div>
+  </aside>
+</main>
+
+<!-- ================= PLANNING ================= -->
+<section class="section-head" id="planning">
+  <h2>Planning · Forecast</h2>
+  <span class="meta">Fire weather outlook, seasonal position, chaqueo calendar & sector risk — prevention phase, Institutional Action Plan 2022</span>
+</section>
+
+<div class="forecast-strip" id="forecast"></div>
+
+<div class="plan-grid">
+  <div class="plan-cell">
+    <h3>Season position — hotspot climatology</h3>
+    <div class="sub">MEAN MONTHLY VIIRS DETECTIONS, REFERENCE REGION 2015–2025 · CURRENT MONTH MARKED</div>
+    <svg id="seasonChart" viewBox="0 0 560 190" preserveAspectRatio="none" role="img" aria-label="Seasonal hotspot curve"></svg>
+    <p class="season-note">
+      The project area is entering the <b>peak of the burn season</b> (Aug–Oct historically carries ~74% of annual
+      detections). Detection cadence is 6–8 overpasses/day; night passes (~01:30 BOT) are the earliest
+      confirmation window for persistent fronts. Expect elevated false positives from authorized chaqueo
+      outside the PA — cross-check every detection against the burn-permit register before escalating.
+    </p>
+  </div>
+  <div class="plan-cell">
+    <h3>Controlled burn (chaqueo) calendar</h3>
+    <div class="sub">REGIONALIZED WINDOWS — TECHNICAL GROUP 2, ACTION PLAN · ABT PERMIT REGISTER</div>
+    <table class="burncal">
+      <thead><tr><th>Zone</th><th>Window 2026</th><th>Permits</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Monte Verde — North (San Javier)</td><td>01 May – 30 Jun</td><td>34 issued</td><td><span class="cal-chip cal-closed">Closed</span></td></tr>
+        <tr><td>Monte Verde — South (Concepción)</td><td>15 May – 15 Jul</td><td>41 issued</td><td><span class="cal-chip cal-closed">Closed</span></td></tr>
+        <tr><td>Lomerío (San Antonio)</td><td>15 Apr – 15 Jun</td><td>22 issued</td><td><span class="cal-chip cal-closed">Closed</span></td></tr>
+        <tr><td>Leakage belt — ag frontier</td><td>Per ABT resolution</td><td>17 pending</td><td><span class="cal-chip cal-review">Review</span></td></tr>
+      </tbody>
+    </table>
+    <div class="suspension">
+      <b>Suspension in force</b> — All new burn authorizations suspended while fire danger holds at
+      VERY HIGH or above (departmental declaration, dry-season protocol). Any detection inside the PA during
+      suspension is treated as unauthorized until verified.
+    </div>
+  </div>
+</div>
+
+<div class="plan-grid">
+  <div class="plan-cell">
+    <h3>Sector risk outlook — next 7 days</h3>
+    <div class="sub">DRIVERS: DAYS WITHOUT RAIN · FUEL LOAD · HISTORICAL DENSITY · AG-FRONTIER PRESSURE</div>
+    <table class="risktable">
+      <thead><tr><th>Sector</th><th>Dry days</th><th>Fuel</th><th>Hist.</th><th>Frontier</th><th>Risk index</th></tr></thead>
+      <tbody id="riskBody"></tbody>
+    </table>
+  </div>
+  <div class="plan-cell">
+    <h3>Preparedness — contingency phase readiness</h3>
+    <div class="sub">BRIGADES · LOGISTICS · INFRASTRUCTURE — PER INTERINSTITUTIONAL LOGISTICS PROTOCOL</div>
+    <div class="readiness">
+      <div class="ready-item">
+        <div class="r-top"><span class="lab">Community brigades active</span><span class="val">12 / 14</span></div>
+        <div class="track"><i style="width:86%"></i></div>
+      </div>
+      <div class="ready-item warn">
+        <div class="r-top"><span class="lab">Water points stocked</span><span class="val">8 / 11</span></div>
+        <div class="track"><i style="width:73%"></i></div>
+      </div>
+      <div class="ready-item">
+        <div class="r-top"><span class="lab">VHF radio network</span><span class="val">92%</span></div>
+        <div class="track"><i style="width:92%"></i></div>
+      </div>
+      <div class="ready-item warn">
+        <div class="r-top"><span class="lab">Firebreaks maintained</span><span class="val">64%</span></div>
+        <div class="track"><i style="width:64%"></i></div>
+      </div>
+      <div class="ready-item">
+        <div class="r-top"><span class="lab">Hand tools & PPE kits</span><span class="val">31 / 34</span></div>
+        <div class="track"><i style="width:91%"></i></div>
+      </div>
+      <div class="ready-item">
+        <div class="r-top"><span class="lab">Trained personnel (2023 cycle)</span><span class="val">218</span></div>
+        <div class="track"><i style="width:100%"></i></div>
+      </div>
+    </div>
+    <table class="matrix" style="margin-top:20px">
+      <thead><tr><th>Level</th><th>Trigger</th><th>Response — who moves</th></tr></thead>
+      <tbody id="matrixBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  DATA · VIIRS 375 m (S-NPP, NOAA-20/21) and MODIS 1 km active-fire products via NASA FIRMS · MapBiomas Bolivia land cover ·
+  ABT burn-permit register (UMIG) · GFS 0.25° fire weather.<br>
+  PROTOCOL · Severity levels, escalation and logistics follow the Institutional Action Plan for Integrated Fire Management,
+  TCOs Monte Verde & Lomerío (2022) and the project fire-response & humanitarian-support activity. Detections in this
+  console are simulated for demonstration; connect the FIRMS API key to go live.
+</footer>
+
+<div id="toast" role="status"></div>
+
+<script>
+/* ============================================================
+   FIRE OPS — Integrated Fire Management Console
+   TIOC Monte Verde & TIOC Lomerío · Santa Cruz, Bolivia
+   Simulated satellite feed (VIIRS/MODIS-style detections)
+   ============================================================ */
+
+// ---------- geography ----------
+const EXTENT = { lonMin:-63.3, lonMax:-60.7, latMax:-14.5, latMin:-17.5 }; // map frame
+const W = 700, H = 800;
+function px(lon){ return (lon - EXTENT.lonMin) / (EXTENT.lonMax - EXTENT.lonMin) * W; }
+function py(lat){ return (EXTENT.latMax - lat) / (EXTENT.latMax - EXTENT.latMin) * H; }
+
+const MONTE_VERDE = [
+  [-62.72,-15.05],[-62.45,-14.85],[-62.10,-14.78],[-61.75,-14.88],[-61.45,-15.02],
+  [-61.32,-15.30],[-61.42,-15.55],[-61.35,-15.78],[-61.60,-15.95],[-61.95,-15.90],
+  [-62.20,-15.98],[-62.50,-15.85],[-62.68,-15.60],[-62.78,-15.35]
+];
+const LOMERIO = [
+  [-62.05,-16.35],[-61.75,-16.25],[-61.50,-16.35],[-61.42,-16.60],
+  [-61.55,-16.85],[-61.85,-16.95],[-62.08,-16.80],[-62.12,-16.55]
+];
+
+const COMMUNITIES = [
+  {name:"Monte Verde",        lat:-15.35, lon:-62.05, tioc:"MV"},
+  {name:"Santa Ana",          lat:-15.15, lon:-61.85, tioc:"MV"},
+  {name:"Palestina",          lat:-15.55, lon:-62.35, tioc:"MV"},
+  {name:"Río Blanco",         lat:-15.05, lon:-62.45, tioc:"MV"},
+  {name:"Makanaté",           lat:-15.65, lon:-61.85, tioc:"MV"},
+  {name:"La Esperanza",       lat:-15.50, lon:-61.60, tioc:"MV"},
+  {name:"El Regreso",         lat:-15.25, lon:-62.25, tioc:"MV"},
+  {name:"Puerto San Pedro",   lat:-14.95, lon:-62.10, tioc:"MV"},
+  {name:"San Antonio de Lomerío", lat:-16.72, lon:-61.78, tioc:"LOM"},
+  {name:"Puquio Cristo Rey",  lat:-16.45, lon:-61.72, tioc:"LOM"},
+  {name:"Fátima",             lat:-16.55, lon:-61.90, tioc:"LOM"},
+  {name:"San Lorenzo",        lat:-16.62, lon:-61.58, tioc:"LOM"},
+  {name:"Surusubí",           lat:-16.38, lon:-61.86, tioc:"LOM"}
+];
+
+const SCARS = [ // 2026 season burn scars (verified perimeters)
+  {pts:[[-62.32,-15.70],[-62.26,-15.66],[-62.20,-15.70],[-62.24,-15.77],[-62.31,-15.76]], label:"FE-2591 · 412 ha"},
+  {pts:[[-61.58,-16.30],[-61.52,-16.27],[-61.48,-16.32],[-61.53,-16.36]],                 label:"FE-2577 · 128 ha"}
+];
+
+function haversine(lat1,lon1,lat2,lon2){
+  const R=6371, toR=Math.PI/180;
+  const dLat=(lat2-lat1)*toR, dLon=(lon2-lon1)*toR;
+  const a=Math.sin(dLat/2)**2 + Math.cos(lat1*toR)*Math.cos(lat2*toR)*Math.sin(dLon/2)**2;
+  return 2*R*Math.asin(Math.sqrt(a));
+}
+function nearestCommunity(lat,lon){
+  let best=null, bd=1e9;
+  for(const c of COMMUNITIES){
+    const d=haversine(lat,lon,c.lat,c.lon);
+    if(d<bd){bd=d;best=c;}
+  }
+  const brg = bearing(lat,lon,best.lat,best.lon); // fire -> community
+  return {c:best, km:bd, dirToCommunity:brg};
+}
+function bearing(lat1,lon1,lat2,lon2){
+  const toR=Math.PI/180;
+  const y=Math.sin((lon2-lon1)*toR)*Math.cos(lat2*toR);
+  const x=Math.cos(lat1*toR)*Math.sin(lat2*toR)-Math.sin(lat1*toR)*Math.cos(lat2*toR)*Math.cos((lon2-lon1)*toR);
+  let b=Math.atan2(y,x)*180/Math.PI; return (b+360)%360;
+}
+function compass(deg){
+  const dirs=["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
+  return dirs[Math.round(deg/22.5)%16];
+}
+function insidePoly(lat,lon,poly){
+  let inside=false;
+  for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+    const xi=poly[i][0], yi=poly[i][1], xj=poly[j][0], yj=poly[j][1];
+    if(((yi>lat)!==(yj>lat)) && (lon < (xj-xi)*(lat-yi)/(yj-yi)+xi)) inside=true;
+  }
+  return inside;
+}
+
+// ---------- environment ----------
+const WIND = { fromDeg:135, toDeg:315, speed:14, label:"SE 14 km/h" }; // blowing toward NW
+const BOT_OFFSET = -4; // Bolivia UTC-4
+
+const PASSES = [ // local BOT times, daily
+  {t:"01:24", sat:"VIIRS S-NPP (night)"},
+  {t:"01:36", sat:"VIIRS NOAA-20 (night)"},
+  {t:"01:48", sat:"VIIRS NOAA-21 (night)"},
+  {t:"10:24", sat:"MODIS Terra"},
+  {t:"13:18", sat:"VIIRS S-NPP"},
+  {t:"13:29", sat:"VIIRS NOAA-20"},
+  {t:"13:41", sat:"VIIRS NOAA-21"},
+  {t:"13:52", sat:"MODIS Aqua"}
+];
+
+// ---------- severity model ----------
+const SEV = {
+  1:{name:"Watch",    color:"var(--sev1)", hex:"#5B9BD5"},
+  2:{name:"Advisory", color:"var(--sev2)", hex:"#E8C547"},
+  3:{name:"Warning",  color:"var(--sev3)", hex:"#EE8438"},
+  4:{name:"Critical", color:"var(--sev4)", hex:"#E8483B"}
+};
+
+function classify(e){
+  const reasons=[];
+  let lvl;
+  if(e.frp<15){lvl=1;reasons.push("low radiative power (FRP "+e.frp.toFixed(0)+" MW)");}
+  else if(e.frp<50){lvl=2;reasons.push("moderate radiative power (FRP "+e.frp.toFixed(0)+" MW)");}
+  else if(e.frp<120){lvl=3;reasons.push("high radiative power (FRP "+e.frp.toFixed(0)+" MW)");}
+  else {lvl=4;reasons.push("very high radiative power (FRP "+e.frp.toFixed(0)+" MW)");}
+
+  if(e.cluster>=3 && lvl<4){lvl++;reasons.push("clustered front — "+e.cluster+" pixels in one scene");}
+  else if(e.cluster>=3){reasons.push("clustered front — "+e.cluster+" pixels");}
+
+  if(e.passes>=3 && lvl<4){lvl++;reasons.push("persistent across "+e.passes+" overpasses");}
+  else if(e.passes>=3){reasons.push("persistent across "+e.passes+" overpasses");}
+
+  const n=nearestCommunity(e.lat,e.lon);
+  if(n.km<2){ if(lvl<4){lvl=4;} reasons.push("community "+n.c.name+" within 2 km");}
+  else if(n.km<5){ if(lvl<3){lvl=3;} reasons.push("community "+n.c.name+" within 5 km");}
+
+  if(e.conf<50 && lvl>1){lvl--;reasons.push("low detection confidence ("+e.conf+"%) — held one level down pending verification");}
+  return {lvl:Math.max(1,Math.min(4,lvl)), reasons, near:n};
+}
+
+const PROTOCOLS = {
+  1:["Log detection; hold for confirmation on next overpass.",
+     "Notify TCO technical team on the monitoring WhatsApp group.",
+     "Cross-check ABT burn-permit register for an authorized chaqueo at these coordinates."],
+  2:["Alert nearest community brigade — ground verification within 12 h.",
+     "TCO technical team confirms against permit register and land-use plan.",
+     "Flag scene for reacquisition on the next two overpasses."],
+  3:["Dispatch community brigade for initial attack; TCO technical team mobilizes tools & water.",
+     "Notify GCP operations and the municipal fire unit (standby).",
+     "Inform ABT regional office; activate interinstitutional logistics protocol.",
+     "Open a verified-event record for the monitoring report (area, severity, carbon pools)."],
+  4:["Full activation — ABT/SATIF and departmental emergency committee (COED) notified.",
+     "Evacuation advisory for communities within 2 km; humanitarian-support protocol on.",
+     "All available brigades converge; establish anchor lines on the leeward flank.",
+     "Continuous tasking on every overpass; daily situation report to project proponent & VVB record."]
+};
+
+const MATRIX = [
+  {l:1, trig:"Single pixel · FRP < 15 MW · unconfirmed", resp:"TCO technical team monitors; permit cross-check"},
+  {l:2, trig:"Confirmed pixel · FRP 15–50 MW · > 5 km from community", resp:"Community brigade verifies on the ground ≤ 12 h"},
+  {l:3, trig:"Cluster ≥ 3 or FRP 50–120 MW · < 5 km from community/HCV", resp:"Brigade dispatch + GCP ops + municipal unit standby + ABT informed"},
+  {l:4, trig:"FRP > 120 MW, multi-pass persistence, or < 2 km from community", resp:"ABT/SATIF + COED activation · evacuation advisory · humanitarian support"}
+];
+
+// ---------- event state ----------
+const now = Date.now();
+const hrs = h => now - h*3600e3;
+
+let events = [
+  {id:"FE-2608", lat:-15.62, lon:-62.28, frp:168, conf:92, cluster:5, passes:3, sat:"VIIRS NOAA-21", first:hrs(19), last:hrs(1.2), status:"Dispatched",
+   log:[["-19.0h","Detected · MODIS Aqua · FRP 61 MW"],["-13.4h","Reacquired · VIIRS S-NPP night pass · cluster 3"],["-6.2h","L4 alert dispatched — VHF + WhatsApp + satphone"],["-5.8h","Acknowledged · Brigada Palestina (VHF ch. 2)"],["-1.2h","Front active on NW flank · FRP rising"]]},
+  {id:"FE-2607", lat:-15.44, lon:-61.55, frp:64, conf:85, cluster:3, passes:1, sat:"VIIRS NOAA-21", first:hrs(2.1), last:hrs(2.1), status:"New", log:[["-2.1h","Detected · VIIRS NOAA-21 · 3 pixels"]]},
+  {id:"FE-2606", lat:-14.92, lon:-62.35, frp:22, conf:68, cluster:1, passes:2, sat:"VIIRS NOAA-20", first:hrs(8.5), last:hrs(2.3), status:"Verifying", log:[["-8.5h","Detected · VIIRS S-NPP"],["-2.3h","Reacquired · low growth"]]},
+  {id:"FE-2605", lat:-16.48, lon:-61.68, frp:41, conf:77, cluster:2, passes:2, sat:"VIIRS S-NPP", first:hrs(11), last:hrs(2.4), status:"Acknowledged",
+   log:[["-11.0h","Detected · night pass"],["-9.7h","L3 alert dispatched — proximity to Puquio Cristo Rey"],["-9.1h","Acknowledged · Brigada Puquio"],["-2.4h","Brigade on site · line construction"]]},
+  {id:"FE-2604", lat:-16.88, lon:-61.90, frp:9, conf:44, cluster:1, passes:1, sat:"MODIS Terra", first:hrs(4.8), last:hrs(4.8), status:"Monitoring", log:[["-4.8h","Detected · low confidence · awaiting reacquisition"]]},
+  {id:"FE-2603", lat:-15.75, lon:-61.95, frp:12, conf:55, cluster:1, passes:2, sat:"VIIRS NOAA-20", first:hrs(30), last:hrs(16), status:"Contained", log:[["-30h","Detected"],["-24h","Verified — residual chaqueo re-ignition"],["-16h","Contained · brigade Makanaté · 3.1 ha"]]},
+  {id:"FE-2602", lat:-16.15, lon:-61.48, frp:88, conf:90, cluster:4, passes:4, sat:"VIIRS S-NPP", first:hrs(41), last:hrs(1.9), status:"Monitoring",
+   log:[["-41h","Detected in leakage belt — ag frontier"],["-27h","ABT notified · outside PA"],["-1.9h","Still active · monitored for PA encroachment"]]}
+];
+let nextIdNum = 2609;
+let selectedId = "FE-2608";
+let live = true;
+let layers = {hotspots:true, communities:true, scars:true, belt:true, labels:false};
+
+function zoneOf(e){
+  if(insidePoly(e.lat,e.lon,MONTE_VERDE)) return "TIOC Monte Verde";
+  if(insidePoly(e.lat,e.lon,LOMERIO)) return "TIOC Lomerío";
+  return "Leakage belt";
+}
+function agoStr(ts){
+  const m=Math.max(0,Math.round((Date.now()-ts)/60000));
+  if(m<60) return m+" min ago";
+  const h=(m/60);
+  return (h<10?h.toFixed(1):Math.round(h))+" h ago";
+}
+function fmtCoord(e){ return e.lat.toFixed(3)+", "+e.lon.toFixed(3); }
+
+// ---------- map ----------
+const svgNS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent){
+  const n=document.createElementNS(svgNS,tag);
+  for(const k in attrs) n.setAttribute(k,attrs[k]);
+  if(parent) parent.appendChild(n);
+  return n;
+}
+function polyPath(pts){
+  return pts.map((p,i)=>(i?"L":"M")+px(p[0]).toFixed(1)+" "+py(p[1]).toFixed(1)).join(" ")+" Z";
+}
+function scalePoly(pts,f){
+  const cx=pts.reduce((s,p)=>s+p[0],0)/pts.length, cy=pts.reduce((s,p)=>s+p[1],0)/pts.length;
+  return pts.map(p=>[cx+(p[0]-cx)*f, cy+(p[1]-cy)*f]);
+}
+
+const map=document.getElementById("map");
+let gFires;
+
+function buildMap(){
+  map.innerHTML="";
+  // graticule
+  const gGrat=el("g",{class:"gratgrp"},map);
+  for(let lon=-63;lon<=-61;lon+=0.5){
+    el("line",{x1:px(lon),y1:0,x2:px(lon),y2:H,class:"graticule"},gGrat);
+    const t=el("text",{x:px(lon)+4,y:14,class:"grat-label"},gGrat);
+    t.textContent=lon.toFixed(1)+"°";
+  }
+  for(let lat=-17;lat<=-15;lat+=0.5){
+    el("line",{x1:0,y1:py(lat),x2:W,y2:py(lat),class:"graticule"},gGrat);
+    const t=el("text",{x:6,y:py(lat)-5,class:"grat-label"},gGrat);
+    t.textContent=lat.toFixed(1)+"°";
+  }
+  // leakage belt
+  const gBelt=el("g",{class:"beltgrp"},map);
+  el("path",{d:polyPath(scalePoly(MONTE_VERDE,1.14)),class:"belt"},gBelt);
+  el("path",{d:polyPath(scalePoly(LOMERIO,1.22)),class:"belt"},gBelt);
+  gBelt.style.display=layers.belt?"":"none";
+  // TIOCs
+  el("path",{d:polyPath(MONTE_VERDE),class:"tioc"},map);
+  el("path",{d:polyPath(LOMERIO),class:"tioc dim"},map);
+  let t=el("text",{x:px(-62.32),y:py(-15.28),class:"tioc-label"},map); t.textContent="TIOC MONTE VERDE";
+  t=el("text",{x:px(-62.32),y:py(-15.28)+14,class:"tioc-sub"},map); t.textContent="947,441 ha · CICOL / CICC / CIP-SJ";
+  t=el("text",{x:px(-61.98),y:py(-16.52),class:"tioc-label"},map); t.textContent="TIOC LOMERÍO";
+  t=el("text",{x:px(-61.98),y:py(-16.52)+14,class:"tioc-sub"},map); t.textContent="259,189 ha · CICOL";
+  // burn scars
+  const gScar=el("g",{class:"scargrp"},map);
+  for(const s of SCARS){
+    el("path",{d:polyPath(s.pts),class:"scar"},gScar);
+    const lb=el("text",{x:px(s.pts[0][0])+4,y:py(s.pts[0][1])-4,class:"community-label"},gScar);
+    lb.textContent=s.label;
+  }
+  gScar.style.display=layers.scars?"":"none";
+  // communities
+  const gCom=el("g",{class:"comgrp"},map);
+  for(const c of COMMUNITIES){
+    el("rect",{x:px(c.lon)-3,y:py(c.lat)-3,width:6,height:6,class:"community",transform:"rotate(45 "+px(c.lon)+" "+py(c.lat)+")"},gCom);
+    const lb=el("text",{x:px(c.lon)+7,y:py(c.lat)+3,class:"community-label","data-lbl":"1"},gCom);
+    lb.textContent=c.name;
+    lb.style.display=layers.labels?"":"none";
+  }
+  gCom.style.display=layers.communities?"":"none";
+  // wind rose
+  const wr=el("g",{class:"windrose",transform:"translate("+(W-64)+",70)"},map);
+  el("circle",{cx:0,cy:0,r:26,fill:"none"},wr);
+  const rad=(WIND.toDeg-90)*Math.PI/180;
+  const ax=Math.cos(rad)*20, ay=Math.sin(rad)*20;
+  el("line",{x1:-ax,y1:-ay,x2:ax,y2:ay,"stroke-width":1.6},wr);
+  el("path",{d:"M "+ax+" "+ay+" l "+(-6*Math.cos(rad-0.5))+" "+(-6*Math.sin(rad-0.5))+" M "+ax+" "+ay+" l "+(-6*Math.cos(rad+0.5))+" "+(-6*Math.sin(rad+0.5)),"stroke-width":1.6,fill:"none"},wr);
+  let wt=el("text",{x:0,y:44,"text-anchor":"middle"},wr); wt.textContent=WIND.label;
+  wt=el("text",{x:0,y:-32,"text-anchor":"middle"},wr); wt.textContent="N";
+  // sweep line (satellite pass)
+  el("line",{x1:0,y1:0,x2:W*0.35,y2:H,class:"sweep-glow",id:"sweepGlow"},map);
+  el("line",{x1:0,y1:0,x2:W*0.35,y2:H,class:"sweep",id:"sweepLine"},map);
+  // fires group
+  gFires=el("g",{class:"firegrp"},map);
+  drawFires();
+}
+
+function drawFires(){
+  gFires.innerHTML="";
+  gFires.style.display=layers.hotspots?"":"none";
+  const sorted=[...events].sort((a,b)=>a.frp-b.frp);
+  for(const e of sorted){
+    const cls=classify(e);
+    const x=px(e.lon), y=py(e.lat);
+    const r=Math.max(4,Math.min(13,3+Math.sqrt(e.frp)*0.75));
+    const active = e.status!=="Contained";
+    if(active && cls.lvl>=3){
+      const halo=el("circle",{cx:x,cy:y,r:r*1.7,fill:SEV[cls.lvl].hex,class:"fire-halo"},gFires);
+      halo.style.transformOrigin=x+"px "+y+"px";
+    }
+    const dot=el("circle",{cx:x,cy:y,r:r,fill:e.status==="Contained"?"#5c6f63":SEV[cls.lvl].hex,class:"fire-dot"+(e.id===selectedId?" selected":""),tabindex:0,role:"button","aria-label":e.id+" severity "+SEV[cls.lvl].name},gFires);
+    dot.addEventListener("click",()=>selectEvent(e.id));
+    dot.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();selectEvent(e.id);}});
+    // projected spread arrow for active L3+
+    if(active && cls.lvl>=3){
+      const rad=(WIND.toDeg-90)*Math.PI/180;
+      const len=r+10+e.frp*0.06;
+      el("line",{x1:x,y1:y,x2:x+Math.cos(rad)*len,y2:y+Math.sin(rad)*len,stroke:SEV[cls.lvl].hex,"stroke-width":1.2,"stroke-dasharray":"3 3",opacity:.8},gFires);
+    }
+    const lb=el("text",{x:x+r+4,y:y-r-2,class:"community-label",fill:"#93aa9c"},gFires);
+    lb.textContent=e.id;
+  }
+}
+
+// ---------- feed ----------
+const feedEl=document.getElementById("feed");
+function renderFeed(newId){
+  const order={New:0,Dispatched:1,Acknowledged:2,Verifying:3,Monitoring:4,Contained:5};
+  const sorted=[...events].sort((a,b)=>{
+    const s=(order[a.status]??9)-(order[b.status]??9);
+    return s!==0?s:b.last-a.last;
+  });
+  feedEl.innerHTML="";
+  for(const e of sorted){
+    const cls=classify(e);
+    const b=document.createElement("button");
+    b.className="feed-item"+(e.id===selectedId?" selected":"")+(e.id===newId?" is-new":"");
+    b.setAttribute("role","listitem");
+    b.innerHTML=
+      '<div class="fi-top"><span class="fi-id">'+e.id+'</span>'+
+      '<span class="sev-tag" style="color:'+SEV[cls.lvl].hex+';border-color:'+SEV[cls.lvl].hex+'">L'+cls.lvl+' '+SEV[cls.lvl].name+'</span></div>'+
+      '<div class="fi-loc">'+zoneOf(e)+' · near '+cls.near.c.name+' ('+cls.near.km.toFixed(1)+' km)</div>'+
+      '<div class="fi-data"><span>FRP '+e.frp.toFixed(0)+' MW</span><span>'+e.cluster+' px</span><span>conf '+e.conf+'%</span><span class="fi-time">'+agoStr(e.last)+'</span></div>'+
+      '<div class="fi-data" style="margin-top:4px"><span class="status-tag">'+e.status+'</span><span>'+e.sat+'</span></div>';
+    b.addEventListener("click",()=>selectEvent(e.id));
+    feedEl.appendChild(b);
+  }
+  const active=events.filter(e=>e.status!=="Contained").length;
+  const crit=events.filter(e=>e.status!=="Contained"&&classify(e).lvl===4).length;
+  document.getElementById("kpiActive").textContent=active;
+  document.getElementById("kpiActiveNote").textContent=crit+" critical · "+events.filter(e=>e.status==="New").length+" awaiting triage";
+  document.getElementById("feedMeta").textContent=events.length+" events · 48 h";
+}
+
+// ---------- detail / dispatch ----------
+const detailEl=document.getElementById("detail");
+function alertMessage(e,cls){
+  const n=cls.near;
+  const spreadDir=compass(WIND.toDeg);
+  return "ALERTA NIVEL "+cls.lvl+" — "+SEV[cls.lvl].name.toUpperCase()+"\n"+
+    "Evento "+e.id+" · "+zoneOf(e)+"\n"+
+    "Detección "+e.sat+" · "+agoStr(e.last)+"\n"+
+    "Coordenadas: "+fmtCoord(e)+" · "+e.cluster+" foco(s) · FRP "+e.frp.toFixed(0)+" MW · conf. "+e.conf+"%\n"+
+    "Comunidad más cercana: "+n.c.name+" — "+n.km.toFixed(1)+" km al "+compass(cls.near.dirToCommunity)+"\n"+
+    "Viento "+WIND.label+" — propagación estimada hacia el "+spreadDir+"\n"+
+    "ACCIÓN: "+({1:"Registrar y monitorear próxima pasada. Verificar registro de permisos de quema (ABT).",
+                 2:"Brigada comunal de "+n.c.name+": verificación en terreno dentro de 12 h. Confirmar contra calendario de chaqueo.",
+                 3:"Brigada comunal de "+n.c.name+": ataque inicial. Equipo técnico TCO movilizar herramientas y agua. Notificar ABT.",
+                 4:"Movilización total. ABT/SATIF y COED notificados. Aviso preventivo de evacuación a comunidades < 2 km."}[cls.lvl])+"\n"+
+    "Confirmar recepción por radio VHF canal 2.";
+}
+const CHANNELS_DEFAULT={1:["WhatsApp"],2:["WhatsApp","SMS"],3:["VHF radio","WhatsApp","SMS"],4:["VHF radio","WhatsApp","SMS","Satphone"]};
+const ALL_CHANNELS=["VHF radio","WhatsApp","SMS","Satphone"];
+let chanState=[];
+
+function renderDetail(){
+  const e=events.find(x=>x.id===selectedId);
+  if(!e){detailEl.innerHTML='<div class="d-empty">Select a detection on the map or in the feed to open verification and dispatch.</div>';return;}
+  const cls=classify(e);
+  const n=cls.near;
+  document.getElementById("detailMeta").textContent=zoneOf(e);
+  const spreadKmH=(WIND.speed*0.045*(1+e.frp/150)).toFixed(1); // simple wind-driven rate-of-spread proxy
+  const etaH = n.km>0? (n.km/Math.max(0.2,spreadKmH)).toFixed(0):"—";
+  const towardCommunity = Math.abs(((cls.near.dirToCommunity - WIND.toDeg)+540)%360-180) < 60;
+  const canDispatch = e.status==="New"||e.status==="Verifying"||e.status==="Monitoring";
+  const msg=alertMessage(e,cls);
+  const matrixRows=MATRIX.map(m=>'<tr class="'+(m.l===cls.lvl?"hl":"")+'"><td><span class="sev-tag" style="color:'+SEV[m.l].hex+';border-color:'+SEV[m.l].hex+'">L'+m.l+'</span></td><td>'+m.trig+'</td><td>'+m.resp+'</td></tr>').join("");
+
+  detailEl.innerHTML=
+  '<div class="d-block"><div class="d-title"><span class="id">'+e.id+'</span>'+
+    '<span class="sev-tag" style="font-size:11px;padding:4px 10px;color:'+SEV[cls.lvl].hex+';border-color:'+SEV[cls.lvl].hex+'">LEVEL '+cls.lvl+' · '+SEV[cls.lvl].name.toUpperCase()+'</span></div>'+
+    '<div class="sev-rationale"><b>Why this level:</b> '+cls.reasons.join("; ")+'.</div></div>'+
+
+  '<div class="d-block"><h3>Satellite record</h3><div class="d-grid">'+
+    kv("Coordinates",fmtCoord(e))+kv("Zone",zoneOf(e))+
+    kv("Sensor",e.sat)+kv("Confidence",e.conf+"%")+
+    kv("FRP","<b>"+e.frp.toFixed(0)+"</b> MW")+kv("Cluster",e.cluster+" pixel(s)")+
+    kv("First seen",agoStr(e.first))+kv("Overpasses",e.passes+" detections")+
+    kv("Nearest community",n.c.name)+kv("Distance",n.km.toFixed(1)+" km "+compass(n.dirToCommunity))+
+  '</div></div>'+
+
+  '<div class="d-block"><h3>Spread outlook</h3><div class="spread">'+
+    'Wind '+WIND.label+' → front pushed toward <b>'+compass(WIND.toDeg)+'</b> at ~'+spreadKmH+' km/h (fuel-adjusted). '+
+    (towardCommunity
+      ? '<b style="color:var(--sev4)">Aligned with '+n.c.name+'</b> — indicative arrival in ~'+etaH+' h if unchecked. Anchor suppression on the '+compass((WIND.toDeg+180)%360)+' flank.'
+      : 'Track is <b>away from '+n.c.name+'</b>; monitor flanking growth on reacquisition.')+
+    '<div class="mono" style="margin-top:6px">RH 31% · T 34°C · 12 days without rain — fine fuels fully available.</div></div></div>'+
+
+  '<div class="d-block"><h3>Response protocol — Level '+cls.lvl+'</h3><ul class="protocol">'+
+    PROTOCOLS[cls.lvl].map(p=>"<li>"+p+"</li>").join("")+'</ul></div>'+
+
+  '<div class="d-block"><h3>Ground-team alert</h3>'+
+    '<div class="alert-msg" id="alertMsg">'+msg+'</div>'+
+    '<div class="channels" id="channels"></div>'+
+    '<div class="dispatch-row">'+
+      '<button class="btn-primary" id="dispatchBtn" '+(canDispatch?"":"disabled")+'>'+
+        (canDispatch?"Dispatch alert":(e.status==="Dispatched"?"Alert sent — awaiting ack":e.status==="Acknowledged"?"Acknowledged by brigade":"Event "+e.status.toLowerCase()))+'</button>'+
+      '<button class="btn-ghost" id="copyBtn">Copy</button></div>'+
+    '<div class="ack-line" id="ackLine">'+ackText(e)+'</div></div>'+
+
+  '<div class="d-block"><h3>Comms log</h3><ul class="comms-log">'+
+    e.log.map(l=>'<li><span class="t">'+l[0]+'</span><span>'+l[1]+'</span></li>').join("")+'</ul></div>'+
+
+  '<div class="d-block"><h3>Escalation matrix</h3><table class="matrix"><tbody>'+matrixRows+'</tbody></table></div>';
+
+  // channels
+  chanState=CHANNELS_DEFAULT[cls.lvl].slice();
+  const chWrap=document.getElementById("channels");
+  ALL_CHANNELS.forEach(ch=>{
+    const b=document.createElement("button");
+    b.className="chan"+(chanState.includes(ch)?" on":"");
+    b.textContent=ch;
+    b.addEventListener("click",()=>{
+      if(chanState.includes(ch)) chanState=chanState.filter(c=>c!==ch);
+      else chanState.push(ch);
+      b.classList.toggle("on");
+    });
+    chWrap.appendChild(b);
+  });
+
+  document.getElementById("copyBtn").addEventListener("click",()=>{
+    const ta=document.createElement("textarea");
+    ta.value=msg;document.body.appendChild(ta);ta.select();
+    try{document.execCommand("copy");}catch(err){}
+    document.body.removeChild(ta);
+    toast("Alert text copied for "+e.id);
+  });
+
+  const db=document.getElementById("dispatchBtn");
+  if(canDispatch) db.addEventListener("click",()=>dispatch(e));
+}
+function kv(l,v){return '<div class="d-kv"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>';}
+function ackText(e){
+  if(e.status==="Acknowledged") return '<span class="ok">✓ Acknowledged by brigade — crew en route / on site.</span>';
+  if(e.status==="Dispatched") return "Sent — awaiting VHF acknowledgment from brigade…";
+  if(e.status==="Contained") return "Closed — perimeter recorded for the monitoring report.";
+  return "Not yet dispatched. Channels pre-selected by severity level.";
+}
+function dispatch(e){
+  if(chanState.length===0){toast("Select at least one channel");return;}
+  e.status="Dispatched";
+  e.log.push(["now","Alert dispatched — "+chanState.join(" + ")]);
+  toast("L"+classify(e).lvl+" alert dispatched via "+chanState.join(", "));
+  renderAll();
+  setTimeout(()=>{
+    if(e.status==="Dispatched"){
+      e.status="Acknowledged";
+      e.log.push(["now","Acknowledged · Brigada "+classify(e).near.c.name+" (VHF ch. 2)"]);
+      toast(e.id+" acknowledged by Brigada "+classify(e).near.c.name);
+      renderAll();
+    }
+  },9000);
+}
+
+function selectEvent(id){
+  selectedId=id;
+  renderAll();
+  const d=document.querySelector(".detailcol");
+  if(window.innerWidth<1180 && d) window.scrollTo({top:d.getBoundingClientRect().top+window.scrollY,behavior:"smooth"}); // solo el panel: dentro del sitio va en un iframe y scrollIntoView movería la página entera
+}
+
+// ---------- toast ----------
+let toastTimer;
+function toast(txt){
+  const t=document.getElementById("toast");
+  t.textContent=txt;t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove("show"),3600);
+}
+
+// ---------- forecast ----------
+const FORECAST=[
+  {d:"Sun 16", t:34, rh:31, w:14, r:0},
+  {d:"Mon 17", t:35, rh:28, w:18, r:0},
+  {d:"Tue 18", t:36, rh:24, w:22, r:0},
+  {d:"Wed 19", t:33, rh:35, w:12, r:0},
+  {d:"Thu 20", t:31, rh:48, w:10, r:2},
+  {d:"Fri 21", t:33, rh:38, w:13, r:0},
+  {d:"Sat 22", t:35, rh:30, w:16, r:0}
+];
+function dangerOf(f){
+  const idx=(f.t-20)*2 + (60-f.rh) + f.w - f.r*12;
+  if(idx<25) return {n:"Low",c:"var(--ok)",p:15};
+  if(idx<45) return {n:"Moderate",c:"var(--sev1)",p:35};
+  if(idx<60) return {n:"High",c:"var(--sev2)",p:58};
+  if(idx<75) return {n:"Very High",c:"var(--sev3)",p:80};
+  return {n:"Extreme",c:"var(--sev4)",p:100};
+}
+function renderForecast(){
+  const wrap=document.getElementById("forecast");
+  wrap.innerHTML="";
+  FORECAST.forEach((f,i)=>{
+    const d=dangerOf(f);
+    const div=document.createElement("div");
+    div.className="fc-day"+(i===0?" today":"");
+    div.innerHTML='<div class="fc-date">'+f.d+(i===0?" · today":"")+'</div>'+
+      '<div class="fc-danger" style="color:'+d.c+'">'+d.n+'</div>'+
+      '<div class="fc-bar"><i style="width:'+d.p+'%;background:'+d.c+'"></i></div>'+
+      '<div class="fc-wx">'+f.t+'°C · RH '+f.rh+'%<br>wind '+f.w+' km/h · rain '+f.r+' mm</div>';
+    wrap.appendChild(div);
+  });
+  const today=dangerOf(FORECAST[0]);
+  const chip=document.getElementById("dangerToday");
+  chip.textContent="DANGER: "+today.n.toUpperCase();
+  chip.style.color=today.c;chip.style.borderColor=today.c;
+}
+
+// ---------- season chart ----------
+function renderSeason(){
+  const data=[12,8,10,25,60,140,420,980,1250,690,160,40];
+  const months=["J","F","M","A","M","J","J","A","S","O","N","D"];
+  const svg=document.getElementById("seasonChart");
+  svg.innerHTML="";
+  const w=560,h=190,pad=26,max=1300;
+  const bw=(w-pad*2)/12;
+  data.forEach((v,i)=>{
+    const bh=(v/max)*(h-pad-26);
+    const x=pad+i*bw+3, y=h-24-bh;
+    const cur=i===7; // August
+    el("rect",{x:x,y:y,width:bw-6,height:bh,fill:cur?"#FF7A45":(i>=6&&i<=9?"#8a5a34":"#2E4237"),rx:1},svg);
+    const t=el("text",{x:x+(bw-6)/2,y:h-9,"text-anchor":"middle",fill:cur?"#FF7A45":"#5E7367","font-size":"10","font-family":"var(--font-mono)"},svg);
+    t.textContent=months[i];
+    if(cur){
+      const t2=el("text",{x:x+(bw-6)/2,y:y-6,"text-anchor":"middle",fill:"#FF7A45","font-size":"10","font-family":"var(--font-mono)"},svg);
+      t2.textContent=v;
+    }
+  });
+  el("line",{x1:pad,y1:h-24,x2:w-pad+6,y2:h-24,stroke:"#2A3A31"},svg);
+}
+
+// ---------- sector risk ----------
+const RISK=[
+  {s:"MV South — Concepción edge", dry:12, fuel:"High", hist:"High", front:"1.8 km", v:88},
+  {s:"Leakage belt — E frontier", dry:12, fuel:"High", hist:"Very high", front:"inside", v:93},
+  {s:"Lomerío — N (Puquio corridor)", dry:11, fuel:"Med", hist:"Med", front:"4.2 km", v:64},
+  {s:"MV North — Río Blanco", dry:9, fuel:"Med", hist:"Low", front:"12 km", v:41},
+  {s:"MV Core — interior HCV", dry:12, fuel:"Low", hist:"Low", front:"> 20 km", v:22}
+];
+function riskColor(v){return v>=80?"var(--sev4)":v>=60?"var(--sev3)":v>=40?"var(--sev2)":"var(--ok)";}
+function renderRisk(){
+  document.getElementById("riskBody").innerHTML=RISK.map(r=>
+    '<tr><td>'+r.s+'</td><td>'+r.dry+'</td><td>'+r.fuel+'</td><td>'+r.hist+'</td><td>'+r.front+'</td>'+
+    '<td><div class="risk-bar"><div class="track"><i style="width:'+r.v+'%;background:'+riskColor(r.v)+'"></i></div>'+r.v+'</div></td></tr>').join("");
+  document.getElementById("matrixBody").innerHTML=MATRIX.map(m=>
+    '<tr><td><span class="sev-tag" style="color:'+SEV[m.l].hex+';border-color:'+SEV[m.l].hex+'">L'+m.l+' '+SEV[m.l].name+'</span></td><td>'+m.trig+'</td><td>'+m.resp+'</td></tr>').join("");
+}
+
+// ---------- clock & passes ----------
+function botNow(){
+  const d=new Date();
+  return new Date(d.getTime()+(BOT_OFFSET*60+d.getTimezoneOffset())*60000);
+}
+function pad2(n){return String(n).padStart(2,"0");}
+function tick(){
+  const b=botNow();
+  document.getElementById("clockLocal").textContent=pad2(b.getHours())+":"+pad2(b.getMinutes())+":"+pad2(b.getSeconds());
+  // next pass
+  const mins=b.getHours()*60+b.getMinutes()+b.getSeconds()/60;
+  let next=null,dm=1e9;
+  for(const p of PASSES){
+    const [hh,mm]=p.t.split(":").map(Number);
+    let m=hh*60+mm-mins; if(m<0)m+=1440;
+    if(m<dm){dm=m;next=p;}
+  }
+  document.getElementById("nextPass").textContent=next.sat.replace(" (night)","·N");
+  const hLeft=Math.floor(dm/60), mLeft=Math.floor(dm%60), sLeft=Math.floor((dm*60)%60);
+  document.getElementById("passCountdown").textContent=(hLeft?hLeft+"h ":"")+pad2(mLeft)+"m "+pad2(sLeft)+"s";
+  const sync=new Date(botNow().getTime()-14*60000);
+  document.getElementById("lastSync").textContent=pad2(sync.getHours())+":"+pad2(sync.getMinutes())+" BOT";
+}
+setInterval(tick,1000);
+
+// ---------- satellite sweep + live simulation ----------
+function runSweep(satName){
+  const line=document.getElementById("sweepLine");
+  const glow=document.getElementById("sweepGlow");
+  const info=document.getElementById("sweepInfo");
+  info.textContent="Overpass in progress — "+satName;
+  const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce){info.textContent="Scene acquired — "+satName;return;}
+  let t=0;
+  const anim=setInterval(()=>{
+    t+=0.012;
+    const x=t*(W+240)-120;
+    [line,glow].forEach(l=>{
+      l.setAttribute("x1",x);l.setAttribute("y1",0);
+      l.setAttribute("x2",x-160);l.setAttribute("y2",H);
+      l.style.opacity=Math.sin(Math.min(1,t)*Math.PI);
+    });
+    if(t>=1){clearInterval(anim);line.style.opacity=0;glow.style.opacity=0;
+      info.textContent="Scene acquired — "+satName+" · feed updated";}
+  },16);
+}
+
+let simCount=0;
+function simulateDetection(){
+  if(!live) return;
+  simCount++;
+  const sat=PASSES[Math.floor(Math.random()*PASSES.length)].sat.replace(" (night)","");
+  runSweep(sat);
+  // 55%: an existing active event grows / reacquires. 45%: new detection.
+  const active=events.filter(e=>e.status!=="Contained");
+  if(Math.random()<0.55 && active.length){
+    const e=active[Math.floor(Math.random()*active.length)];
+    const before=classify(e).lvl;
+    e.passes++; e.last=Date.now(); e.sat=sat;
+    e.frp=Math.max(4,e.frp*(0.85+Math.random()*0.5));
+    if(Math.random()<0.35) e.cluster=Math.min(9,e.cluster+1);
+    e.conf=Math.min(97,e.conf+Math.floor(Math.random()*6));
+    const after=classify(e).lvl;
+    e.log.push(["now","Reacquired · "+sat+" · FRP "+e.frp.toFixed(0)+" MW"+(after>before?" · ESCALATED to L"+after:"")]);
+    if(after>before) toast(e.id+" escalated to L"+after+" "+SEV[after].name+" — review dispatch");
+    renderAll(e.id);
+  } else {
+    // spawn inside one of the polygons or belt
+    const roll=Math.random();
+    let lat,lon;
+    if(roll<0.55){ // Monte Verde
+      do{ lat=-14.85-Math.random()*1.05; lon=-62.7+Math.random()*1.3; }while(!insidePoly(lat,lon,MONTE_VERDE));
+    } else if(roll<0.8){ // Lomerío
+      do{ lat=-16.3-Math.random()*0.6; lon=-62.1+Math.random()*0.65; }while(!insidePoly(lat,lon,LOMERIO));
+    } else { lat=-16.1-Math.random()*0.15; lon=-61.55+Math.random()*0.2; } // belt
+    const e={id:"FE-"+(nextIdNum++), lat, lon,
+      frp:5+Math.random()*Math.random()*140,
+      conf:40+Math.floor(Math.random()*55),
+      cluster:1+(Math.random()<0.3?Math.floor(Math.random()*3):0),
+      passes:1, sat, first:Date.now(), last:Date.now(), status:"New",
+      log:[["now","Detected · "+sat]]};
+    events.unshift(e);
+    const cls=classify(e);
+    toast("New detection "+e.id+" — L"+cls.lvl+" "+SEV[cls.lvl].name+" near "+cls.near.c.name);
+    renderAll(e.id);
+  }
+}
+setInterval(simulateDetection, 22000);
+setTimeout(()=>runSweep("VIIRS NOAA-21"), 1500);
+
+// ---------- toolbar ----------
+document.querySelectorAll(".layer-btn").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const k=b.dataset.layer;
+    layers[k]=!layers[k];
+    b.classList.toggle("on",layers[k]);
+    if(k==="labels"){
+      document.querySelectorAll('[data-lbl]').forEach(t=>t.style.display=layers.labels?"":"none");
+    } else buildMap();
+  });
+});
+document.getElementById("liveToggle").addEventListener("click",function(){
+  live=!live;
+  this.classList.toggle("paused",!live);
+  this.setAttribute("aria-pressed",live);
+  document.getElementById("liveLabel").textContent=live?"Live feed":"Paused";
+  toast(live?"Live satellite feed resumed":"Feed paused — detections held");
+});
+
+// ---------- boot ----------
+function renderAll(newId){
+  drawFires();
+  renderFeed(newId);
+  renderDetail();
+}
+buildMap();
+renderForecast();
+renderSeason();
+renderRisk();
+renderAll();
+tick();
+</script>
+</body>
+</html>

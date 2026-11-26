@@ -20,21 +20,21 @@ La primera vez, antes de arrancar Apache, el contenedor instala WordPress en esp
 
 `GC_URL` se guarda en la base en la primera instalación. Para cambiar de dominio después: `docker compose exec wordpress wp --allow-root search-replace 'http://viejo' 'https://nuevo'`.
 
-Con la imagen ya construida (`greencarbon-wordpress-1.2.4-amd64.tar.gz`, para servidores x86) no hace falta reconstruir:
+Con la imagen ya construida (`greencarbon-wordpress-1.3.2-amd64.tar.gz`, para servidores x86) no hace falta reconstruir:
 
 ```bash
-docker load -i greencarbon-wordpress-1.2.4-amd64.tar.gz
-docker tag greencarbon-wordpress:1.2.4-amd64 greencarbon-wordpress:1.2.4
+docker load -i greencarbon-wordpress-1.3.2-amd64.tar.gz
+docker tag greencarbon-wordpress:1.3.2-amd64 greencarbon-wordpress:1.3.2
 docker compose up -d --no-build
 ```
 
 ## Qué edita el administrador
 
-21 secciones, en el mismo orden que la página, con 354 campos. Cada texto tiene dos campos, **ES** y **EN** (debajo):
+21 secciones, en el mismo orden que la página, con 355 campos. Cada texto tiene dos campos, **ES** y **EN** (debajo):
 
 | Sección | Qué se edita |
 |---|---|
-| General | Título de la pestaña, descripción para buscadores, **enlace de los mapas** e **enlace del monitoreo de incendios** (si se completan, se muestran en un iframe) |
+| General | Título de la pestaña, descripción para buscadores, **enlace de los mapas** e **enlace del monitoreo de incendios** (opcionales: si se completan, reemplazan el mapa interactivo o el panel de demostración por esa página en un iframe) |
 | Cabecera y menú → Pie de página | Cada título, párrafo, botón, ítem del menú, foto (y su texto alternativo), enlace externo, redes sociales y destino del formulario |
 | Avisos «Falta» / «SSOT» | Cada aviso tiene un campo. Si se escribe el dato real, el aviso desaparece y se muestra el dato. Si se deja vacío, vuelve el aviso. |
 | Retratos y foto de especie | Huecos de imagen. Mientras estén vacíos se ve la silueta o el aviso. |
@@ -49,9 +49,17 @@ En los textos se permiten `<em>`, `<strong>`, `<b>`, `<br>` y `<a>`.
 
 ## Qué NO se edita desde el panel (está fijo en el tema)
 
-- **El recorrido en video**: `video/recorrido-1080p60.mp4` (60 fps) en computadora y los cuadros WebP `pack/v` a 48 fps en celular. `pack/h` (24 fps) solo es un respaldo si falla el MP4. Los fps altos se interpolaron (minterpolate) desde los de 30 y 24 fps con `herramientas/video/subir_fps.py` (los clips originales de Flow no están en el repo; `recorrido3.py` y `empaquetar.py` son el pipeline original). El manifest de cada paquete trae sus `fps` y el JS convierte las anclas, que siguen en cuadros de 24/s. Se generan con los scripts de Python del recorrido. Si cambia, hay que reemplazar los archivos y subir `VERSION` en `js/main.js`, porque el navegador los cachea.
+- **El recorrido en video**: `video/recorrido-1080p60.mp4` (60 fps) en computadora y los cuadros WebP `pack/v` a 48 fps en celular. `pack/h` (24 fps) solo es un respaldo si falla el MP4. Los fps altos se interpolaron (minterpolate) desde los de 30 y 24 fps con `herramientas/video/subir_fps.py` (los clips originales de Flow no están en el repo; `recorrido3.py` y `empaquetar.py` son el pipeline original). El manifest de cada paquete trae sus `fps` y el JS convierte las anclas, que siguen en cuadros de 24/s. Se generan con los scripts de Python del recorrido. Si cambia, hay que reemplazar los archivos y subir `GC_RECORRIDO_V` en `functions.php`, porque el navegador los cachea.
 - **Las anclas `data-cuadro`** de cada sección, que sincronizan el scroll con el video.
 - **El diseño**: `style.css`, los íconos SVG y la estructura de secciones.
+
+## Versión 1.3.2
+
+Reconstruida desde el sitio publicado (tema 1.3.1) sobre 1.2.4, porque el código de 1.3.1 no estaba en el repo. Trae lo de 1.3.1: fuentes locales (Inter, sin Google Fonts), mapa interactivo Leaflet de Monte Verde y Lomerío (`datos/*.geojson`) con botón a Global Nature Watch por territorio, panel de demostración del Centro de Operaciones de Incendios (`panel.html`, detecciones simuladas), videos de testimonios en ventana (`testimonios/`), metadatos para buscadores y redes (canónica, Open Graph, JSON-LD), favicon, oficinas y teléfonos nuevos, y superficies por territorio. Conserva los datos del cliente de 1.2.4 (impacto, jaguar, noticia, consentimiento con enlace a `?privacidad`, sin adjunto).
+
+**Formulario de contacto:** si «Destino del formulario» (18 · Contacto) está vacío, envía a `/wp-json/gc/v1/contacto` y WordPress manda el correo a la dirección de contacto con `wp_mail` (el servidor tiene que poder enviar correo: SMTP o plugin). Si el panel ya tenía guardado `submit-form.com`, sigue usándolo hasta vaciar el campo.
+
+`herramientas/convertir.py` ya no reproduce este tema (no conoce los cambios de 1.3.x): no correrlo sobre `tema/greencarbon` sin portar antes esos cambios.
 
 ## Cómo está hecho
 
@@ -73,7 +81,7 @@ Dockerfile, docker-compose.yml
 - Usar el `.env` con contraseñas propias, `GC_URL` con el dominio real y `GC_INDEXAR=1` cuando el cliente apruebe publicar (hoy está en `noindex`, igual que el sitio actual).
 - Poner HTTPS delante (proxy inverso o el panel del hosting) y publicar el puerto solo en `127.0.0.1`. El editor de archivos del admin está desactivado (`DISALLOW_FILE_EDIT`).
 - Las contraseñas de `.env` quedan visibles con `docker inspect`: en producción conviene usar secretos del orquestador.
-- Si se despliega en un hosting WordPress sin Docker: subir solo `tema/greencarbon` a `wp-content/themes/` y activarlo. Pesa unos 245 MB por el video y los cuadros.
+- Si se despliega en un hosting WordPress sin Docker: subir solo `tema/greencarbon` a `wp-content/themes/` y activarlo. Pesa unos 325 MB por el video y los cuadros.
 - Respaldo: volúmenes `db` (base de datos) y `uploads` (fotos que suba el admin).
 
 ## Pendientes del cliente (se cargan desde el panel cuando lleguen)
@@ -82,4 +90,4 @@ Ya cargados por defecto en 1.2.4 (respuestas del cliente, fuente PDMR): contacto
 
 Siguen pendientes: foto de Lomerío, foto del jaguar con autoría y permiso, cobertura forestal por territorio, cifra de prevención/respuesta, enlace a datos de monitoreo, dirección propia del dashboard de incendios, destino del Canal de Integridad y flujo de «Reportar una alerta». El sitio tiene versión en inglés (`?lang=en`); cada texto nuevo lleva su campo EN.
 
-Ojo: si el panel ya tiene guardado un campo, ese valor manda sobre el predeterminado nuevo; para ver el dato de 1.2.4 hay que vaciar el campo en el Personalizador.
+Ojo: si el panel ya tiene guardado un campo, ese valor manda sobre el predeterminado nuevo; para ver el dato de 1.3.2 hay que vaciar el campo en el Personalizador.

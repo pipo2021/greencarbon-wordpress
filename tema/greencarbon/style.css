@@ -1,10 +1,18 @@
 /*
 Theme Name: Green Carbon Bolivia
 Description: Sitio de una página con recorrido en video. Todo el contenido se edita en Apariencia → Personalizar → Contenido de la web.
-Version: 1.2.4
+Version: 1.3.2
 Requires PHP: 8.1
 Text Domain: greencarbon
 */
+/* Fuentes servidas desde el tema (antes venían de Google Fonts: una conexión menos y sin bloquear la carga). */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 600; font-display: swap; src: url(fonts/inter-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 600; font-display: swap; src: url(fonts/inter-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(fonts/inter-tight-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(fonts/inter-tight-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 500; font-display: swap; src: url(fonts/jetbrains-mono-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 500; font-display: swap; src: url(fonts/jetbrains-mono-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
 /* Estructura según el brief de diseño (oct 2026). Un recorrido de video fijo de fondo (secuencia en canvas)
    atado al scroll: cada sección con data-cuadro fija qué cuadro se ve cuando su borde superior llega arriba;
    las secciones con fondo propio (claro, cálido, gris) tapan el video y el recorrido se queda quieto detrás. */
@@ -723,6 +731,8 @@ html.anim .reveal.in .foto-vert, html.anim .reveal.in .tres-fotos .marco, html.a
 /* "GREEN CARBON" mide ~6,84 veces su tamaño de letra: con 14cqi siempre entra en el ancho del pie. */
 footer .cont { container-type: inline-size; }
 .pie-gigante { font-size: min(14cqi, 240px); }
+/* Decorativo: el texto va en ::before para que no cuente como texto a leer (contraste y lectores de pantalla). */
+.pie-gigante::before { content: attr(data-texto); }
 
 /* ===== Observaciones del cliente (2026-10-22) =====
    Una sola familia tipográfica: los acentos de los títulos ya no van en itálica con serifa, solo cambian de color y peso. */
@@ -735,6 +745,19 @@ h1 em, h2 em { font-weight: 300; letter-spacing: -.045em; }
 .contacto h2 em { font-weight: 300; }
 /* Centro de monitoreo: vista previa del dashboard que abre en otra pestaña */
 .centro-vista { margin-top: 34px; min-height: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: #0c1d16; }
+/* Panel de incendios (panel.html) en un iframe: alto fijo y el panel se desplaza por dentro. */
+.centro-vista { height: clamp(560px, 85vh, 900px); }
+.panel-abrir { display: none; }
+/* Celular: el panel (12 pantallas de alto) se ve como vista previa, sin atrapar el desplazamiento de la página,
+   y el botón lo abre completo. */
+@media (max-width: 760px) {
+  .centro-vista { height: 560px; }
+  .centro-vista iframe { pointer-events: none; }
+  .centro-vista::after { content: ""; position: absolute; inset: auto 0 0; height: 45%; pointer-events: none;
+    background: linear-gradient(180deg, rgba(12,19,16,0) 0%, rgba(12,19,16,.92) 70%); }
+  .panel-abrir { display: inline-flex; position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 2;
+    white-space: nowrap; box-shadow: 0 16px 40px -10px rgba(0,0,0,.7); }
+}
 .vista { position: relative; display: block; }
 .vista img { width: 100%; height: auto; display: block; transition: transform 1.2s var(--ease), filter .4s; filter: saturate(.9) brightness(.8); }
 .vista:hover img { transform: scale(1.02); filter: none; }
@@ -759,19 +782,21 @@ h1 em, h2 em { font-weight: 300; letter-spacing: -.045em; }
 .mapa-fuente { display: none; position: absolute; right: 12px; bottom: 12px; z-index: 2; padding: 5px 9px; border-radius: 999px;
   background: rgba(10,23,18,.8); color: var(--mist-2); font: 500 10px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; }
 .mapa:has(.mapa-img) .mapa-fuente { display: block; }
+/* Mapa del territorio (Leaflet): tapa la imagen y el aviso una vez cargado */
+.mapa-vivo { position: absolute; inset: 0; z-index: 1; background: transparent; font: 500 11px/1.4 var(--f-mono); }
+.mapa.con-mapa .mapa-vacio, .mapa.con-mapa .mapa-img, .mapa.con-mapa .mapa-fuente { display: none; }
+.mapa-vivo .leaflet-control-zoom { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 16px 16px 0 0; box-shadow: none; }
+.mapa-vivo .leaflet-control-zoom a { background: rgba(10,23,18,.85); color: var(--mist, #e8efe6); border-color: var(--line); width: 34px; height: 34px; line-height: 34px; }
+.mapa-vivo .leaflet-control-zoom a:hover { background: var(--lichen); color: var(--night); }
+.mapa-vivo .leaflet-control-attribution { background: rgba(10,23,18,.7); color: var(--mist-2); font-size: 10px; border-radius: 6px 0 0 0; }
+.mapa-vivo .leaflet-container, .mapa-vivo.leaflet-container { background: #0c1d16; }
+/* Botón «Ver mapa interactivo» (Global Nature Watch), abajo a la izquierda del mapa */
+.mapa-gnw { position: absolute; left: 16px; bottom: 16px; z-index: 3; white-space: nowrap; box-shadow: 0 16px 40px -10px rgba(0,0,0,.7); }
+@media (max-width: 520px) { .mapa-gnw { left: 50%; transform: translateX(-50%); bottom: 46px; } #mapa-territorio .mapa-vacio { padding-bottom: 110px; } }
 :root { --alfa-tarjeta: .72; }
 .cuatro article, .doc, .nodo:not(.fuerte), .lateral .rol, .tabs { background: rgba(255,255,255,var(--alfa-tarjeta)); }
 .mapa-panel { background: rgba(15,34,26,var(--alfa-tarjeta)); }
 :root { --panel: rgba(10,23,18,.62); }
-/* ===== Tipografía (2026-11-04): Barlow, a pedido del cliente (Inter se veía genérica).
-   Títulos en Barlow Condensed mayúscula, texto en Barlow; las etiquetas pasan de mono a Barlow Semi Condensed.
-   Una condensada en mayúsculas no necesita el tracking negativo que tenía Inter Tight. */
-:root { --f-display: 'Barlow Condensed', 'Arial Narrow', sans-serif; --f-body: 'Barlow', 'Segoe UI', system-ui, sans-serif;
-  --f-mono: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif; }
-h1, h2 { text-transform: uppercase; }
-h1, h2, h3, h1 em, h2 em, .hero h1, .hero h1 em, .paso h3, .cifra-grande, .cinta span, .indicador b, .cuatro article::after, .pie-gigante { letter-spacing: -.005em; }
-h2, .hero h1 { line-height: .92; }
-.pie-gigante { font-size: min(18.8cqi, 330px); } /* la condensada es más angosta: recalculado para que llene el ancho */
 
 /* Fotos que carga el administrador en huecos que eran avisos */
 .bio-foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -786,7 +811,26 @@ h2, .hero h1 { line-height: .92; }
 .idioma a:hover { color: var(--mist); }
 .idioma a[aria-current] { background: var(--lichen); color: var(--night); }
 @media (max-width: 1060px) { .cab-der { margin-left: auto; } .menu-btn { margin-left: 10px; order: 3; } }
-/* Celular: el logo no se encoge y el selector muestra solo el otro idioma */
+/* Celular: el logo no se encoge; el selector muestra los dos idiomas (el actual resaltado), más compacto */
 .marca { flex-shrink: 0; }
-@media (max-width: 520px) { .idioma a[aria-current] { display: none; } }
-@media (max-width: 359px) { .marca-pais { display: none; } }
+@media (max-width: 520px) {
+  .cab { gap: 8px; padding-left: 14px; padding-right: 14px; }
+  .cab-der { gap: 6px; } .idioma { padding: 3px; } .idioma a { padding: 7px 7px; letter-spacing: .06em; }
+  .menu-btn { margin-left: 6px; padding: 9px 10px; }
+}
+@media (max-width: 380px) { .marca-pais { display: none; } }
+
+/* Voces del territorio: reproductor de «Ver historia» */
+.reproductor { padding: 0; border: 1px solid var(--line); border-radius: var(--r, 12px); background: #000; max-width: min(92vw, 1100px); max-height: 90vh; overflow: visible; }
+.reproductor::backdrop { background: rgba(5,12,9,.85); backdrop-filter: blur(4px); }
+.reproductor video { display: block; width: 100%; max-height: 90vh; border-radius: inherit; background: #000; }
+.reproductor-cerrar { position: absolute; top: -18px; right: -18px; z-index: 1; width: 40px; height: 40px; border-radius: 999px; border: 0; background: var(--lichen); color: var(--night); font: 600 24px/1 var(--f-body); cursor: pointer; }
+@media (max-width: 760px) { .reproductor-cerrar { top: -50px; right: 0; } }
+
+/* Contacto: varias líneas por dato (oficinas, teléfonos) y campo trampa para bots */
+.datos-contacto li { align-items: flex-start; }
+.datos-contacto li > span:first-of-type { min-width: 92px; }
+.datos-contacto .dato { flex: 1 1 260px; line-height: 1.55; }
+.datos-contacto .dato a, .pie-marca a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
+.consent a { color: inherit; text-decoration: underline; }
+.trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

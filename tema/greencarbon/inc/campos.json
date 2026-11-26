@@ -20,14 +20,14 @@
    "enlace_mapas": {
     "tipo": "url",
     "etiqueta": "Enlace de los mapas interactivos",
-    "defecto": "https://globalnaturewatch.org/map/aoi/6adf4aa18fb9070015b598a8/?mainMap=eyJzaG93QmFzZW1hcHMiOnRydWUsInNob3dBbmFseXNpcyI6dHJ1ZX0%3D&map=eyJjZW50ZXIiOnsibGF0IjotMTUuNTc4MDgzMDI3MDk2Nzg2LCJsbmciOi02Mi4wODQ0OTM2MDQ0NzEyNX0sInpvb20iOjguNTY1MDk2MzYzNDYzMzk3LCJjYW5Cb3VuZCI6ZmFsc2V9",
-    "desc": "Opcional, para más adelante: si se completa, reemplaza la imagen estática del mapa por un iframe. El sitio enlazado tiene que permitir ser embebido."
+    "defecto": "",
+    "desc": "Opcional: si se completa, reemplaza el mapa satelital por un iframe. El sitio enlazado tiene que permitir ser embebido."
    },
    "enlace_incendios": {
     "tipo": "url",
     "etiqueta": "Enlace embebible del monitoreo de incendios",
     "defecto": "",
-    "desc": "Opcional, para más adelante: si se completa, reemplaza la imagen estática del Centro de Operaciones de Incendios por el dashboard en un iframe. Tiene que estar publicado fuera de claude.ai y permitir ser embebido en el dominio."
+    "desc": "Opcional: si se completa, reemplaza el panel de demostración del Centro de Operaciones de Incendios por el dashboard real en un iframe."
    },
    "mostrar_idioma": {
     "tipo": "check",
@@ -517,9 +517,9 @@
    "s04_04": {
     "tipo": "texto",
     "etiqueta": "Aviso «Superficie exacta a validar · SSOT»",
-    "defecto": "1.133.035 ha en los territorios indígenas de Monte Verde y Lomerío.",
+    "defecto": "Superficie del proyecto: 1.133.035 ha.",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": "1,133,035 ha in the Indigenous territories of Monte Verde and Lomerío."
+    "en": "Project area: 1,133,035 ha."
    },
    "s04_05": {
     "tipo": "texto",
@@ -576,19 +576,12 @@
     "desc": "",
     "en": "02 / Area"
    },
-   "s05_07": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «SSOT»",
-    "defecto": "PDMR 2026",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": "PDMR 2026"
-   },
    "s05_08": {
     "tipo": "texto",
     "etiqueta": "Destacado: 1.133.035 ha",
     "defecto": "1.133.035 ha",
     "desc": "",
-    "en": "1.133.035 ha"
+    "en": "1,133,035 ha"
    },
    "s05_09": {
     "tipo": "texto",
@@ -604,13 +597,6 @@
     "desc": "",
     "en": "03 / Communities"
    },
-   "s05_11": {
-    "tipo": "texto",
-    "etiqueta": "Aviso «SSOT»",
-    "defecto": "PDMR 2026",
-    "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": "PDMR 2026"
-   },
    "s05_12": {
     "tipo": "texto",
     "etiqueta": "Destacado: 82",
@@ -621,9 +607,9 @@
    "s05_13": {
     "tipo": "texto",
     "etiqueta": "Texto: Comunidades",
-    "defecto": "Comunidades",
+    "defecto": "Comunidades: 53 en Monte Verde y 29 en Lomerío",
     "desc": "",
-    "en": "Communities"
+    "en": "Communities: 53 in Monte Verde and 29 in Lomerío"
    },
    "s05_14": {
     "tipo": "texto",
@@ -770,6 +756,25 @@
     "desc": "",
     "en": "Source: Global Nature Watch"
    },
+   "s06_gnw_txt": {
+    "tipo": "texto",
+    "etiqueta": "Botón del mapa interactivo",
+    "defecto": "Ver mapa interactivo",
+    "desc": "",
+    "en": "View interactive map"
+   },
+   "s06_gnw": {
+    "tipo": "url",
+    "etiqueta": "Enlace del botón · Monte Verde",
+    "defecto": "https://globalnaturewatch.org/map/aoi/6adf4aa18fb9070015b598a8/?mainMap=eyJzaG93QmFzZW1hcHMiOnRydWUsInNob3dBbmFseXNpcyI6dHJ1ZX0%3D&map=eyJjZW50ZXIiOnsibGF0IjotMTUuNTc4MDgzMDI3MDk2Nzg2LCJsbmciOi02Mi4wODQ0OTM2MDQ0NzEyNX0sInpvb20iOjguNTY1MDk2MzYzNDYzMzk3LCJjYW5Cb3VuZCI6ZmFsc2V9",
+    "desc": "Mapa de Global Nature Watch que abre el botón con la pestaña Monte Verde."
+   },
+   "s06_gnw_l": {
+    "tipo": "url",
+    "etiqueta": "Enlace del botón · Lomerío",
+    "defecto": "https://globalnaturewatch.org/map/aoi/6adf4cbc8fb9070015b59972/?mainMap=eyJzaG93QmFzZW1hcHMiOnRydWUsInNob3dBbmFseXNpcyI6dHJ1ZX0%3D&map=eyJjZW50ZXIiOnsibGF0IjotMTYuNjY4MDM1MzkwNjQxMTk0LCJsbmciOi02MS43NDUzMzE2ODIxMzE2MTR9LCJ6b29tIjo5LjA2Mzg5MzgwMTIxNzQ2OCwiZGF0YXNldHMiOlt7Im9wYWNpdHkiOjAuNywidmlzaWJpbGl0eSI6dHJ1ZSwiZGF0YXNldCI6InByaW1hcnktZm9yZXN0cyIsImxheWVycyI6WyJwcmltYXJ5LWZvcmVzdHMtMjAwMSJdfSx7ImRhdGFzZXQiOiJwb2xpdGljYWwtYm91bmRhcmllcyIsImxheWVycyI6WyJkaXNwdXRlZC1wb2xpdGljYWwtYm91bmRhcmllcyIsInBvbGl0aWNhbC1ib3VuZGFyaWVzIl0sImJvdW5kYXJ5Ijp0cnVlLCJvcGFjaXR5IjoxLCJ2aXNpYmlsaXR5Ijp0cnVlfSx7ImRhdGFzZXQiOiJ0cmVlLWNvdmVyLWxvc3MiLCJsYXllcnMiOlsidHJlZS1jb3Zlci1sb3NzIl0sIm9wYWNpdHkiOjEsInZpc2liaWxpdHkiOnRydWUsInRpbWVsaW5lUGFyYW1zIjp7InN0YXJ0RGF0ZSI6IjIwMDItMDEtMDEiLCJlbmREYXRlIjoiMjAyNS0xMi0zMSIsInRyaW1FbmREYXRlIjoiMjAyNS0xMi0zMSJ9LCJwYXJhbXMiOnsidGhyZXNob2xkIjozMCwidmlzaWJpbGl0eSI6dHJ1ZSwiYWRtX2xldmVsIjoiYWRtMCJ9fV19",
+    "desc": "Mapa de Global Nature Watch que abre el botón con la pestaña Lomerío."
+   },
    "s06_14": {
     "tipo": "texto",
     "etiqueta": "Lector de pantalla: Territorio",
@@ -808,23 +813,23 @@
    "s06_19": {
     "tipo": "texto",
     "etiqueta": "Rótulo: Superficie",
-    "defecto": "Superficie titulada",
+    "defecto": "Superficie",
     "desc": "",
-    "en": "Titled area"
+    "en": "Area"
    },
    "s06_20": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT» · Monte Verde",
-    "defecto": "Aprox. 947.441 ha",
+    "defecto": "947.441 ha",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": "Approx. 947,441 ha"
+    "en": "947,441 ha"
    },
    "s06_20_l": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT» · Lomerío",
-    "defecto": "Aprox. 259.189 ha",
+    "defecto": "259.189 ha",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": "Approx. 259,189 ha"
+    "en": "259,189 ha"
    },
    "s06_21": {
     "tipo": "texto",
@@ -857,16 +862,16 @@
    "s06_24": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT» · Monte Verde",
-    "defecto": "",
+    "defecto": "939.607 ha",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "939,607 ha"
    },
    "s06_24_l": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT» · Lomerío",
-    "defecto": "",
+    "defecto": "207.630 ha",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "207,630 ha"
    },
    "s06_25": {
     "tipo": "texto",
@@ -878,16 +883,16 @@
    "s06_26": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT» · Monte Verde",
-    "defecto": "Central Indígena de Comunidades de Concepción (CICC), Central Indígena Paikoneka de San Javier (CIP-SJ) y Central Indígena de Comunidades Originarias de Lomerío (CICOL)",
+    "defecto": "CIP-SJ / CICC / CICOL",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": "Central Indígena de Comunidades de Concepción (CICC), Central Indígena Paikoneka de San Javier (CIP-SJ) and Central Indígena de Comunidades Originarias de Lomerío (CICOL)"
+    "en": "CIP-SJ / CICC / CICOL"
    },
    "s06_26_l": {
     "tipo": "texto",
     "etiqueta": "Aviso «SSOT» · Lomerío",
-    "defecto": "Central Indígena de Comunidades Originarias de Lomerío (CICOL)",
+    "defecto": "CICOL",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": "Central Indígena de Comunidades Originarias de Lomerío (CICOL)"
+    "en": "CICOL"
    },
    "s06_27": {
     "tipo": "texto",
@@ -1273,12 +1278,6 @@
     "desc": "",
     "en": "Territorial fire operations console: satellite detections, active events and brigade response."
    },
-   "s10_04": {
-    "tipo": "imagen",
-    "etiqueta": "Imagen: fire-ops-vista.webp",
-    "defecto": "assets/fotos/fire-ops-vista.webp",
-    "desc": ""
-   },
    "s10_05": {
     "tipo": "texto",
     "etiqueta": "Texto alternativo: Vista del Centro de Operaciones de Incendios: m…",
@@ -1289,9 +1288,16 @@
    "s10_06": {
     "tipo": "texto",
     "etiqueta": "Párrafo: Imagen ilustrativa del Centro de Operaciones de…",
-    "defecto": "Imagen ilustrativa del Centro de Operaciones de Incendios.",
+    "defecto": "Demostración interactiva del Centro de Operaciones de Incendios: las detecciones son simuladas.",
     "desc": "",
-    "en": "Illustrative image of the Fire Operations Center."
+    "en": "Interactive demo of the Fire Operations Center: detections are simulated."
+   },
+   "s10_panel": {
+    "tipo": "texto",
+    "etiqueta": "Botón: abrir el panel completo",
+    "defecto": "Abrir el panel completo",
+    "desc": "",
+    "en": "Open the full dashboard"
    }
   }
  },
@@ -1378,7 +1384,7 @@
    "s12_06": {
     "tipo": "imagen",
     "etiqueta": "Retrato",
-    "defecto": "assets/testimonios/felipe-antonio-castro.webp",
+    "defecto": "testimonios/felipe-antonio-castro.webp",
     "desc": "Vacío = se muestra la silueta."
    },
    "s12_07": {
@@ -1405,7 +1411,7 @@
    "s12_10": {
     "tipo": "video",
     "etiqueta": "Video: historia de Felipe Antonio Castro",
-    "defecto": "assets/testimonios/felipe-antonio-castro.mp4",
+    "defecto": "testimonios/felipe-antonio-castro.mp4",
     "desc": "Se abre con «Ver historia»."
    },
    "s12_11": {
@@ -1418,7 +1424,7 @@
    "s12_12": {
     "tipo": "imagen",
     "etiqueta": "Retrato",
-    "defecto": "assets/testimonios/maria-flores.webp",
+    "defecto": "testimonios/maria-flores.webp",
     "desc": "Vacío = se muestra la silueta."
    },
    "s12_13": {
@@ -1433,7 +1439,7 @@
     "etiqueta": "Texto: Central Paikoneka, San Javier · Segunda …",
     "defecto": "Central Paikoneka, San Javier · Segunda Cacique de la OICH",
     "desc": "",
-    "en": "Paikoneka Central, San Javier · Second Cacique of the OICH"
+    "en": "Central Paikoneka, San Javier · Second Cacique of the OICH"
    },
    "s12_15": {
     "tipo": "texto",
@@ -1445,7 +1451,7 @@
    "s12_16": {
     "tipo": "video",
     "etiqueta": "Video: historia de María Flores",
-    "defecto": "assets/testimonios/maria-flores.mp4",
+    "defecto": "testimonios/maria-flores.mp4",
     "desc": "Se abre con «Ver historia»."
    },
    "s12_17": {
@@ -1458,7 +1464,7 @@
    "s12_18": {
     "tipo": "imagen",
     "etiqueta": "Retrato",
-    "defecto": "assets/testimonios/jose-maria-guasase.webp",
+    "defecto": "testimonios/jose-maria-guasase.webp",
     "desc": "Vacío = se muestra la silueta."
    },
    "s12_19": {
@@ -1485,7 +1491,7 @@
    "s12_22": {
     "tipo": "video",
     "etiqueta": "Video: historia de José María Guasase",
-    "defecto": "assets/testimonios/jose-maria-guasase.mp4",
+    "defecto": "testimonios/jose-maria-guasase.mp4",
     "desc": "Se abre con «Ver historia»."
    },
    "s12_23": {
@@ -1498,7 +1504,7 @@
    "s12_24": {
     "tipo": "imagen",
     "etiqueta": "Retrato",
-    "defecto": "assets/testimonios/seferino-paz.webp",
+    "defecto": "testimonios/seferino-paz.webp",
     "desc": "Vacío = se muestra la silueta."
    },
    "s12_25": {
@@ -1520,12 +1526,12 @@
     "etiqueta": "Cita: Perdimos la madera, perdimos los animali…",
     "defecto": "Perdimos la madera, perdimos los animalitos.",
     "desc": "",
-    "en": "We lost the timber, we lost the animals."
+    "en": "We lost the timber, we lost the little animals."
    },
    "s12_28": {
     "tipo": "video",
     "etiqueta": "Video: historia de Seferino Paz",
-    "defecto": "assets/testimonios/seferino-paz.mp4",
+    "defecto": "testimonios/seferino-paz.mp4",
     "desc": "Se abre con «Ver historia»."
    },
    "s12_29": {
@@ -2113,16 +2119,16 @@
    "s18_03": {
     "tipo": "texto",
     "etiqueta": "Texto: Dirección",
-    "defecto": "Dirección",
+    "defecto": "Oficinas",
     "desc": "",
-    "en": "Address"
+    "en": "Offices"
    },
    "s18_04": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta»",
-    "defecto": "Oficina central: Edificio Manzana 40, piso 17, oficina 1710, Santa Cruz de la Sierra<br>Oficina administrativa: Calle Gualberto Villarroel N.º 300, Santa Cruz de la Sierra<br>Oficina operativa: Zona 4, calle Guarayo s/n, Concepción",
+    "defecto": "<b>Central:</b> Edificio Manzana 40, piso 17, oficina 1710, Santa Cruz de la Sierra<br><b>Administrativa:</b> Calle Gualberto Villarroel N.º 300, Santa Cruz de la Sierra<br><b>Operativa:</b> Zona 4, calle Guarayo s/n, Concepción",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": "Head office: Edificio Manzana 40, 17th floor, office 1710, Santa Cruz de la Sierra<br>Administrative office: Calle Gualberto Villarroel No. 300, Santa Cruz de la Sierra<br>Field office: Zona 4, calle Guarayo s/n, Concepción"
+    "en": "<b>Head office:</b> Edificio Manzana 40, 17th floor, office 1710, Santa Cruz de la Sierra<br><b>Administrative office:</b> Calle Gualberto Villarroel N.º 300, Santa Cruz de la Sierra<br><b>Operations office:</b> Zona 4, calle Guarayo s/n, Concepción"
    },
    "s18_05": {
     "tipo": "texto",
@@ -2141,22 +2147,22 @@
    "s18_07": {
     "tipo": "texto",
     "etiqueta": "Texto: Teléfono",
-    "defecto": "Teléfono",
+    "defecto": "Teléfonos",
     "desc": "",
-    "en": "Phone"
+    "en": "Phones"
    },
    "s18_08": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta»",
-    "defecto": "<a href=\"tel:+59175005342\">+591 75005342</a> (administrativa)<br><a href=\"tel:+59162223306\">+591 62223306</a> (operativa, Concepción)",
+    "defecto": "<a href=\"tel:+59175005342\">+591 75005342</a> · administrativa<br><a href=\"tel:+59162223306\">+591 62223306</a> · operativa (Concepción)",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": "<a href=\"tel:+59175005342\">+591 75005342</a> (administrative)<br><a href=\"tel:+59162223306\">+591 62223306</a> (field office, Concepción)"
+    "en": "<a href=\"tel:+59175005342\">+591 75005342</a> · administrative office<br><a href=\"tel:+59162223306\">+591 62223306</a> · operations office (Concepción)"
    },
    "s18_09": {
     "tipo": "url",
     "etiqueta": "Destino del formulario",
-    "defecto": "https://submit-form.com/zAQqp9upk",
-    "desc": ""
+    "defecto": "",
+    "desc": "Vacío = el formulario envía el correo desde WordPress (a la dirección de «Correo»). Completar solo para usar un servicio externo."
    },
    "s18_10": {
     "tipo": "texto",
@@ -2300,9 +2306,9 @@
    "pie_03": {
     "tipo": "texto",
     "etiqueta": "Aviso «Falta»",
-    "defecto": "Edificio Manzana 40, piso 17, of. 1710, Santa Cruz de la Sierra",
+    "defecto": "Edificio Manzana 40, piso 17, oficina 1710, Santa Cruz de la Sierra, Bolivia",
     "desc": "Escribí el dato real para reemplazar el aviso. Vacío = se muestra el aviso.",
-    "en": ""
+    "en": "Edificio Manzana 40, 17th floor, office 1710, Santa Cruz de la Sierra, Bolivia"
    },
    "pie_04": {
     "tipo": "texto",

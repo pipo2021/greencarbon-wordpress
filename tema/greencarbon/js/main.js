@@ -4,13 +4,102 @@
   function embeber(id, url, titulo) {
     if (!url) return;
     const caja = document.getElementById(id);
-    caja.querySelectorAll('.mapa-vacio, .vista, .mapa-img, .mapa-fuente').forEach(el => el.remove());
+    caja.querySelectorAll('.mapa-vacio, .vista, .mapa-img, .mapa-fuente, .panel-abrir, .mapa-gnw, .mapa-vivo').forEach(el => el.remove());
     const f = document.createElement('iframe');
     f.src = url; f.title = titulo; f.loading = 'lazy';
     caja.appendChild(f);
   }
   embeber('mapa-territorio', ENLACES.mapas, GC.t.iframe_mapa);
   embeber('mapa-monitoreo', ENLACES.incendios, GC.t.iframe_incendios);
+
+  // Mapa del territorio: satélite + contornos de Monte Verde y Lomerío (datos de Global Nature Watch), sin herramientas.
+  // Leaflet y los contornos se bajan recién cuando la sección se acerca a la pantalla.
+  // Las pestañas Monte Verde / Lomerío mueven el mapa y cambian el enlace del botón a GNW.
+  (function () {
+    const caja = document.getElementById('mapa-vivo');
+    const pestanas = document.querySelectorAll('[data-territorio]');
+    const boton = document.querySelector('#mapa-territorio .mapa-gnw');
+    const enlaceGnw = { 'Monte Verde': boton && boton.href, 'Lomerío': boton && (boton.dataset.lomerio || boton.href) };
+    let elegido = 'Monte Verde', mostrar = null;
+    pestanas.forEach(b => b.addEventListener('click', () => {
+      elegido = b.dataset.territorio;
+      if (boton && enlaceGnw[elegido]) boton.href = enlaceGnw[elegido];
+      if (mostrar) mostrar(true);
+    }));
+    if (!caja || !('IntersectionObserver' in window)) return;
+    const base = GC.tema + '/';
+    const cargar = (tag, attrs) => new Promise((ok, mal) => {
+      const el = Object.assign(document.createElement(tag), attrs);
+      el.onload = ok; el.onerror = mal; document.head.appendChild(el);
+    });
+    const bajar = n => fetch(base + 'datos/' + n + '.geojson?v=' + GC.v).then(r => { if (!r.ok) throw r.status; return r.json(); });
+    function armar(geos) {
+      const tactil = matchMedia('(pointer: coarse)').matches;
+      const L = window.L;
+      const mapa = L.map(caja, {
+        zoomSnap: .25, scrollWheelZoom: false, dragging: !tactil, touchZoom: !tactil,
+        doubleClickZoom: !tactil, boxZoom: false, keyboard: false, zoomControl: !tactil, attributionControl: true
+      });
+      if (mapa.zoomControl) mapa.zoomControl.setPosition('topright');
+      mapa.attributionControl.setPrefix(false);
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 17, attribution: 'Esri, Maxar · Global Nature Watch'
+      }).addTo(mapa);
+      const capas = {};
+      for (const n in geos) capas[n] = L.geoJSON(geos[n], { interactive: false }).addTo(mapa);
+      const margen = { paddingTopLeft: [20, 60], paddingBottomRight: [20, tactil ? 110 : 30] };
+      mostrar = animar => {
+        for (const n in capas) {
+          const si = n === elegido;
+          capas[n].setStyle(si
+            ? { color: '#b8d48f', weight: 2, opacity: 1, dashArray: null, fillColor: '#b8d48f', fillOpacity: .14 }
+            : { color: '#eef3ef', weight: 1, opacity: .45, dashArray: '4 4', fillOpacity: 0 });
+          if (si) capas[n].bringToFront();
+        }
+        // Algunos retazos sueltos quedan dibujados pero no cuentan para el encuadre ("encuadre": false).
+        const lim = L.latLngBounds([]);
+        capas[elegido].eachLayer(l => { if (l.feature.properties.encuadre !== false) lim.extend(l.getBounds()); });
+        if (animar && !matchMedia('(prefers-reduced-motion: reduce)').matches) mapa.flyToBounds(lim, Object.assign({ duration: .9 }, margen));
+        else mapa.fitBounds(lim, margen);
+      };
+      mostrar(false);
+      mapa.setMinZoom(Math.max(5, mapa.getZoom() - 2.5));
+      new ResizeObserver(() => { mapa.invalidateSize(); }).observe(caja);
+      document.getElementById('mapa-territorio').classList.add('con-mapa');
+    }
+    const io = new IntersectionObserver(es => {
+      if (!es.some(e => e.isIntersecting)) return;
+      io.disconnect();
+      cargar('link', { rel: 'stylesheet', href: base + 'js/leaflet/leaflet.css?v=1.9.4' });
+      Promise.all([
+        window.L ? 0 : cargar('script', { src: base + 'js/leaflet/leaflet.js?v=1.9.4' }),
+        bajar('monte-verde'), bajar('lomerio')
+      ]).then(([, mv, lo]) => armar({ 'Monte Verde': mv, 'Lomerío': lo })).catch(() => caja.remove());
+    }, { rootMargin: '800px 0px' });
+    io.observe(caja);
+  })();
+
+  // Voces del territorio: «Ver historia» abre el video en un reproductor sobre la página (sin dialog, abre el MP4).
+  (function () {
+    const botones = document.querySelectorAll('.voz-video');
+    if (!botones.length || typeof HTMLDialogElement !== 'function') return;
+    const dlg = document.createElement('dialog');
+    dlg.className = 'reproductor';
+    dlg.innerHTML = '<button type="button" class="reproductor-cerrar" aria-label="' + (GC.t.cerrar || 'Cerrar') + '">×</button><video controls playsinline preload="none"></video>';
+    document.body.appendChild(dlg);
+    const video = dlg.querySelector('video');
+    const cerrar = () => dlg.close();
+    dlg.querySelector('button').addEventListener('click', cerrar);
+    dlg.addEventListener('click', e => { if (e.target === dlg) cerrar(); });
+    dlg.addEventListener('close', () => { video.pause(); video.removeAttribute('src'); video.load(); });
+    botones.forEach(b => b.addEventListener('click', e => {
+      e.preventDefault();
+      dlg.setAttribute('aria-label', b.dataset.titulo || '');
+      video.src = b.href;
+      dlg.showModal();
+      video.play().catch(() => {});
+    }));
+  })();
 
   const raiz = document.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -62,12 +151,23 @@
     reveals.forEach(r => io.observe(r));
   }
 
+  // Selector de idioma: el otro idioma se abre en la misma sección que se está leyendo.
+  document.querySelectorAll('.idioma a').forEach(a => a.addEventListener('click', () => {
+    let id = '';
+    document.querySelectorAll('main > section[id]').forEach(s => {
+      if (s.getClientRects().length && s.getBoundingClientRect().top < innerHeight * .4) id = s.id;
+    });
+    const u = new URL(a.href);
+    u.hash = id;
+    a.href = u.href;
+  }));
+
   // Mapa: pestañas Monte Verde / Lomerío.
   document.querySelectorAll('[data-territorio]').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('[data-territorio]').forEach(o => o.setAttribute('aria-selected', String(o === b)));
     document.getElementById('t-nombre').textContent = 'TIOC ' + b.dataset.territorio;
     document.getElementById('migas-territorio').textContent = b.dataset.territorio;
-    document.querySelectorAll('[data-t]').forEach(d => { d.hidden = d.dataset.t !== b.dataset.territorio; });
+    document.querySelectorAll('.ficha [data-t]').forEach(d => { d.hidden = d.dataset.t !== b.dataset.territorio; });
   }));
 
   // Voces: flechas del carrusel.
@@ -101,7 +201,7 @@
     new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) video.play().catch(() => {}); else video.pause(); }), { threshold: .3 }).observe(video);
   }
 
-  // Formulario: al mismo Formspark que el sitio del proyecto, sin salir de la página.
+  // Formulario: lo envía WordPress por correo (gc/v1/contacto), o un servicio externo si se cargó en el Personalizador.
   const form = document.getElementById('contacto-form'), estado = document.getElementById('form-estado');
   form.addEventListener('submit', async ev => {
     ev.preventDefault();
@@ -126,7 +226,7 @@
   let N = 1294;
   const FPS_ANCLAS = 24;
   let ESC = 1;  // cuadros del paquete por cuadro de ancla: el manifest trae sus fps (48 en celular)
-  const VERSION = '?v=7';  // cambia con cada recorrido nuevo: los archivos se llaman igual y el navegador los cachea
+  const VERSION = '?v=' + GC.v;  // GC_RECORRIDO_V en functions.php: subirlo con cada recorrido nuevo (el navegador cachea los archivos)
   const dir = matchMedia('(max-aspect-ratio: 1/1)').matches ? 'v' : 'h';
   let usarVideo = dir === 'h';
   let peli = document.createElement('video');
@@ -134,12 +234,25 @@
   const ctx = canvas.getContext('2d');
   const blobs = [];
   let cargados = 0, paraMostrar = N;
-  let PAQUETES_PARA_MOSTRAR = 2;  // ~1 de cada 8 cuadros de 24/s: con más fps alcanza con el primer paquete
+  // La página se muestra con los primeros cuadros del primer paquete (~150 KB), sin esperar el paquete entero.
+  const MIN_CUADROS = 4;
+  // Antes de que la persona se mueva se bajan solo los primeros cuadros del primer paquete (~0,9 MB de 6,9 MB).
+  const CUADROS_ANTES = 24;
+  // Ahorro de datos o red 2G: se baja menos recorrido (más saltado, pero mucho más liviano).
+  const con = navigator.connection;
+  const ahorro = !!(con && (con.saveData || /(^|-)2g$/.test(con.effectiveType || '')));
+  // El resto del recorrido (decenas de MB) se baja recién cuando la persona empieza a moverse por la página.
+  const alInteractuar = new Promise(ok => {
+    const evs = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'];
+    // Sin captura: solo cuenta el desplazamiento de la página, no el de un carrusel o una cinta.
+    const listo = () => { evs.forEach(e => removeEventListener(e, listo)); ok(); };
+    evs.forEach(e => addEventListener(e, listo, { passive: true }));
+  });
 
   raiz.classList.add('cargando');
   scrollTo(0, 0);
   const barra = document.getElementById('loader-barra'), txt = document.getElementById('loader-txt');
-  let mostrada = false;
+  let mostrada = false, saltar = false;
   function progreso() {
     const pct = Math.min(100, Math.floor(cargados / paraMostrar * 100));
     barra.style.width = pct + '%';
@@ -158,8 +271,21 @@
     requestAnimationFrame(() => raiz.classList.add('listo'));
     document.getElementById('loader').classList.add('fuera');
     medir();
+    irAlAncla();
   }
-  setTimeout(mostrar, 45000);  // red muy lenta: se muestra igual con lo que haya
+  // Con #seccion en la dirección (al cambiar de idioma o desde un enlace externo) se abre en esa sección,
+  // no en la portada. Se hace al sacar la pantalla de carga, cuando la página ya se puede desplazar.
+  function irAlAncla() {
+    let el = null;
+    try { el = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) {}
+    if (!el || !el.getClientRects().length) return;
+    const st = raiz.style.scrollBehavior;
+    raiz.style.scrollBehavior = 'auto';  // salto directo (el CSS tiene desplazamiento suave)
+    el.scrollIntoView(true);
+    raiz.style.scrollBehavior = st;
+    saltar = true;  // el recorrido va directo a ese punto, sin recorrer todo el video desde el principio
+  }
+  setTimeout(mostrar, 15000);  // red muy lenta: se muestra igual con lo que haya
 
   // Computadora: el navegador baja el MP4 de a partes (preload auto) y el scroll mueve currentTime.
   if (usarVideo) {
@@ -184,7 +310,8 @@
     // El navegador baja el MP4 de a partes y una búsqueda hacia una parte que no llegó puede quedar colgada.
     // Se baja el archivo entero en segundo plano y, al terminar, se cambia a una copia local (búsquedas
     // instantáneas). El cambio usa un segundo <video> que se muestra recién cuando ya tiene el cuadro actual.
-    (async () => {
+    // Esa copia completa pesa decenas de MB: se pide al primer gesto y no con ahorro de datos.
+    if (!ahorro) alInteractuar.then(async () => {
       try {
         const r = await fetch(SRC_VIDEO);
         if (!r.ok) return;
@@ -202,21 +329,55 @@
         }, { once: true });
         peli.after(local);
       } catch (e) {}  // sin copia local se sigue con la descarga de a partes
-    })();
+    });
   }
 
-  async function bajarPaquete(base, p, intentos = 3) {
+  // Cada paquete (o un tramo de cuadros de él) se lee a medida que llega: los cuadros quedan disponibles uno
+  // por uno, en el orden del manifest, que es el de los bytes. Un tramo se pide con Range; si el servidor
+  // no lo acepta y manda el archivo entero, se corta la descarga al llegar al último cuadro del tramo.
+  async function bajarPaquete(base, p, desde = 0, hasta = p.c.length, intentos = 3) {
+    const cs = p.c.slice(desde, hasta);
+    if (!cs.length) return;
+    const ini = cs[0][1], fin = cs[cs.length - 1][1] + cs[cs.length - 1][2];
+    const tramo = desde > 0 || hasta < p.c.length;
     for (let i = 0; i < intentos; i++) {
       try {
-        const r = await fetch(base + p.f + VERSION);
+        const r = await fetch(base + p.f + VERSION, tramo ? { headers: { Range: `bytes=${ini}-${fin - 1}` } } : undefined);
         if (!r.ok) throw new Error(r.status);
-        const buf = await r.arrayBuffer();
-        for (const [n, off, len] of p.c) { blobs[n] = new Blob([buf.slice(off, off + len)], { type: 'image/webp' }); cargados++; }
-        progreso();
+        const off0 = r.status === 206 ? ini : 0;  // 200: llegó el archivo desde el byte 0
+        const total = fin - off0;
+        const buf = new Uint8Array(total);
+        let llego = 0, hechos = 0;
+        const separar = () => {
+          let nuevos = 0;
+          while (hechos < cs.length) {
+            const [n, off, len] = cs[hechos];
+            if (off - off0 + len > llego) break;
+            if (!blobs[n]) { blobs[n] = new Blob([buf.subarray(off - off0, off - off0 + len)], { type: 'image/webp' }); cargados++; nuevos++; }
+            hechos++;
+          }
+          if (nuevos) progreso();
+        };
+        const lector = r.body && r.body.getReader && r.body.getReader();
+        if (lector) {
+          while (llego < total) {
+            const { done, value } = await lector.read();
+            if (done) break;
+            const n = Math.min(value.length, total - llego);
+            buf.set(n === value.length ? value : value.subarray(0, n), llego); llego += n;
+            separar();
+          }
+          if (llego >= total) lector.cancel().catch(() => {});  // lo que sobre (archivo entero) no se baja
+        } else {
+          const todo = new Uint8Array(await r.arrayBuffer());
+          const n = Math.min(total, todo.length);
+          buf.set(todo.subarray(0, n)); llego = n; separar();
+        }
+        if (hechos < cs.length) throw new Error('incompleto');
         return;
       } catch (e) { await new Promise(r => setTimeout(r, 800 * (i + 1))); }
     }
-    cargados += p.c.length; progreso();
+    cargados += cs.filter(([n]) => !blobs[n]).length; progreso();  // sin esos cuadros: que no trabe la carga
   }
   async function cargarPaquetes() {
     const base = `${GC.tema}/pack/${dir}/`;
@@ -224,12 +385,15 @@
     try { man = await (await fetch(base + 'manifest.json' + VERSION)).json(); } catch (e) { return mostrar(); }
     N = man.n;
     ESC = (man.fps || FPS_ANCLAS) / FPS_ANCLAS;
-    if (ESC >= 2) PAQUETES_PARA_MOSTRAR = 1;
     medir();
-    paraMostrar = man.paquetes.slice(0, PAQUETES_PARA_MOSTRAR).reduce((s, p) => s + p.c.length, 0);
-    const cola = man.paquetes.slice();
-    const trabajador = async () => { while (cola.length) await bajarPaquete(base, cola.shift()); };
-    await Promise.all([trabajador(), trabajador()]);
+    const [primero, ...resto] = man.paquetes;
+    paraMostrar = Math.min(MIN_CUADROS, primero.c.length);
+    const antes = Math.min(CUADROS_ANTES, primero.c.length);
+    // Al primer gesto: el resto del primer paquete y después los demás (con ahorro de datos, solo uno más).
+    const cola = [{ p: primero, desde: antes }, ...(ahorro ? resto.slice(0, 1) : resto).map(p => ({ p, desde: 0 }))];
+    const trabajador = async () => { while (cola.length) { const t = cola.shift(); await bajarPaquete(base, t.p, t.desde); } };
+    alInteractuar.then(() => Promise.all([trabajador(), trabajador()]));
+    await bajarPaquete(base, primero, 0, antes);
   }
   if (!usarVideo) cargarPaquetes();
 
@@ -313,6 +477,7 @@
   let pos = 0, sentido = 1, inicioBusqueda = 0;
   function frame() {
     const meta = cuadroPara(scrollY);
+    if (saltar) { pos = meta; saltar = false; }
     if (Math.abs(meta - pos) > .5) sentido = meta > pos ? 1 : -1;
     pos = reduce ? meta : pos + (meta - pos) * .1;
     const pc = usarVideo ? pos : pos * ESC;  // posición en cuadros del paquete
